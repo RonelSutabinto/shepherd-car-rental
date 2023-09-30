@@ -5,7 +5,7 @@ Semeter: Fall Semester
 
 Shepherd Car Rental is an ongoing effort. This project provides consumers with an easy and user-friendly interface for browsing, searching, and renting cars.
 
-# Features:
+## Features:
 
     Car Listings: Display a list of available cars with details such as model, year, price, and availability status.
     
@@ -18,9 +18,9 @@ Shepherd Car Rental is an ongoing effort. This project provides consumers with a
     Responsive Design: Ensure the application is accessible and visually appealing across various devices and screen sizes.
 
 
-# MERN stack development
+## MERN stack development
 
-technology requirements:
+Technology requirements:
 
     Next.js
 
