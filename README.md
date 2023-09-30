@@ -1,5 +1,27 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Semeter: Fall Semester
+Course: DGL-409
+
+Shepherd Car Rental is an ongoing effort. This project provides consumers with an easy and user-friendly interface for browsing, searching, and renting cars.
+
+Features
+
+    Car Listings: Display a list of available cars with details such as model, year, price, and availability status.
+    Search and Filters: Implement search functionality and filters to help users find specific cars based on their preferences.
+    Basic Booking System: Enable users to rent cars for a specified period, displaying rental details and confirmation messages.
+    Payment Integration: Implement Stripe payment system to securely process rental payments online.
+    Responsive Design: Ensure the application is accessible and visually appealing across various devices and screen sizes.
+
+MERN stack development
+technology requirements:
+    Next.js
+    React.js
+    Node.js
+    GraphQl
+    MongoDB
+    Tailwind CSS
+
 ## Getting Started
 
 First, run the development server:
