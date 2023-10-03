@@ -25,6 +25,7 @@ module.exports = {
         "light-white": {
           DEFAULT: "#ebe7de",
           100: "rgba(59,60,152,0.02)",
+          200: "rgba(59,60,152,0.03)"
         },
         grey: "#747A88",
       },

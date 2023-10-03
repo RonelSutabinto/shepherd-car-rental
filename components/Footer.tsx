@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
-      
+    <div className='gap-12 m-12'>
+      Footer
     </div>
   )
 }

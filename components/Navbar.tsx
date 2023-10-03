@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-// import { UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
@@ -37,8 +36,6 @@ const Navbar = () => {
               Sign In
             </h2>
           </div>
-         
-          
         </nav>
     </header>
 
