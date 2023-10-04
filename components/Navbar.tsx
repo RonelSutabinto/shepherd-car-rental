@@ -18,18 +18,18 @@ const Navbar = () => {
 
           <div className='flex items-center justify-between gap-6'>
             <div className='flex'>
-              <h2 className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
+              <Link href={"/"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
                 Home
-              </h2>
-              <h2 className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
+              </Link>
+              <Link href={"/book"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
                 Booking
-              </h2>
-              <h2 className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
+              </Link>
+              <Link href={"/services"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
                 Services
-              </h2>
-              <h2 className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
+              </Link>
+              <Link href={"/contactus"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
                 Contact Us
-              </h2>
+              </Link>
             </div> 
 
             <h2 className='bg-secondary-blue p-2 px-6 rounded-full text-white cursor-pointer'>

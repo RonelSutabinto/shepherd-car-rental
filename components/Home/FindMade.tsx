@@ -4,7 +4,7 @@
 import { Combobox, Transition } from '@headlessui/react';
 import { useState, Fragment } from 'react';
 import { MadeProps } from 
- '@/properties';
+ '@/types';
 
  import { carMade } from '@/details';
 import Image from 'next/image';
@@ -35,7 +35,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             </Combobox.Button>
             
             <Combobox.Input
-            className='w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white-200 outline-none cursor-pointer text-sm'
+            className=' w-full h-[48px] pl-12 p-4   bg-light-white-100 outline-none cursor-pointer text-sm'
             displayValue={(car_made: string) => car_made}
             onChange={(e) => setQuery(e.target.value)} // When the input changes, the search query is updated
             placeholder='Honda...'
@@ -49,7 +49,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             afterLeave={() => setQuery("")} // After the transition of component, reset the search query
           >
             <Combobox.Options
-              className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
+              className='absolute mt-12 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
               static
             >
               {filteredMade.length === 0 && query !== "" ? (
@@ -64,7 +64,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
                   <Combobox.Option
                     key={item}
                     className={({ active }) =>
-                      `relative  cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative mb-6 min-h-fit  cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? "bg-primary-blue text-white" : "text-gray-900"
                       }`
                     }
