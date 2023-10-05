@@ -20,13 +20,13 @@ const CarCard = ({ car }: CarCardProps) => {
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl group">
       <div className="w-full flex justify-between items-start gap-2">
         <h2 className="text-[22px] leading-[26px] font-bold capitalize">
-          {make} {model}
+          {make} {model} model
         </h2>
       </div>
 
       <p className='flex mt-6 text-[32px] leading-[38px] font-extrabold'>
         <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span>
-        {rentRate}
+        {rentRate} 0.00
         <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
       </p>
 
@@ -39,16 +39,16 @@ const CarCard = ({ car }: CarCardProps) => {
           <div className='flex flex-col justify-center items-center gap-2'>
             <Image src='/steering-wheel.svg' width={20} height={20} alt='steering wheel' />
             <p className='text-[14px] leading-[17px]'>
-              {transmission === "a" ? "Automatic" : "Manual"}
+              {transmission === "a" ? "Automatic" : "Manual"} Manual
             </p>
           </div>
           <div className="flex group-hover:invisible w-full justify-between text-grey">
             <Image src="/tire.svg" width={20} height={20} alt="seat" />
-            <p className="text-[14px] leading-[17px]">{seats}</p>
+            <p className="text-[14px] leading-[17px]">{seats}5</p>
           </div>
           <div className="flex group-hover:invisible w-full justify-between text-grey">
             <Image src="/gas.svg" width={20} height={20} alt="seat" />
-            <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
+            <p className="text-[14px] leading-[17px]">{city_mpg}15 MPG</p>
           </div>
         </div>
 

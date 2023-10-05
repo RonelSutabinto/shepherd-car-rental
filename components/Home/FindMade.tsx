@@ -5,6 +5,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import { useState, Fragment } from 'react';
 import { MadeProps } from 
  '@/types';
+ import { FaListUl } from 'react-icons/fa';
 
  import { carMade } from '@/details';
 import Image from 'next/image';
@@ -25,13 +26,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
       <Combobox value={selected} onChange={setSelected}>
         <div className='flex relative w-full'>
             <Combobox.Button className="absolute top-[14px]">
-            <Image
-              src='/honda-car.png'
-              width={20}
-              height={20}
-              className='ml-4'
-              alt='car logo'
-            />
+            <FaListUl size={20} />
             </Combobox.Button>
             
             <Combobox.Input

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import FindMade from './FindMade';
+import { FaSistrix, FaCar } from 'react-icons/fa';
 
 
 const SearchInput = ({ setMade, setModel }: any) => {
@@ -26,14 +27,8 @@ const SearchInput = ({ setMade, setModel }: any) => {
   };
 
   const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-    <button type='submit' className={`-ml-3 z-10 ${otherClasses}`}>
-      <Image
-        src={"/magnifying-glass.svg"}
-        alt={"magnifying glass"}
-        width={40}
-        height={40}
-        className='object-contain'
-      />
+    <button type='submit' className={`ml-1 rounded-full z-10 ${otherClasses}`}>
+      <FaSistrix size={20} />
     </button>
   );
   
@@ -51,20 +46,14 @@ const SearchInput = ({ setMade, setModel }: any) => {
         </div>
 
         <div className=' max-sm:w-full flex justify-start items-center relative'>
-          <Image
-            src='/model-icon.png'
-            width={25}
-            height={25}
-            className='absolute w-[20px] h-[20px] ml-4'
-            alt='car model'
-          />
+          <FaCar size={20} />
           <input
             type='text'
             name='model'
             value={searchModel}
             onChange={(e) => setSearchModel(e.target.value)}
             placeholder='Search Model...'
-            className='w-full h-[48px] pl-12 p-4 bg-light-white-100 rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm'
+            className='w-full h-[48px] pl-12 p-4 bg-light-white-100  outline-none cursor-pointer text-sm'
           />
           <SearchButton otherClasses='sm:hidden' />
         </div>

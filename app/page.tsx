@@ -1,5 +1,6 @@
 "use client"
 
+import { CarCard } from '@/components';
 import Hero from '@/components/home/Hero'
 import SearchInput from '@/components/home/SearchInput'
 import Image from 'next/image'
@@ -32,6 +33,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <section>
+            <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14'>
+              {allCars?.map((car) => (
+                <CarCard car={car} />
+              ))}
+            </div>
+       </section>     
 
       
     </main>
