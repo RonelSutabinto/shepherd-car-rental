@@ -25,19 +25,21 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
     <div className='flex-1 max-sm:w-full flex justify-start items-center'>
       <Combobox value={selected} onChange={setSelected}>
         <div className='flex relative w-full'>
-            <Combobox.Button className="absolute top-[14px]">
-            <FaListUl size={20} />
-            </Combobox.Button>
-            
-            <Combobox.Input
+          <Combobox.Button className="absolute top-[14px]">
+          <FaListUl size={20} />
+          </Combobox.Button>
+          
+          {/* When the input changes, the search query is updated */}
+          <Combobox.Input
             className=' w-full h-[48px] pl-12 p-4   bg-light-white-100 outline-none cursor-pointer text-sm'
             displayValue={(car_made: string) => car_made}
-            onChange={(e) => setQuery(e.target.value)} // When the input changes, the search query is updated
+            onChange={(e) => setQuery(e.target.value)} 
             placeholder='Honda...'
-            />
+          />
 
+          {/* Group more components without adding a new DOM node  */}
           <Transition
-            as={Fragment} // Group more components without adding a new DOM node 
+            as={Fragment} 
             leave='transition ease-in duration-100'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'

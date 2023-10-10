@@ -1,10 +1,13 @@
 "use client"
 
 import { CarCard } from '@/components';
+import DataList from '@/components/DataList';
+import Form from '@/components/home/Form';
 import Hero from '@/components/home/Hero'
 import SearchInput from '@/components/home/SearchInput'
+import axios from 'axios';
 import Image from 'next/image'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [allCars, setAllCars] = useState([]);
@@ -13,6 +16,24 @@ export default function Home() {
   // search state
   const [made, setMade] = useState("");
   const [model, setModel] = useState("");
+  const [data, setData] = useState([]);
+
+  // ========================================
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/api/cars/get');
+      setData(response.data);
+    } catch (error: any) {
+      setError(error);
+    }
+  };
+
+  if (error) {
+    return <div>Error loading data</div>;
+  }
+  //=========================================
 
   return (
     <main className='overflow-hidden'>
@@ -40,9 +61,26 @@ export default function Home() {
                 <CarCard car={car} />
               ))}
             </div>
+            <div>
+              <DataList data={data}  />
+             
+            </div>
        </section>     
 
       
     </main>
   )
 }
+
+/*
+import CarsList from "@/components/car_crud/CarsList";
+
+export default function Home() {
+  return (
+    <div className="gap-6 px-6 pb-6 mx-12 mb-12">
+      <CarsList />
+    </div>
+  );
+}
+
+*/

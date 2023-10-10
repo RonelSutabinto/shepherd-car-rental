@@ -3,12 +3,12 @@
 import {useState} from 'react'
 import Image from 'next/image';
 
-import { CarProps } from '@/types';
-import { carImageUrl } from '@/services';
 import Link from 'next/link';
+import { carProps } from '@/utils/props/carProps';
+import { carImageUrl } from '@/utils';
 
 interface CarCardProps {
-  car: CarProps;
+  car: carProps;
 }
 
 const CarCard = ({ car }: CarCardProps) => {

@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "libs/mongodb.ts", "libs/mongodb.ts", "libs/Mongodb.jsx", "app/api/cars/route.js"],
+  "include": ["app/api/**/*.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/mongoDB.ts", "utils/mongoDB.ts", "utils/Mongodb.jsx", "app/api/cars/route.js"],
   "exclude": ["node_modules"]
 }
