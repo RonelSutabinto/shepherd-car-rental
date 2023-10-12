@@ -21,9 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative">
         <Navbar />
-        <div className='pt-32 px-6 mx-12'>
+        
+        {/* It will be used if there is a need to add car records */}
+        {/* <div className='pt-32 px-6 mx-12'>
             <ListHeader />
-        </div>
+        </div> */}
+
         {children}
         <Footer />
       </body>

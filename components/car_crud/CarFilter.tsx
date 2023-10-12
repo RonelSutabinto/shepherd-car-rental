@@ -1,7 +1,15 @@
+
+
+// "use client"
+
 import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
 import RemoveBtn from "../ui/RemoveBtn";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+//const response = await fetch(`/api/cars/filter?make=${make}&model=${model}`);
 const getCars = async () => {
   try {
     const res = await fetch("http://localhost:3001/api/car_crud", {
@@ -16,11 +24,13 @@ const getCars = async () => {
   } catch (error) {
     console.log("Error loading topics: ", error);
   }
-};
+};  
 
-export default async function CarsList() {
+export default async function CarFilter({make, model}: any) {
+  const [getMake, setGetMake] = useState(make);
+  const [getModel, setGetModel] = useState(model);
+
   const { cars } = await getCars();
-
   
   return (
     <>

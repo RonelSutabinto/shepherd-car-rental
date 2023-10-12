@@ -1,6 +1,6 @@
 import { carProps } from "./props/carProps";
 
-export const carImageUrl = (car: carProps, angle?: string) => {
+export  const carImageUrl = async (car: carProps, angle?: string) => {
     const url = new URL("https://cdn.imagin.studio/getimage");
     const { make, model, year } = car;
   
@@ -11,5 +11,5 @@ export const carImageUrl = (car: carProps, angle?: string) => {
     url.searchParams.append('modelYear', `${year}`);
     url.searchParams.append('angle', `${angle}`);
   
-    return `${url}`;
-  } 
+    return  `${url}`;
+  }

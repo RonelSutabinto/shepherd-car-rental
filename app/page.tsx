@@ -1,86 +1,73 @@
-"use client"
 
-import { CarCard } from '@/components';
-import DataList from '@/components/DataList';
-import Form from '@/components/home/Form';
-import Hero from '@/components/home/Hero'
-import SearchInput from '@/components/home/SearchInput'
-import axios from 'axios';
-import Image from 'next/image'
-import { useEffect, useState } from 'react';
+import { CarCard, SearchInput } from "@/components";
+import CarsList from "@/components/home/CarsList";
+import { fetchCars } from "@/utils/actions/car.actions";
+import { HomeProps } from "@/utils/props/carProps";
+import Image from 'next/image';
 
-export default function Home() {
-  const [allCars, setAllCars] = useState([]);
-  const [loading, setLoading] = useState(false);
-
+export default async function Home({ searchParams }: HomeProps) {
   // search state
-  const [made, setMade] = useState("");
-  const [model, setModel] = useState("");
-  const [data, setData] = useState([]);
+  // const [made_, setMade_] = useState("");
+  // const [model_, setModel_] = useState("");
 
-  // ========================================
-  const [error, setError] = useState(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/api/cars/get');
-      setData(response.data);
-    } catch (error: any) {
-      setError(error);
-    }
-  };
-
-  if (error) {
-    return <div>Error loading data</div>;
-  }
-  //=========================================
+  const result = await fetchCars(1, 10, searchParams.made, searchParams.model);
 
   return (
-    <main className='overflow-hidden'>
-      <Hero />
+    <div className='mt-12 padding-x padding-y max-width' id='discover'>
+      {/* <Hero onDataReceived={handleDataFromHero} /> */}
+      {/* Start of the hero part============================================== */}
+      <div className='px-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2'>
+        
+          <div className=' pt-12 my-4 xl:px-8 sm:px-4'>
+            <h3 className='text-black-100 2xl:text-[26px] sm:text-[22px] text-[22px]'>
+              SPECIAL OFFER
+            </h3>
+            <h1 className='text-secondary-blue text-[40px] md:text-[60px] font-bold '>
+              Best <span className='text-secondary-orange'>Car </span>Rental
+            </h1>
 
-      <div className='mt-4 padding-x padding-y max-width' id='discover'>
-        <div className='flex flex-col items-start justify-start gap-y-2.5 text-black-100'>
-          <h4 className='text-2xl font-extrabold'>Rent a car in BC</h4>
-          <p>Look into cars that interest you.</p>
-        </div>
+            <h2 className='text-[20px] text-gray-500 pr-20 mt-5'>
+              Enjoy your vacation with the best car rental service from us.
+            </h2>
+            
 
+            <div className='mt-6 pt-4 w-full flex-between items-center flex-wrap gap-5'>
+              <h4 className='text-2xl font-extrabold'>Rent a car in BC</h4>
+              <SearchInput />
+            </div>
 
-        <div className='mt-4 w-full flex-between items-center flex-wrap gap-5'>
-          <SearchInput setMade={setMade} setModel={setModel}/>
+          </div>
 
-          <div className='flex justify-start flex-wrap items-center gap-2'>
-            <p>Car Type</p>
+          <div className='flex flex-center my-4 pt-4'>
+            <Image 
+              src='/hero.png'
+              alt='hero'
+              width={400}
+              height={500}
+              className='w-full object-contain align-middle'
+            />
           </div>
         </div>
       </div>
+      {/* End of the Hero part================================================ */}
 
-      <section>
-            <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14'>
-              {allCars?.map((car) => (
-                <CarCard car={car} />
-              ))}
-            </div>
-            <div>
-              <DataList data={data}  />
-             
-            </div>
-       </section>     
+      <div className='mt-4  py-4 max-width' id='discover'>
+        <div className='flex flex-col mt-4 px-5 items-start justify-start gap-y-2.5 text-black-100'>
+          <h4 className=' text-2xl font-extrabold'>Car Catalog</h4>
+          <p>Look into cars that interest you.</p>
+        </div>
+      </div>
 
-      
-    </main>
-  )
-}
-
-/*
-import CarsList from "@/components/car_crud/CarsList";
-
-export default function Home() {
-  return (
-    <div className="gap-6 px-6 pb-6 mx-12 mb-12">
-      <CarsList />
+      <section className="px-4 max-width">
+        {result.cars.length === 0 ? (
+          <p className="no-result">No cars found</p>
+          ) : (
+            <CarsList cars = {result.cars} />
+          )}
+      </section>
     </div>
   );
 }
 
-*/
+

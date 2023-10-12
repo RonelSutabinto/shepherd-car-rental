@@ -3,8 +3,13 @@
 import Image from 'next/image';
 import { SearchInput } from '..';
 import { useState } from 'react';
+import { fetchCars } from '@/utils/actions/car.actions';
 
-const Hero = () => {
+interface HeroProps {
+  onDataReceived: (data1: string, data2: string) => void;
+}
+
+const Hero = ({ onDataReceived }: HeroProps) => {
   const [allCars, setAllCars] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -12,56 +17,50 @@ const Hero = () => {
   const [made, setMade] = useState("");
   const [model, setModel] = useState("");
 
+  // setModel_(made) { setMade_, setModel_ }: any
+  // setMade_(model)
+
+  const data1 = made;
+  const data2 = model;
+  // Call the function passed from the main page with the event data
+  onDataReceived(data1, data2);
 
   return (
-    <div className="flex xl:flex-row flex-col gap-5 relative z-1 max-w-[1440px] mx-auto">
+    <div className='px-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2'>
         
-      <div className='flex pt-36 padding-x'>
-        <div>
+      <div className=' pt-12 my-4 xl:px-8 sm:px-4'>
         <h3 className='text-black-100 2xl:text-[26px] sm:text-[22px] text-[22px]'>
           SPECIAL OFFER
         </h3>
-        <h1 className='text-secondary-blue 2xl:text-[70px] sm:text-[62px] text-[50px] font-extrabold'>
+        <h1 className='text-secondary-blue text-[40px] md:text-[60px] font-bold '>
           Best <span className='text-secondary-orange'>Car </span>Rental
         </h1>
-        <p className=' text-black-100 font-light mt-5'>
+
+        <h2 className='text-[20px] text-gray-500 pr-20 mt-5'>
           Enjoy your vacation with the best car rental service from us.
-        </p>
-
-
-        <div className='py-6'>
-          <div className='flex flex-col items-start justify-start px-6 text-black-100'>
-            <h4 className='text-2xl text-secondary-blue font-extrabold'>Rent a car in BC</h4>
-            <p>Look into cars that interest you.</p>
-          </div>
-
-          
-          <div className=' rounded-md py-6 px-6 drop-shadow bg-secondary-light-100'>
-            <div className='w-[70%]'>
-            <SearchInput setMade={setMade} setModel={setModel}/>
-            </div>
-            
-          </div>
-        
-        </div>
-        </div>
+        </h2>
         
 
-        <div className='flex'>
-        <Image src="/hero.png" alt='hero image' fill className='object-contain'/>
+        <div className='mt-6 pt-4 w-full flex-between items-center flex-wrap gap-5'>
+          <h4 className='text-2xl font-extrabold'>Rent a car in BC</h4>
+          <SearchInput setMade={setMade} setModel={setModel}/>
         </div>
-        
+
       </div>
 
-      
-      {/* <div className='xl:flex-[1.5] flex justify-center items-center w-full xl:h-screen'>
-          <div className='relative xl:w-full w-[80%] xl:h-full h-[390px] z-0'>
-              <Image src="/hero.png" alt='hero image' fill className='object-contain'/>
-          </div>
-      </div>  */}
-     
-
+      <div className='flex flex-center my-4 pt-4'>
+        <Image 
+          src='/hero.png'
+          alt='hero'
+          width={400}
+          height={500}
+          className='w-full object-contain align-middle'
+        />
+      </div>
     </div>
+    </div>
+   
   )
 }
 

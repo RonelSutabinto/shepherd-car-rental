@@ -43,3 +43,4 @@ export async function GET(request: any, { params }: any) {
   const car = await Car.findOne({ _id: id });
   return NextResponse.json({ car }, { status: 200 });
 }
+

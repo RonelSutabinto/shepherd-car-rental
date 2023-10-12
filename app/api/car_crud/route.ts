@@ -50,3 +50,4 @@ export async function DELETE(request: any) {
   await Car.findByIdAndDelete(id);
   return NextResponse.json({ message: "Car deleted" }, { status: 200 });
 }
+

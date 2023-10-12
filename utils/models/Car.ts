@@ -1,6 +1,7 @@
-import mongoose, { Schema } from "mongoose";
 
-const carSchema = new Schema(
+import mongoose from 'mongoose';
+
+const carSchema = new mongoose.Schema(
   {
     city_mpg: Number,
     color: String,
@@ -17,14 +18,12 @@ const carSchema = new Schema(
     availability: {
       type: Boolean,
       default: true
-    }
-  },
-  {
-    timestamps: true,
+    },
   }
 );
 
-const Car = mongoose.models.Car || mongoose.model("Car", carSchema);
+ const Car = mongoose.models.Car || mongoose.model('Car', carSchema);
+  //const Car = mongoose.models.Car || mongoose.model<ICar>('Car', carSchema);
 
 export default Car;
 

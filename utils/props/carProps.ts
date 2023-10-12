@@ -1,3 +1,5 @@
+
+
 export interface carProps {
   city_mpg: number,
   color: string,
@@ -12,4 +14,13 @@ export interface carProps {
   transmission: string,
   year: number,
   availability: boolean;
+}
+
+export interface SearchProps {
+  made: string;
+  model: string; 
+}
+
+export interface HomeProps {
+  searchParams: SearchProps;
 }
