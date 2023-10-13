@@ -4,9 +4,13 @@ import {useState} from 'react'
 import Image from 'next/image';
 
 import Link from 'next/link';
-import { carProps } from '@/utils/props/carProps';
+
 import { carImageUrl } from '@/utils';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
+import React from 'react';
+import { useDisclosure } from '@chakra-ui/react';
+import BookModal from '../booking/BookModal';
+import { carProps } from '@/utils/props/carProps';
 
 interface CarCardProps {
   car: carProps;
@@ -15,9 +19,13 @@ interface CarCardProps {
 const CarCard = ({ car }: CarCardProps) => {
   const { city_mpg, year, make, model, transmission, rentRate, seats } = car;
 
-  const [isOpen, setIsOpen] = useState(false);
+  //Modal page hook settings========
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
 
   return (
+    <>
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group">
       <div className="w-full flex justify-between items-start gap-2">
         <h2 className="text-[18px] leading-[22px] font-bold capitalize">
@@ -56,17 +64,17 @@ const CarCard = ({ car }: CarCardProps) => {
       </div>
 
       <div className='flex-1 mt-4 w-full h-10 object-contain'>
-          <button className='  bg-gradient-to-r from-blue-400 to-primary-blue p-2 rounded-lg text-white w-full px-5 justify-between'
-          >
-            <span className='text-30px font-bold text-white'>Book A Car</span> 
-          </button>
-
-        </div>
-
-      <div className="hidden group-hover:flex absolute bottom-0 w-full z-10">
-        <Link href="/bookcar">View Car</Link>
+        <button className='  bg-gradient-to-r from-blue-400 to-primary-blue p-2 rounded-lg text-white w-full px-5 justify-between'
+          onClick={onOpen}
+        >
+          <span className='text-30px font-bold text-white'>Book A Car</span> 
+        </button>
       </div>
+
     </div>
+
+    <BookModal isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} car={car} />
+    </>
 
    
   );

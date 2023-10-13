@@ -1,4 +1,8 @@
 
+//=============================================================
+// UI source for input filtering: https://headlessui.com/react/combobox
+//=============================================================
+
 "use client";
 
 import { Combobox, Transition } from '@headlessui/react';
@@ -7,7 +11,7 @@ import { MadeProps } from
  '@/types';
  import { FaListUl } from 'react-icons/fa';
 
- import { carMade } from '@/constant';
+ import { carMade } from '@/utils/details';
 import Image from 'next/image';
 
 const FindMade = ({selected, setSelected}: MadeProps) => {

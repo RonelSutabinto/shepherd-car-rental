@@ -1,3 +1,7 @@
+//=====================================================================================
+// UI source for input filtering: https://headlessui.com/react/combobox================
+// https://chat.openai.com/=for handling search param object============================
+
 "use client";
 
 import { useState } from 'react';
@@ -5,7 +9,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import FindMade from './FindMade';
-import { FaSistrix, FaCar } from 'react-icons/fa';
+import { FaSistrix } from 'react-icons/fa';
 
 
 const SearchInput = () => {
@@ -52,6 +56,9 @@ const SearchInput = () => {
     } else {
        searchParams.delete("made");
     }
+
+    console.log(made);
+    console.log(model);
 
     // Generate the new pathname with the updated search parameters
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;

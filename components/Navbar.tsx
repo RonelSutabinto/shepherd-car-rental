@@ -88,12 +88,12 @@ const Navbar: React.FC = () => {
           </button>
         </div>
         <div className={`md:flex flex-col md:flex-row md:space-x-4 ${isOpen ? 'flex' : 'hidden'}`}>
-          <a href="/" className="hover:bg-secondary-light rounded-full hover:text-dark-100 p-2 px-3 cursor-pointer">
-            Home
-          </a>
-          <a href="/Book" className="hover:bg-secondary-light rounded-full hover:text-dark-100 p-2 px-3 cursor-pointer">
-            Booking
-          </a>
+          <h1  className="hover:bg-secondary-light rounded-full hover:text-dark-100 p-2 px-3 cursor-pointer">
+            <Link href="/">Home</Link>
+          </h1>
+          <h1 className="hover:bg-secondary-light rounded-full hover:text-dark-100 p-2 px-3 cursor-pointer">
+            <Link href="/book">Booking</Link>
+          </h1>
           <a href="/Services" className="hover:bg-secondary-light rounded-full hover:text-dark-100 p-2 px-3 cursor-pointer">
             Services
           </a>

@@ -1,6 +1,4 @@
 
-
-
 "use server";
 
 import { connectToDB } from "@/libs/mongodb";
@@ -9,21 +7,24 @@ import Car from "../models/Car";
 
 
 export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: string, searchModel?: string) {
-  connectToDB();
+  await connectToDB();
 
   //Calculate the number of cars 
   const skipAmount = (pageNumber - 1) * pageSize;
-  const search_make = searchMake ? { $regex: searchMake, $options: 'i' } : '';
-  const search_model = searchModel ? { $regex: searchModel, $options: 'i' }: '';
+  const search_make = searchMake ? { $regex: searchMake, $options: 'i' } : null;
+  const search_model = searchModel ? { $regex: searchModel, $options: 'i' }: null;
 
-  // Fetch the cars...
-  const carsQuery = Car.find({ make: search_make} || { model: searchModel})
-    .skip(skipAmount)
-    .limit(pageSize)
+  const query = {}
+  if (search_make) {
+    query.make = search_make
+  }
 
-  // const carsQuery = Car.find()
-  // .skip(skipAmount)
-  // .limit(pageSize)
+  if (search_model) {
+    query.model = search_model
+  }
+
+  // // Fetch the cars...
+  const carsQuery = Car.find(query).skip(skipAmount).limit(pageSize)
 
   const totalCarsCount = await Car.countDocuments()
 
