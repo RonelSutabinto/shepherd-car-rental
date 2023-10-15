@@ -8,18 +8,19 @@ import Link from 'next/link';
 import { carImageUrl } from '@/utils';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import React from 'react';
-import { useDisclosure } from '@chakra-ui/react';
+import { Divider, useDisclosure } from '@chakra-ui/react';
 import BookModal from '../booking/BookModal';
 import { carProps } from '@/utils/props/carProps';
 
 interface CarCardProps {
+  isList: boolean;
   car: carProps;
 }
 
-const CarCard = ({ car }: CarCardProps) => {
-  const { city_mpg, year, make, model, transmission, rentRate, seats } = car;
+const CarCard = ({isList, car }: CarCardProps) => {
+  const { city_mpg, year, make, model, transmission, rentRate, seats } = car; // Initialize local props from the car details received ======
 
-  //Modal page hook settings========
+  //Book modal component react hook settings========
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -63,14 +64,16 @@ const CarCard = ({ car }: CarCardProps) => {
         </div>
       </div>
 
-      <div className='flex-1 mt-4 w-full h-10 object-contain'>
+      {isList ? ( 
+        <div className='flex-1 mt-4 w-full h-10 object-contain'>
         <button className='  bg-gradient-to-r from-blue-400 to-primary-blue p-2 rounded-lg text-white w-full px-5 justify-between'
           onClick={onOpen}
         >
           <span className='text-30px font-bold text-white'>Book A Car</span> 
         </button>
       </div>
-
+      ): (<div></div>)}
+      
     </div>
 
     <BookModal isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} car={car} />

@@ -14,7 +14,7 @@ function BookingModal({car}:any) {
     <div className='grid grid-cols-1
     md:grid-cols-2 p-5'>
         <div>
-            <CarCard car={car} />
+            {/* <CarCard car={car} /> */}
         </div>
         <div>
            <Form car={car} />

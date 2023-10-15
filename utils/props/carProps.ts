@@ -1,6 +1,7 @@
 
 
 export interface carProps {
+  _id: string
   city_mpg: number,
   color: string,
   fuel_type: string,
@@ -13,7 +14,7 @@ export interface carProps {
   seats: number,
   transmission: string,
   year: number,
-  availability: boolean;
+  availability: boolean,
 }
 
 export interface SearchProps {
@@ -23,4 +24,25 @@ export interface SearchProps {
 
 export interface HomeProps {
   searchParams: SearchProps;
+}
+
+export interface BookProps {
+  location: Number,
+  pickupDateTime: Date,
+  no_days : Number,
+  total_amount: Number,
+  full_name: String,
+  contact_no: String,
+  carId: String,
+  createdAt: Date
+}
+
+export interface booksProps {
+  location: string, 
+  pickupDateTime: string, 
+  total_amount: number, 
+  no_days: number, 
+  full_name: string ,
+  contact_no: string, 
+  carId: string
 }

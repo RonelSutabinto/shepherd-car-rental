@@ -12,7 +12,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useDisclosure,
   Select,
   NumberInput,
   NumberInputField,
@@ -22,10 +21,14 @@ import {
   
 } from '@chakra-ui/react'
 import React, { useState } from 'react';
-
+import { CarCard } from '..';
+import { createCarBook } from '@/utils/actions/carbook.actions';
+import { format } from 'date-fns'; //YYYY-MM-DDTHH:mm:ss.sssZ
+ 
+// book modal modified received data props======
 interface CarDetailsProps {
   isOpen: boolean;
-  onClose: any;
+  onClose: () => void;
   initialRef: any;
   finalRef: any;
   car: carProps;
@@ -33,96 +36,171 @@ interface CarDetailsProps {
 
 const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) => {
 
+  const [location, setLocation] = useState<string>('');
+  const [pickupDateTime, setPickupDateTime] = useState<string>(format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')); 
+  const [total_amount, setTotal_amount] = useState<number>(car.rentRate);
+  const [no_days, setNo_days] = useState<number>(1);
+  const [full_name, setFull_name] = useState<string>('');
+  const [contact_no, setContact_no] = useState<string>('');
+  const [carId, setCarId] = useState<string>(car._id);
 
-    return ( 
-      <>
-          <Modal
-            initialFocusRef={initialRef}
-            finalFocusRef={finalRef}
-            isOpen={isOpen}
-            onClose={onClose}
-          >
-            <ModalOverlay />
-            <form method="dialog" className="modal-box w-11/12 max-w-5xl">
+  // Handle the number of days change event here
+  const handleNumberChange = (value: string) => {
+    
+    const parsedValue = parseInt(value, 10) || 0;
+    setNo_days(parsedValue);
+
+    // Calculate total amount based on number of days and rent per day
+    const amount = parsedValue * car.rentRate;
+    setTotal_amount(amount);
+
+    // Assign the formatted total amount to the rentRateInput chakra component
+    const total_amountField = document.getElementById('rentRateInput') as HTMLInputElement;
+    if (total_amountField) {
+      total_amountField.value = `$${amount.toFixed(2)}`;
+    }
+  };
+
+  // Handle form submission
+  const handleFormSubmit = async () => {
+    try {
+    
+      // Call the backend API to create a car book
+      const response = await createCarBook({location, pickupDateTime, total_amount, no_days, full_name, contact_no, carId});
+
+      // Handle success response (if needed)
+      console.log('Car book created successfully:', response);
+
+      // Close the modal after successful form submission
+      onClose();
+    } catch (error) {
+      // Handle error (if needed)
+      console.error('Error creating car book:', error);
+    }
+  };
+
+  return ( 
+    <>
+        <Modal
+          initialFocusRef={initialRef}
+          finalFocusRef={finalRef}
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <form onSubmit={handleFormSubmit} className="modal-box w-11/12 max-w-5xl">
             <ModalContent className='max-w-screen-sm'>
               <ModalHeader className='text-secondary-blue'>Book A Car</ModalHeader>
               <ModalCloseButton />
+
               <ModalBody pb={6}>
-
                 <div className='grid grid-cols-1
-                md:grid-cols-2 p-5'>
-                    <div>
-                        {/* <CarCard car={car} /> */}
+                md:grid-cols-2 p-4'>
+                    <div className='px-4'>
+                      {/* Reuse the car card component from the list component */}
+                      <CarCard isList={false} car = {car}/> 
                     </div>
-                    <div>
-                      {/* <Form car={car} /> */}
+                    <div className='border-[1px] shadow-md border-b-slate-500 p-4 rounded-2xl '>
 
-                      <FormControl >
+                      {/* Chakra ui form rent a car input details starts here=== */}
+                      <FormControl  >
                         <FormLabel className='text-xs text-gray-600'>Localtion</FormLabel>
-                        
-                        <Select size='sm' placeholder="Select Location">
+                        <Select 
+                          size='sm' 
+                          placeholder="Select Location"
+                          id="locationSelect"
+                          onChange={(e) => setLocation(e.target.value)}
+                        >
                           <option value="1">Courtenay, BC</option>
                           <option value="2">Comox Valley, BC</option>
                           <option value="3">Nanaimo, BC</option>
                         </Select>
                       </FormControl>
 
-                      <div className='flex justify-between mt-4'>
-                        <FormControl className='mr-2'>
-                          <FormLabel className='text-xs text-gray-600' >Pick Up Date</FormLabel>
+                      <FormControl className='mt-4'>
+                          <FormLabel className='text-xs text-gray-600' >Pick Up Date And Time</FormLabel>
                           <Input                   
                             placeholder="Select Date and Time"
                             size="sm"
-                            type="date-local"
+                            type="datetime-local"
+                            id="dataTimePicker"
+                            onChange={(e) => setPickupDateTime(e.target.value)}
                           />
                         </FormControl>
 
-                        <FormControl className=''>
-                          <FormLabel className='text-xs text-gray-600'>Number Of Days</FormLabel>
-                          <NumberInput size='sm' defaultValue={1} min={1} max={20}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                              <NumberIncrementStepper />
-                              <NumberDecrementStepper />
-                            </NumberInputStepper>
-                          </NumberInput>
+                        <div className='grid grid-cols-1 md:grid-cols-2 '>
+                          <FormControl className='mt-4'>
+                            <FormLabel className='text-xs text-gray-600'>Number Of Days</FormLabel>
+                            <NumberInput 
+                              size='sm' 
+                              defaultValue={1} 
+                              min={1} 
+                              max={20} 
+                              onChange={(valueString) => handleNumberChange(valueString)}
+                              id="numberOfDaysInput"
+                              name="no_days"
+                            >
+                              <NumberInputField />
+                              <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                              </NumberInputStepper>
+                            </NumberInput>
+                          </FormControl>
+
+                          <FormControl className='mt-4'  mt={4}>
+                            <FormLabel className='text-xs text-gray-600'>Total Amount</FormLabel>
+                            <Input 
+                              className=' text-secondary-orange font-bold'
+                              size='sm' 
+                              defaultValue={`$${car.rentRate.toFixed(2)}`}
+                              placeholder='Total amount' 
+                              readOnly // Make the input field read-only
+                              id="rentRateInput"
+                            />
+                          </FormControl>
+                        </div>
+
+                        <FormControl className='mt-4'>
+                          <FormLabel className='text-xs text-gray-600'>Renters Full Name</FormLabel>
+                          <Input 
+                            size='sm' 
+                            ref={initialRef} 
+                            placeholder='Full name' 
+                            id="fullNameInput" 
+                            onChange={(e) => setFull_name(e.target.value)}
+                          />
                         </FormControl>
-                      </div>
 
-
-
-                      <FormControl className='mb-2'>
-                          <FormLabel className='text-xs text-gray-600'>First name</FormLabel>
-                          <Input size='sm' ref={initialRef} placeholder='First name' value={car.make} />
-                        </FormControl>
-
-                        <FormControl className='mb-2'  mt={4}>
-                          <FormLabel className='text-sm text-gray-600'>Last name</FormLabel>
-                          <Input size='sm' placeholder='Last name' value={car.model} />
+                        <FormControl className='mt-4'  mt={4}>
+                          <FormLabel className='text-xs text-gray-600'>Contact Number</FormLabel>
+                          <Input 
+                            size='sm' 
+                            placeholder='Contact number'  
+                            id="contactInput"
+                            onChange={(e) => setContact_no(e.target.value)}
+                          />
                         </FormControl>
                       
                     </div>
                 </div>
-            
-             
-                
               </ModalBody>
+
               <ModalFooter>
-                <Button className=' text-white bg-secondary-blue hover:text-black-100 hover:bg-secondary-light' mr={3}>
+                <Button type="submit" className=' text-white bg-secondary-blue hover:text-black-100 hover:bg-secondary-light' mr={3}>
                   Book Now
                 </Button>
                 <Button className=' text-white bg-secondary-orange hover:text-black-100 hover:bg-secondary-light' onClick={onClose}>Cancel</Button>
               </ModalFooter>
-
               
             </ModalContent>
-            </form>
-          </Modal>
+          </form>
+        </Modal>
+    
       
-        
-      </>
+    </>
 
-    );
+  );
   }
 
   export default  BookModal;
