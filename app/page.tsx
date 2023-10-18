@@ -6,10 +6,8 @@ import { HomeProps } from "@/utils/props/carProps";
 import Image from 'next/image';
 
 export default async function Home({ searchParams }: HomeProps) {
-  // search state
-  // const [made_, setMade_] = useState("");
-  // const [model_, setModel_] = useState("");
-
+  
+  //Use four parameters to fetch the filtered car lists available ===================
   const result = await fetchCars(1, 10, searchParams.made, searchParams.model);
 
   return (

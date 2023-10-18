@@ -1,58 +1,11 @@
-// import React from 'react'
-// import Image from 'next/image'
-// import Link from 'next/link'
-
-// const Navbar = () => {
-//   return (
-//     <div className='flex flex-between items-center justify-between p-4 px-10 shadow-sm border-b-[1px]'>
-     
-//       <Link href="/" className="flex justify-center items-center">
-//         <Image 
-//           src="/logo.png"
-//           alt="Car Rental Logo"
-//           width={100}
-//           height={95}
-//           className="object-contain"
-//         />
-//       </Link> 
-
-//       <div>
-//         <div className='flex items-center justify-between gap-6'>
-//           <div className='flex'>
-//             <Link href={"/"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
-//               Home
-//             </Link>
-//             <Link href={"/book"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
-//               Booking
-//             </Link>
-//             <Link href={"/services"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
-//               Services
-//             </Link>
-//             <Link href={"/contactus"} className='hover:bg-secondary-light p-2 px-3 rounded-full hover:text-black-100 cursor-pointer'>
-//               Contact Us
-//             </Link>
-//           </div> 
-
-//           <h2 className='bg-secondary-blue p-2 px-6 rounded-full text-white cursor-pointer hover:scale-105 transition-all'>
-//             Sign In
-//           </h2>
-//         </div>
-//       </div>
-      
-//     </div>
- 
-
-//   )
-// }
-
-// export default Navbar
-
-
 "use client"
 
 import Link from 'next/link';
 import Image from 'next/image'
 import React, { useState } from 'react';
+import { css } from '@emotion/react';
+
+const navbarStyles = css` z-index: 1000; /* or any value higher than the other components */`;
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +15,9 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-100 text-primary-blue p-2 fixed w-full top-0">
+    <>
+      <div className='navbar' > 
+      <nav className="bg-gray-100 text-primary-blue p-2 fixed w-full top-0">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-xl font-bold">
           <Link href="/" className="flex justify-center items-center">
@@ -109,6 +64,9 @@ const Navbar: React.FC = () => {
 
       </div>
     </nav>
+    </div>
+    </>
+    
   );
 };
 

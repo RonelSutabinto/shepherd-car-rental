@@ -1,28 +1,81 @@
-"use client"
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import React from 'react';
-export default function Page() {
+import BookCard from '@/components/booking/BookCard';
+import SideButton from '@/components/booking/TopButton';
+import TopButton from '@/components/booking/TopButton';
+import { fetchCarBooks } from '@/utils/actions/carbook.actions';
+import { BookHistoryParams } from '@/utils/props/carProps';
+
+
+
+export default async function Page({searchParams}: BookHistoryParams) {
+
+  //Fetch the filtered book a car records by its status ===================
+  const result = await fetchCarBooks(searchParams.bookStatus, "1", "20");
 
   return (
   <>
-  <div className='pt-32 px-16'>
-    <Tabs variant='soft-rounded' colorScheme='green'>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <p>one!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
-</div>
-    
+    <div className=' padding-x padding-y max-width'>
+      <div className=' mt-28 flex justify-center'>
+        
+      <div className='fixed top-28 flex justify-center rounded-lg bg-secondary-blue-100 w-4/5'>
+        <div className='my-2'>
+          <TopButton />
+        </div>
+      </div>
+
+      <div className='flex '></div>
+        <div>
+          <div className='flex justify-center mt-56 sm:mt-44 md:mt-32 lg:mt-24 mb-4'>
+            <h1 className=' text-secondary-blue text-[28px] font-bold ' >Booking <span className='text-secondary-orange'>History </span>Records </h1>            
+          </div>
+          
+          <div className='flex justify-center '>
+
+            <div className='pt-8  p-2 rounded-l-2xl ' >
+                <h1 className=' text-[20px] font-bold text-black-100'>
+                  Please click the <span className='text-secondary-orange'>pay now button</span> to complete your car reservation. 
+                </h1>
+                <h1 className='justify-center max-w-lg text-[14px] text-black-100'>
+                  We can accommodate your needs, whether you need a dependable vehicle for a business trip, are organizing a road trip, or simply want the comfort of having a car of your choice.
+                </h1>
+          
+            </div>
+
+            <div className=' p-2 rounded-r-2xl'>
+              <img
+                className=" flex-1 mx-5  w-40 h-40 object-contain align-middle "
+                alt=""
+                src="/cartmp.png"
+              />
+            </div>
+            
+          </div>
+            
+          <div className=" bg-white p-4 w-full md:flex md:flex-col md:h-screen">
+            <div className='max-h-fit overflow-y-auto border p-4'>
+              <div className='bg-white md:w-full w-full'>
+                {result.carbooks.length === 0 ? (
+                <p className="no-result">No book cars found</p>
+                ) : (
+                  <div>
+                    {result.carbooks.map((book: any) => (
+                      < BookCard book={book}/>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            {/* <img src="..." /> */}
+            <strong></strong>
+          </div>
+          {/* <!-- ... --> */}
+        </div>
+      </div>
+      
+    </div>
   </>
 
   );

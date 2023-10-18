@@ -69,7 +69,7 @@ const SearchInput = () => {
   return (
     <form className='searchbar' onSubmit={handleSearch}>
         <div className='flex pr-4 rounded-full bg-secondary-blue'>
-        <div className='flex text-white rounded-full justify-start items-center relative'>
+        <div className='flex text-white rounded-full justify-start items-center '>
           <FindMade 
             selected={findMade}
             setSelected={setFindMade}
@@ -78,7 +78,7 @@ const SearchInput = () => {
           {/* <SearchButton otherClasses='sm:hidden'/> */}
         </div>
 
-        <div className=' max-sm:w-full flex justify-start   text-white items-center relative'>
+        <div className=' max-sm:w-full flex justify-start   text-white items-center '>
           {/* <FaCar size={20} /> */}
           <input
             type='text'

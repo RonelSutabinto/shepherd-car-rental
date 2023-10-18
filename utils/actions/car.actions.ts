@@ -13,6 +13,8 @@ export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: strin
   const search_make = searchMake ? { $regex: searchMake, $options: 'i' } : null;
   const search_model = searchModel ? { $regex: searchModel, $options: 'i' }: null;
 
+  //  This section was created by Alex, =====================================
+  // our class's technical support for Capstone web application development==
   const query = {}
   if (search_make) {
     query.make = search_make
@@ -21,10 +23,11 @@ export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: strin
   if (search_model) {
     query.model = search_model
   }
+  //=============================================================================
+
 
   // // Fetch the cars...
   const carsQuery = Car.find(query).skip(skipAmount).limit(pageSize)
-
   const totalCarsCount = await Car.countDocuments()
 
   const cars = await carsQuery.exec();
@@ -32,6 +35,22 @@ export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: strin
   const isNext = totalCarsCount > skipAmount + cars.length;
 
   return { cars, isNext }
+}
+
+//const car = await Car.findOne({ _id: id });
+export async function fetchCarsById(Id: string) {
+  await connectToDB();
+
+  const query = {}
+  if (Id) {
+    query._id = Id
+  }
+  
+  // // Fetch the cars...
+  const carsQuery = Car.findOne(query);
+  const car = await carsQuery.exec();
+  
+  return { car }
 }
 
 export const updateSearchParams = (type: string, value: string) => {

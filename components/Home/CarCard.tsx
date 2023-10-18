@@ -18,9 +18,10 @@ interface CarCardProps {
 }
 
 const CarCard = ({isList, car }: CarCardProps) => {
-  const { city_mpg, year, make, model, transmission, rentRate, seats } = car; // Initialize local props from the car details received ======
+  // Initialize local props from the car details received ======
+  const { city_mpg, year, make, model, transmission, rentRate, seats } = car; 
 
-  //Book modal component react hook settings========
+  //Book modal component react hook settings====================
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);

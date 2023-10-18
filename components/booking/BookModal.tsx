@@ -38,11 +38,16 @@ const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) 
 
   const [location, setLocation] = useState<string>('');
   const [pickupDateTime, setPickupDateTime] = useState<string>(format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')); 
+  const [rate, setRate] = useState<number>(car.rentRate);
   const [total_amount, setTotal_amount] = useState<number>(car.rentRate);
   const [no_days, setNo_days] = useState<number>(1);
   const [full_name, setFull_name] = useState<string>('');
   const [contact_no, setContact_no] = useState<string>('');
   const [carId, setCarId] = useState<string>(car._id);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [card_type, setCard_type] = useState<string>('');
+  const [card_number, setCard_number] = useState<string>('');
+  const [expiry, setexpiry] = useState<string>('');
 
   // Handle the number of days change event here
   const handleNumberChange = (value: string) => {
@@ -66,7 +71,7 @@ const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) 
     try {
     
       // Call the backend API to create a car book
-      const response = await createCarBook({location, pickupDateTime, total_amount, no_days, full_name, contact_no, carId});
+      const response = await createCarBook({location, pickupDateTime, rate, no_days, total_amount, full_name, contact_no, carId,isComplete, card_type, card_number, expiry});
 
       // Handle success response (if needed)
       console.log('Car book created successfully:', response);
