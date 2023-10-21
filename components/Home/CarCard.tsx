@@ -54,9 +54,9 @@ const CarCard = ({isList, car }: CarCardProps) => {
               {transmission === "Manual" ? "Manual" : "Auto"}
             </p>
           </div>
-          <div className="fflex flex-col justify-center items-center gap-2">
+          <div className="flex flex-col justify-center items-center gap-2">
             <FaWheelchair  className="w-full text-[20px] mb-2" />
-            <p className="flex-1 text-[14px] leading-[17px]">{seats}</p>
+            <p className="text-[14px] leading-[17px]">{seats}</p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <FaGasPump className="w-full text-[20px] mb-2" />

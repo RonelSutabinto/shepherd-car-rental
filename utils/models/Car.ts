@@ -19,6 +19,11 @@ const carSchema = new mongoose.Schema(
       type: Boolean,
       default: true
     },
+    idStripe: String,
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   }
 );
 

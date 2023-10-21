@@ -1,63 +1,105 @@
-// "use client";
+ "use client";
 
 import { FaAngleDoubleRight, FaRegEdit,FaCar, FaGasPump, FaWheelchair } from "react-icons/fa";
 import { booksProps } from "@/utils/props/carProps";
-import { useState } from "react";
+// import { useState } from "react";
 import { fetchCarsById } from "@/utils/actions/car.actions";
 import CarCard from "../home/CarCard";
 import Image from 'next/image';
+import { format } from 'date-fns';
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import axios from "axios"
+import { MeasureMemoryMode } from "vm";
 
 interface BookProps {
-  book: booksProps;
+  book: booksProps,
+  make: string,
+  model: string,
+  transmission: string,
+  rentRate: number,
+  seats: number,
+  city_mpg: number,
+  idStripe: string
 }
  
-export default async function BookCard ({book}: BookProps)  {
+const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe }: BookProps) => {
+    // const router = useRouter();
     
-    // Initialize local props from the book a car data received ======
+    // Initialize server side props from the book a car data rendering
     const { location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
-     
+    const id_Stripe  = idStripe; 
+    const _make = make;
+    const _model = model;
+    const _transmission = transmission;
+    const _rentRate = rentRate;
+    const _seats = seats;
+    const _city_mpg = city_mpg;
+
     // Fetch the car detail
-    const result = await fetchCarsById(carId);            
+    // const result = await fetchCarsById(carId);   
+
+    // POST request for stripe payment integration
+    const handlePayment = async (e: any) => {
+      e.preventDefault();
+      const { data } = await axios.post('/api/payment',{ 
+        priceId: id_Stripe,
+        days: no_days
+      }, {
+        headers: {
+          "Content-Type": "app/json",
+        },
+      });
+
+      window.location.assign(data)
+    }
 
   return (
     
-      <div className=' grid grid-cols-1
-      md:grid-cols-2 p-4 dr border-[1px] border-gray-400 my-6 rounded-lg bg-secondary-blue-100b '   >
+      <div className={` 
+        grid grid-cols-1
+        md:grid-cols-2 
+        p-4 dr 
+        border-[1px]
+        border-gray-400 
+        my-6 
+        rounded-lg 
+        ${isComplete===true ? "bg-secondary-blue-100b" :"bg-light-white"} `} 
+      >
         <div className='px-4 '>
       
           {/* View the car detail */}
-          <div className="flex flex-col p-4 pr-4 justify-center items-start text-black-100 bg-secondary-blue-100b border-blue-600 rounded-3xl group">
+         <div className="flex flex-col p-4 pr-4 justify-center items-start text-black-100 bg-secondary-blue-100b border-blue-600 rounded-3xl group">
             <div className="w-full flex justify-between items-start gap-1">
               <h2 className="text-[18px] leading-[22px] font-bold capitalize">
-                {result.car.make} {result.car.model} 
+                {_make} {_model} 
               </h2>
             </div>
 
             <p className='flex mt-2 text-[32px] leading-[38px] font-extrabold'>
               <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span>
-              {result.car.rentRate} 
+              {_rentRate} 
               <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
             </p>
 
             <div className='flex w-full'>
               <div className='relative w-full h-24 object-contain'>
                 <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
-                {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' /> */}
+                 {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' />  */}
               </div>
-              <div className='flex group-hover:visible w-full justify-between text-grey'>
+              <div className='flex group-hover:visible w-full justify-between text-grey pl-2'>
                 <div className='flex flex-col justify-center items-center gap-2'>
                   <FaCar  className="w-full text-[20px]" />
                   <p className='text-[14px] leading-[17px]'>
-                    {result.car.transmission === "Manual" ? "Manual" : "Auto"}
+                    {_transmission === "Manual" ? "Manual" : "Auto"}
                   </p>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
                   <FaWheelchair  className="w-full text-[20px]" />
-                  <p className=" text-[14px] leading-[17px]">{result.car.seats}</p>
+                  <p className=" text-[14px] leading-[17px]">{_seats}</p>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
                   <FaGasPump className="w-full text-[20px]" />
-                  <p className="text-[14px] leading-[17px]">{result.car.city_mpg} MPG</p>
+                  <p className="text-[14px] leading-[17px]">{_city_mpg} MPG</p>
                 </div>
               </div>
             </div>
@@ -74,16 +116,21 @@ export default async function BookCard ({book}: BookProps)  {
           </div>
 
           <div className="">
-            <h2 className="text-[14px] font-bold">Days: 
-              <span className="pl-2 text-[13px] font-normal"> 
-                {no_days}: {result.car.make} -  {result.car.model}
-              </span>
-            </h2>
-            <h2 className="text-[14px] font-bold">Total Amount: 
-              <span className="pl-2 text-[13px] font-normal"> 
-                {total_amount}
-              </span>
-            </h2>
+
+            <div className=" flex">
+              <h2 className="text-[14px] font-bold">Days: 
+                <span className="pl-2 text-[13px] font-normal"> 
+                  {no_days}
+                </span>
+              </h2>
+
+              <h2 className="ml-6 text-[14px] font-bold">Pick Up DateTime: 
+                <span className="pl-2 text-[13px] font-normal"> 
+                  {new Date(pickupDateTime).toISOString()}
+                </span>
+              </h2>
+            </div>
+
             <h2 className="text-[14px]  font-bold">Location: 
               <span className="pl-2 text-[13px] font-normal"> 
                 {parseInt(location) === 1 ? "Courtenay, BC" : 
@@ -93,14 +140,22 @@ export default async function BookCard ({book}: BookProps)  {
             </h2> 
             <h2 className="text-[14px]  font-bold">Contact Number: 
               <span className="pl-2 text-[13px] font-normal"> 
-                {contact_no}
+                {contact_no} - {idStripe}
+              </span>
+            </h2>
+
+            <h2 className="text-[14px] font-bold">Total Amount: 
+              <span className="pl-2 text-[16px] font-bold text-secondary-blue"> 
+                {`$${total_amount.toFixed(2)}`}
               </span>
             </h2>
           </div>
           <div className=" flex justify-end pt-4" >
-            
-            <button className=" m-2 flex justify-center py-2 h-9 border border-secondary-orange text-secondary-orange px-2 rounded-lg hover:bg-secondary-orange hover:text-white transition duration-300 text-[12px] font-bold" >
-            <FaAngleDoubleRight size={20}  />
+            <button 
+              className=" m-2 flex justify-center py-2 h-9 border border-secondary-orange text-secondary-orange px-2 rounded-lg hover:bg-secondary-orange hover:text-white transition duration-300 text-[12px] font-bold" 
+              onClick={handlePayment}
+            >
+              <FaAngleDoubleRight size={20}  />
               Pay Now
             </button>
             
@@ -115,6 +170,8 @@ export default async function BookCard ({book}: BookProps)  {
     
   );
 };
+
+export default BookCard
 
 
 

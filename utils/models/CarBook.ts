@@ -9,7 +9,10 @@ const carbookSchema = new mongoose.Schema(
     total_amount: Number,
     full_name: String,
     contact_no: String,
-    carId: String,
+    carId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
+    },
     isComplete:{
       type: Boolean,
       default: false,

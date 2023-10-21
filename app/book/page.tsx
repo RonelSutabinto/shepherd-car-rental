@@ -54,12 +54,21 @@ export default async function Page({searchParams}: BookHistoryParams) {
           <div className=" bg-white p-4 w-full md:flex md:flex-col md:h-screen">
             <div className='max-h-fit overflow-y-auto border p-4'>
               <div className='bg-white md:w-full w-full'>
-                {result.carbooks.length === 0 ? (
+                {result?.mergedCarbooks.length === 0 ? (
                 <p className="no-result">No book cars found</p>
                 ) : (
                   <div>
-                    {result.carbooks.map((book: any) => (
-                      < BookCard book={book}/>
+                    {result?.mergedCarbooks.map((book: any) => (
+                      < BookCard 
+                        book={book} 
+                        idStripe = {book.idStripe}
+                        make = {book.make}
+                        model = {book.model}
+                        transmission = {book.transition}
+                        rentRate = {book.rentRate}
+                        seats = {book.seats}
+                        city_mpg = {book.city_mpg}
+                      />
                     ))}
                   </div>
                 )}

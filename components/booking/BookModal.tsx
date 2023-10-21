@@ -36,6 +36,7 @@ interface CarDetailsProps {
 
 const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) => {
 
+  // Webooks objects implementation ============================================
   const [location, setLocation] = useState<string>('');
   const [pickupDateTime, setPickupDateTime] = useState<string>(format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')); 
   const [rate, setRate] = useState<number>(car.rentRate);
@@ -70,7 +71,7 @@ const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) 
   const handleFormSubmit = async () => {
     try {
     
-      // Call the backend API to create a car book
+      // Call the backend API endpoint to create a car book
       const response = await createCarBook({location, pickupDateTime, rate, no_days, total_amount, full_name, contact_no, carId,isComplete, card_type, card_number, expiry});
 
       // Handle success response (if needed)

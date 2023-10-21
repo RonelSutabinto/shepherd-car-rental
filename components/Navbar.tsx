@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 
 const navbarStyles = css` z-index: 1000; /* or any value higher than the other components */`;
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {

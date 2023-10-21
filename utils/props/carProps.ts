@@ -15,11 +15,12 @@ export interface carProps {
   transmission: string,
   year: number,
   availability: boolean,
+  idStripe: string,
 }
 
 export interface SearchProps {
-  made: string;
-  model: string; 
+  made: string,
+  model: string 
 }
 
 export interface HomeProps {
@@ -34,19 +35,6 @@ export interface SearchBookHistoryProps{
 export interface BookHistoryParams{
   searchParams: SearchBookHistoryProps,
 }
-
-
-// export interface BookProps {
-//   location: Number,
-//   pickupDateTime: Date,
-//   no_days : Number,
-//   total_amount: Number,
-//   full_name: String,
-//   contact_no: String,
-//   carId: String,
-//   createdAt: Date,
-//   isComplete: Boolean
-// }
 
 export interface booksProps {
   _id: string,
@@ -77,5 +65,6 @@ export interface booksParams {
   card_type?: string,
   card_number?: string,
   expiry?: string,
+  
 }
 

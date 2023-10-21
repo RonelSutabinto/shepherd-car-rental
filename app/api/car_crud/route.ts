@@ -38,7 +38,7 @@ export async function POST(request: any) {
   return NextResponse.json({ message: "Car Created" }, { status: 201 });
 }
 
-export async function GET() {
+export async function GET(request: any) {
   await connectMongoDB();
   const cars = await Car.find();
   return NextResponse.json({ cars });
@@ -51,3 +51,16 @@ export async function DELETE(request: any) {
   return NextResponse.json({ message: "Car deleted" }, { status: 200 });
 }
 
+/**
+ import Stripe from "stripe";
+import { NextResponse } from "next/server";
+
+export async function GET(request) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+    const prices = await stripe.prices.list({
+        limit: 4,
+    });
+
+    return NextResponse.json(prices.data.reverse())
+}
+ */

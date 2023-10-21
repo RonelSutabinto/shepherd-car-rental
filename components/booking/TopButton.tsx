@@ -6,15 +6,17 @@ import { FaTasks,FaAngleDoubleRight,FaCheckDouble,FaUserTie,FaUsersSlash } from 
 import { useRouter } from "next/navigation";
 
 const TopButton = ()  => {
+  // Implement route navigation object================= 
   const router = useRouter();
   
+
   const [bookStatus, setBookStatus] = useState<string>('');
   const [activeButton, setActiveButton] = useState<string | null>(null);
 
   const buttons = [
     { name: 'View All', id: 1,bIcon: <FaAngleDoubleRight className="w-full text-[13px] " />  },
     { name: 'Incomplete', id: 2,bIcon: <FaTasks className="w-full text-[13px] mb-1" /> },
-    { name: 'Complete', id: 3, bIcon: <FaCheckDouble className="w-full text-[13px] " /> },
+    { name: 'Completed', id: 3, bIcon: <FaCheckDouble className="w-full text-[13px] " /> },
     { name: 'View Profile', id: 4, bIcon: <FaUserTie className="w-full text-[13px] " /> },
     { name: 'Sign Out', id: 5 , bIcon: <FaUsersSlash className="w-full text-[13px] " />},
   ];

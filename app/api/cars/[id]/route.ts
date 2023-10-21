@@ -1,5 +1,5 @@
 
-  import connectMongoDB from "@/libs/mongodb";
+import { connectToDB } from "@/libs/mongodb";
   import Car from "@/utils/models/Car";
   
   import { NextResponse } from "next/server";
@@ -17,10 +17,12 @@
       rentRate,
       seats,
       transmission,
-      year 
+      year,
+      availability,
+      idStripe 
     } = await request.json();
   
-    await connectMongoDB();
+    await connectToDB();
     await Car.create({ 
       city_mpg,
       color,
@@ -33,14 +35,16 @@
       rentRate,
       seats,
       transmission,
-      year  
+      year,
+      availability,
+      idStripe 
     });
   
     return NextResponse.json({ message: "Car Created" }, { status: 201 });
   }
   
   export async function GET(req: any) {
-    await connectMongoDB();
+    await connectToDB();
     
     const { make, model } = req.query;
     
@@ -60,7 +64,7 @@
   
   export async function DELETE(request: any) {
     const id = request.nextUrl.searchParams.get("id");
-    await connectMongoDB();
+    await connectToDB();
     await Car.findByIdAndDelete(id);
     return NextResponse.json({ message: "Car deleted" }, { status: 200 });
   }
