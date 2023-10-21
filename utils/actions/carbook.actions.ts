@@ -24,7 +24,7 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
       // Fetch all book cars 
       const carbooks = await CarBook.find().skip(skip).limit(limit).exec();
            
-      // Merge posts with users based on userId
+      // Merge books with cars based on carId
       const mergedCarbooks = carbooks.map(carbook => {
         const car = cars.find(c => c._id.toString() === carbook.carId.toString());
         return {
@@ -47,7 +47,7 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
       // Fetch book cars by completed status
       const carbooks = await CarBook.find(filter).skip(skip).limit(limit).exec();
 
-      // Merge posts with users based on userId
+      // Merge book with cars based on carId
       const mergedCarbooks = carbooks.map(carbook => {
         const car = cars.find(c => c._id.toString() === carbook.carId.toString());
         return {

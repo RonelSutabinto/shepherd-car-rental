@@ -1,5 +1,5 @@
 // Source site to get stripe API endpoint
-// Link: https://stripe.com ===============
+// Resource: https://stripe.com ===============
 
 import Stripe from "stripe";
 import { NextResponse } from "next/server";

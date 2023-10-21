@@ -1,8 +1,8 @@
 import { connectToDB } from "@/libs/mongodb";
 import Car from "@/utils/models/Car";
-// import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
+// Temporarily add to the comment section for code experemental of rendering api endpoint response that filtered by id
 // export async function GET(req: any) {
 //   await connectToDB();
   
@@ -21,7 +21,6 @@ import { NextResponse } from "next/server";
 export async function GET(req: any) {
   await connectToDB();
   
-  //   const { id } = req.query;
   const { searchParams } = new URL(req.url);
   
   let query = {};
@@ -35,29 +34,6 @@ export async function GET(req: any) {
 
   const car = await Car.findOne(query);
   return NextResponse.json(car);
-  // // const car = await Car.findOne({_id: new ObjectId(id as string)});
-
-  // const data = await Car.findOne({ _id: new ObjectId(id as string) }); // Replace YOUR_OBJECT_ID with the object ID you want to fetch
-
-  //   if (!data) {
-  //     res.status(404).json({ error: 'Not found' });
-  //   } else {
-  //     res.status(200).json(data);
-  //   }
   
 }
 
-/*
- await connectToDB();
-
-  const query = {}
-  if (Id) {
-    query._id = Id
-  }
-  
-  // // Fetch the cars...
-  const carsQuery = Car.findOne(query);
-  const car = await carsQuery.exec();
-  
-  return { car }
-*/

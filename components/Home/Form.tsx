@@ -10,8 +10,7 @@ const Form = () => {
 
     try {
       await axios.post('/api/post', { name, username });
-      // Handle success (e.g., show a success message)
-      // Reset form fields if needed
+ 
     } catch (error) {
       console.error(error);
     }

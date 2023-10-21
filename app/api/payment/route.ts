@@ -1,5 +1,5 @@
 // Source site of the code concept in accepting payment using stripe
-// Link: https://stripe.com/docs/checkout/quickstart ===============
+// Resource: https://stripe.com/docs/checkout/quickstart ===============
 
 import Stripe from "stripe";
 import { NextResponse } from "next/server";

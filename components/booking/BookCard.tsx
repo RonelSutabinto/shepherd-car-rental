@@ -23,9 +23,8 @@ interface BookProps {
 }
  
 const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe }: BookProps) => {
-    // const router = useRouter();
     
-    // Initialize server side props from the book a car data rendering
+    // Initialize server side props from book a car data rendering
     const { location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
     const id_Stripe  = idStripe; 
     const _make = make;
