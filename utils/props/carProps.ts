@@ -18,6 +18,7 @@ export interface carProps {
   idStripe: string,
 }
 
+//start of car search parameters=======
 export interface SearchProps {
   made: string,
   model: string 
@@ -26,16 +27,34 @@ export interface SearchProps {
 export interface HomeProps {
   searchParams: SearchProps;
 }
+// end of car search parameters========
 
+
+
+// start of car reservation parameters
 export interface SearchBookHistoryProps{
   bookStatus: string,
   page: string,
-  pageSize: string
+  pageSize: string,
+  checkOutSessionId: string,
+  bookId: string,
+  checkout: string,
+  pathName: string
 }
 export interface BookHistoryParams{
   searchParams: SearchBookHistoryProps,
 }
+// end of car reservation parameters
 
+// start of checkout session id property====
+export interface checkoutSession{
+  id: string,
+}
+
+export interface CheckoutSession{
+  sessionParams: checkoutSession;
+}
+//end of checkout session id property========
 export interface booksProps {
   _id: string,
   location: string, 
@@ -49,9 +68,11 @@ export interface booksProps {
   isComplete: boolean,
   card_type?: string,
   card_number?: string,
+  checkoutId?: string,
   expiry?: string,
 }
 
+// Create interface parameters for book a car webhook server side rendering 
 export interface booksParams {
   location: string, 
   pickupDateTime: string, 
@@ -64,7 +85,10 @@ export interface booksParams {
   isComplete: boolean,
   card_type?: string,
   card_number?: string,
+  checkoutId?: string
   expiry?: string,
-  
+
 }
+
+
 

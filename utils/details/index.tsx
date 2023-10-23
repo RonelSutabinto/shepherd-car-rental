@@ -42,3 +42,11 @@ export const carMade = [
     "Volkswagen",
     "Volvo",
   ];
+
+  export const minimalCarMade = [
+    "All Cars",
+    "Honda",
+    "Toyota",
+    "Ford",
+    "Kia",
+    "BMW"];

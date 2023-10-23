@@ -11,7 +11,7 @@ export async function GET(request: any) {
     });
    
     prices.data.map
-    console.log("Price ID: "+prices.data.id );
+    console.log("Price ID: "+ prices.data.id );
 
     return NextResponse.json(prices.data.reverse())
 }

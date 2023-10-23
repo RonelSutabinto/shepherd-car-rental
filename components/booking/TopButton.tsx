@@ -6,7 +6,7 @@ import { FaTasks,FaAngleDoubleRight,FaCheckDouble,FaUserTie,FaUsersSlash } from 
 import { useRouter } from "next/navigation";
 
 const TopButton = ()  => {
-  // Implement route navigation object================= 
+  // Implement route navigation for Webhooks================= 
   const router = useRouter();
   
 
@@ -44,8 +44,13 @@ const TopButton = ()  => {
       searchParams.delete("bookStatus");
     }
 
+    searchParams.delete("checkout");
+    searchParams.delete("bookId");
+
+
     // Generate the new pathname with the updated search parameters
-    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+    // const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+    const newPathname = `/book?${searchParams.toString()}`;
     router.push(newPathname);
     
   };
@@ -55,7 +60,7 @@ const TopButton = ()  => {
       {buttons.map((button) => (
           <button
               key={button.id}
-            className={`" bg-secondary-blue-100 my-2 w-32 h-12 mb-2  text-white text-[13px] " ${activeButton === button.name ? " text-dark scale-102 transition-all rounded-full bg-white " : " bg-gray-100"}`}
+            className={`" bg-secondary-blue-100 my-2 w-32 h-12 mb-2 text-[13px] " ${activeButton === button.name ? " text-secondary-blue scale-102 transition-all rounded-full bg-white " : "text-light-white bg-gray-100"}`}
             onClick={() => handleButtonClick(button.name)}
           >
               <span>{button.bIcon}</span>

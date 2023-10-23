@@ -16,6 +16,8 @@
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.17",
     "@nestjs/mongoose": "^10.0.1",
+    "@stripe/react-stripe-js": "^2.3.1",
+    "@stripe/stripe-js": "^2.1.9",
     "@types/mongoose": "^5.11.97",
     "@types/next": "^9.0.0",
     "@types/node": "20.6.4",

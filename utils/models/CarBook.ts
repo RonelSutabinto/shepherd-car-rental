@@ -19,6 +19,7 @@ const carbookSchema = new mongoose.Schema(
     },
     card_type: String,
     card_number: String,
+    checkoutId: String,
     expiry: {
       type: Date,
       default: null

@@ -3,6 +3,8 @@
 
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
+import { Session } from "inspector";
+import { id } from "date-fns/locale";
 
 export async function POST (request) {
 
@@ -11,6 +13,7 @@ export async function POST (request) {
     let data = await request.json();
     let priceId = data.priceId
     let days = data.days
+    let bookId = data.bookId
 
     const session = await stripe.checkout.sessions.create({
         line_items: [ {
@@ -19,9 +22,16 @@ export async function POST (request) {
         }
         ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/book',
-      cancel_url: 'http://localhost:3000/book'
-    })
+      success_url: `http://localhost:3000/book?checkout=success&bookId=${bookId}`,
+      cancel_url: 'http://localhost:3000/book?checkout=cancelled',
+  
+    });
 
-    return NextResponse.json(session.url)
+    if(session.success_url) {
+        session.success_url = session.success_url + session.id;
+    }
+    
+    const url = session.url;
+
+    return NextResponse.json({ url, id: session.id})
 }

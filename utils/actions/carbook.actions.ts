@@ -4,6 +4,7 @@ import { connectToDB } from "@/libs/mongodb";
 import CarBook from "../models/CarBook";
 import { booksParams } from "../props/carProps";
 import Car from "../models/Car";
+import { revalidatePath } from "next/cache";
 
 export async function fetchCarBooks(searchStatus?: string, page?: string, pageSize?: string) {
   try {
@@ -67,52 +68,94 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
     }    
 
   } catch (error) {
-    console.error('Fetching book car error:', error);
+    console.error('Fetching bookcar error:', error);
   }
  
 }
 
 
-  export async function createCarBook({ 
-    location, 
-    pickupDateTime, 
-    rate, 
-    no_days, 
-    total_amount, 
-    full_name ,
-    contact_no, 
-    carId, 
-    isComplete,
-    card_type,
-    card_number,
-    expiry
-  }: booksParams) {
-    try {
-      await connectToDB();
-  
-      const createdCarBook = await CarBook.create({
-        location,
-        pickupDateTime,
-        rate,
-        no_days,
-        total_amount,
-        full_name,
-        contact_no,
-        carId,
-        isComplete,
-        card_type,
-        card_number,
-        expiry
-      });
+export async function updateCarBookSessionCheckOut( _id: string , checkOutSessionId: string, path: string ){
 
-    // Update car model
-    await Car.findByIdAndUpdate(carId, {
-      $push: { threads: createdCarBook._id },
-    });
+  // Update carbook collection by finding the document by its _id
+  try {
+    await connectToDB();
 
-      console.log("Book a car successfully created");
-    } catch (error: any) {
-      throw new Error(`Failed to create to book a car: ${error.message}`);
-    }
+    // Update carbook collection
+    await CarBook.findByIdAndUpdate(
+      { _id: _id },
+      { card_number: checkOutSessionId }
+    );
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`Failed to checkout bookcar: ${error.message}`);
   }
   
+}
+
+export async function updateCarBookCheckOut( checkout: string , bookId: string, path: string){
+
+  // Update carbook collection by finding the document by its _id
+  try {
+    await connectToDB();
+
+    // Update carbook collection to complete the checkout process
+    if(checkout==='success'){
+      await CarBook.findByIdAndUpdate(
+        { _id: bookId },
+        { isComplete: true }
+      );
+    }
+
+    revalidatePath(path);
+
+  } catch (error: any) {
+    throw new Error(`Failed to checkout bookcar: ${error.message}`);
+  }
+  
+}
+
+// Create 
+export async function createCarBook({ 
+  location, 
+  pickupDateTime, 
+  rate, 
+  no_days, 
+  total_amount, 
+  full_name ,
+  contact_no, 
+  carId, 
+  isComplete,
+  card_type,
+  card_number,
+  checkoutId,
+  expiry
+}: booksParams) {
+  try {
+    await connectToDB();
+
+    const createdCarBook = await CarBook.create({
+      location,
+      pickupDateTime,
+      rate,
+      no_days,
+      total_amount,
+      full_name,
+      contact_no,
+      carId,
+      isComplete,
+      card_type,
+      card_number,
+      checkoutId,
+      expiry
+    });
+
+  // Update car model
+  await Car.findByIdAndUpdate(carId, {
+    $push: { threads: createdCarBook._id },
+  });
+
+    console.log("Book a car successfully created");
+  } catch (error: any) {
+    throw new Error(`Failed to create to book a car: ${error.message}`);
+  }
+}

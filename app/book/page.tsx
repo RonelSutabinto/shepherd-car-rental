@@ -2,15 +2,17 @@
 import BookCard from '@/components/booking/BookCard';
 import SideButton from '@/components/booking/TopButton';
 import TopButton from '@/components/booking/TopButton';
-import { fetchCarBooks } from '@/utils/actions/carbook.actions';
+import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
 import { BookHistoryParams } from '@/utils/props/carProps';
-
-
 
 export default async function Page({searchParams}: BookHistoryParams) {
 
   //Fetch the filtered book a car records by its status ===================
   const result = await fetchCarBooks(searchParams.bookStatus, "1", "20");
+
+  if(searchParams.checkout && searchParams.checkout==='success'){
+    updateCarBookCheckOut(searchParams.checkout, searchParams.bookId,'/book');
+  }
 
   return (
   <>
@@ -43,9 +45,9 @@ export default async function Page({searchParams}: BookHistoryParams) {
 
             <div className=' p-2 rounded-r-2xl'>
               <img
-                className=" flex-1 mx-5  w-40 h-40 object-contain align-middle "
+                className=" flex mx-5  w-40 h-40 object-contain align-middle "
                 alt=""
-                src="/cartmp.png"
+                src="/tmpImage.png"
               />
             </div>
             

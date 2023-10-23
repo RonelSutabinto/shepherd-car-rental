@@ -1,15 +1,14 @@
  "use client";
 
 import { FaAngleDoubleRight, FaRegEdit,FaCar, FaGasPump, FaWheelchair } from "react-icons/fa";
-import { booksProps } from "@/utils/props/carProps";
-// import { useState } from "react";
-import { fetchCarsById } from "@/utils/actions/car.actions";
-import CarCard from "../home/CarCard";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { BookHistoryParams, booksProps } from "@/utils/props/carProps";
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios"
 import { MeasureMemoryMode } from "vm";
+import { useRouter } from "next/navigation";
+import { updateCarBookSessionCheckOut } from "@/utils/actions/carbook.actions";
 
 interface BookProps {
   book: booksProps,
@@ -19,13 +18,20 @@ interface BookProps {
   rentRate: number,
   seats: number,
   city_mpg: number,
-  idStripe: string
+  idStripe: string,
+  searchParams: BookHistoryParams,
+  sessionId: string,
+  pathName: string
 }
+
  
-const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe }: BookProps) => {
+const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe, searchParams, sessionId, pathName }: BookProps) => {
+    // Implement route navigation for Webhooks================= 
+    const router = useRouter();
     
-    // Initialize server side props from book a car data rendering
-    const { location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
+
+    // Initialize for webhook server side props for data rendering
+    const { _id, location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
     const id_Stripe  = idStripe; 
     const _make = make;
     const _model = model;
@@ -33,25 +39,33 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
     const _rentRate = rentRate;
     const _seats = seats;
     const _city_mpg = city_mpg;
-
-    // Fetch the car detail
-    // const result = await fetchCarsById(carId);   
+    const _isComplete = isComplete
 
     // POST request for stripe payment integration
     const handlePayment = async (e: any) => {
       e.preventDefault();
       const { data } = await axios.post('/api/payment',{ 
         priceId: id_Stripe,
-        days: no_days
+        days: no_days,
+        bookId: _id
       }, {
         headers: {
           "Content-Type": "app/json",
         },
       });
 
-      window.location.assign(data)
-    }
+      pathName = `${window.location.pathname}`;
 
+      // Try to check if some important data was able to rendered properly
+      console.log("Book ID: "+_id + " - "+ model + " Session ID: "+ data.id + " Path: "+ pathName);
+    
+      if(data.id){
+        updateCarBookSessionCheckOut(_id, data.id, pathName);
+      }
+
+      window.location.assign(data.url);
+    };
+   
   return (
     
       <div className={` 
@@ -81,7 +95,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
             </p>
 
             <div className='flex w-full'>
-              <div className='relative w-full h-24 object-contain'>
+              <div className='relative w-full h-24'>
                 <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
                  {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' />  */}
               </div>
@@ -150,20 +164,33 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
             </h2>
           </div>
           <div className=" flex justify-end pt-4" >
-            <button 
-              className=" m-2 flex justify-center py-2 h-9 border border-secondary-orange text-secondary-orange px-2 rounded-lg hover:bg-secondary-orange hover:text-white transition duration-300 text-[12px] font-bold" 
-              onClick={handlePayment}
-            >
-              <FaAngleDoubleRight size={20}  />
-              Pay Now
-            </button>
-            
-            <button className=" m-2 flex justify-center py-2 h-9 border border-secondary-blue text-secondary-blue px-2 rounded-lg hover:bg-secondary-blue hover:text-white transition duration-300 text-[12px]" >
-            <FaRegEdit size={20}  />
-              Update
-            </button>
+           
+            { _isComplete ? (
+              
+                <button 
+                  className=" m-2 flex justify-center py-2 h-9 border text-light-white px-2 rounded-lg bg-secondary-blue-200 text-[12px] font-bold" 
+                >
+                <IoCheckmarkDoneOutline size={20}  />
+                Complete
+              </button>
+              
+             ) : ( 
+              <>
+                <button 
+                  className=" m-2 flex justify-center py-2 h-9 border border-secondary-orange text-secondary-orange px-2 rounded-lg hover:bg-secondary-orange hover:text-white transition duration-300 text-[12px] font-bold" 
+                  onClick={handlePayment}
+                >
+                  <FaAngleDoubleRight size={20}  />
+                  Pay Now
+                </button>
+                
+                <button className=" m-2 flex justify-center py-2 h-9 border border-secondary-blue text-secondary-blue px-2 rounded-lg hover:bg-secondary-blue hover:text-white transition duration-300 text-[12px]" >
+                <FaRegEdit size={20}  />
+                  Update
+                </button>
+              </>
+            ) } 
           </div>
-          
         </div>
       </div>
     
