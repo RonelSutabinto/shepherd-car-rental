@@ -1,6 +1,5 @@
 
 import CarCard from "@/components/home/CarCard";
-import CarsList from "@/components/home/CarsList";
 import SearchInput from "@/components/home/SearchInput";
 import { fetchCars } from "@/utils/actions/car.actions";
 import { HomeProps } from "@/utils/props/carProps";

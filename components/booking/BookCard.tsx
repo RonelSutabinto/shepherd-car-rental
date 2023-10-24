@@ -6,7 +6,6 @@ import { BookHistoryParams, booksProps } from "@/utils/props/carProps";
 import Image from 'next/image';
 import { format } from 'date-fns';
 import axios from "axios"
-import { MeasureMemoryMode } from "vm";
 import { useRouter } from "next/navigation";
 import { updateCarBookSessionCheckOut } from "@/utils/actions/carbook.actions";
 
@@ -25,7 +24,7 @@ interface BookProps {
 }
 
  
-const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe, searchParams, sessionId, pathName }: BookProps) => {
+const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe, pathName }: BookProps) => {
     // Implement route navigation for Webhooks================= 
     const router = useRouter();
     

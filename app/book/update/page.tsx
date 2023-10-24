@@ -1,4 +1,4 @@
-import { CarCard } from '@/components';
+
 import Form from '@/components/booking/Form'
 import SearchCar from '@/components/booking/SearchCar'
 import UpdateCarCard from '@/components/booking/UpdateCarCard';
