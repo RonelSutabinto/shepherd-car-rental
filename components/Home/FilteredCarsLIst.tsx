@@ -6,7 +6,7 @@ function FilteredCarList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/car_crud'); // Replace with your API endpoint URL
+        const response = await fetch('http://localhost:3001/api/car_crud'); 
         const data = await response.json();
         setCars(data.cars);
       } catch (error) {
@@ -20,8 +20,10 @@ function FilteredCarList() {
   return (
     <div>
       {cars.map((car) => (
-        <div key={car.id}>{car.model}</div>
-      ))}
+        // <div>{car.model}</div>
+        <div></div>
+      ))
+      }
     </div>
   );
 }

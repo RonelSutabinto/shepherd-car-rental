@@ -17,9 +17,6 @@ const Hero = ({ onDataReceived }: HeroProps) => {
   const [made, setMade] = useState("");
   const [model, setModel] = useState("");
 
-  // setModel_(made) { setMade_, setModel_ }: any
-  // setMade_(model)
-
   const data1 = made;
   const data2 = model;
   // Call the function passed from the main page with the event data
@@ -44,7 +41,7 @@ const Hero = ({ onDataReceived }: HeroProps) => {
 
         <div className='mt-6 pt-4 w-full flex-between items-center flex-wrap gap-5'>
           <h4 className='text-2xl font-extrabold'>Rent a car in BC</h4>
-          <SearchInput setMade={setMade} setModel={setModel}/>
+          {/* <SearchInput setMade={setMade} setModel={setModel}/> */}
         </div>
 
       </div>

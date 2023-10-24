@@ -6,6 +6,7 @@ import { AiFillCar } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { useRouter }  from 'next/navigation';
 import { FaAngleDoubleRight } from 'react-icons/fa';
+import { revalidatePath } from "next/cache";
 
 const SearchCar = () => {
   // Implement route navigation for Webhooks================= 
@@ -25,6 +26,8 @@ const SearchCar = () => {
 
     searchParams.set("made", carMade);
     searchParams.set("model", model);
+
+    revalidatePath(`${window.location.pathname}?${searchParams.toString()}`)
 
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
     router.push(newPathname);

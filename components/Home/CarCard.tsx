@@ -1,14 +1,9 @@
 "use client";
 
-import {useState} from 'react'
 import Image from 'next/image';
-
-import Link from 'next/link';
-
-import { carImageUrl } from '@/utils';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import React from 'react';
-import { Divider, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import BookModal from '../booking/BookModal';
 import { carProps } from '@/utils/props/carProps';
 

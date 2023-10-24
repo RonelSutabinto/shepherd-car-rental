@@ -1,5 +1,5 @@
 
-import { CarCard, SearchInput } from "@/components";
+import { SearchInput } from "@/components";
 import CarsList from "@/components/home/CarsList";
 import { fetchCars } from "@/utils/actions/car.actions";
 import { HomeProps } from "@/utils/props/carProps";

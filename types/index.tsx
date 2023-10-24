@@ -1,8 +1,10 @@
 import { MouseEventHandler } from "react";
 
 export interface MadeProps {
-    carMade: string;
-    setCarMade: (made: string) => void;
+    // carMade: string;
+    // setCarMade: (made: string) => void;
+    selected: string;
+    setSelected: (made: string) => void;
   }
   
   export interface CarProps {

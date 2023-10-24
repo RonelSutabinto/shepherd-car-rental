@@ -146,11 +146,12 @@ export async function updateCarBook(
         carId: carId
        }
     
-      
     );
 
+    revalidatePath('/book')
+
   } catch (error: any) {
-    throw new Error(`Failed to checkout bookcar: ${error.message}`);
+    throw new Error(`Failed to update bookcar: ${error.message}`);
   }
   
 }

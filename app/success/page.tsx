@@ -8,7 +8,6 @@ const Page = () => {
 
     if (paymentMethodId) {
       console.log('Payment Method ID:', paymentMethodId);
-      // Perform any further actions with the payment method ID here
     } else {
       console.log('Payment method ID not found in the URL.');
     }
