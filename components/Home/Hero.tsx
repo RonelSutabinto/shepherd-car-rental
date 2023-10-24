@@ -1,9 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import { SearchInput } from '..';
 import { useState } from 'react';
-import { fetchCars } from '@/utils/actions/car.actions';
 
 interface HeroProps {
   onDataReceived: (data1: string, data2: string) => void;
