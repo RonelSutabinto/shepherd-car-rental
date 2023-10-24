@@ -42,19 +42,31 @@ export interface SearchBookHistoryProps{
   pathName: string
 }
 export interface BookHistoryParams{
-  searchParams: SearchBookHistoryProps,
+  searchParams: SearchBookHistoryProps
 }
 // end of car reservation parameters
 
 // start of checkout session id property====
 export interface checkoutSession{
-  id: string,
+  id: string
 }
 
 export interface CheckoutSession{
-  sessionParams: checkoutSession;
+  sessionParams: checkoutSession
 }
 //end of checkout session id property========
+
+export interface UpdateBookCarProps{
+  made: string,
+  model: string,
+  bookId: string,
+  carId: string
+}
+
+export interface UpdateBookCarParams{
+  searchParams: UpdateBookCarProps
+}
+
 export interface booksProps {
   _id: string,
   location: string, 
@@ -70,6 +82,19 @@ export interface booksProps {
   card_number?: string,
   checkoutId?: string,
   expiry?: string,
+}
+
+export interface UpdateBookProps {
+  bookId: string,
+  location: string, 
+  pickupDateTime: string, 
+  rate: number,
+  no_days: number, 
+  total_amount: number, 
+  full_name: string ,
+  contact_no: string, 
+  carId: string,
+  path: string
 }
 
 // Create interface parameters for book a car webhook server side rendering 
@@ -89,6 +114,8 @@ export interface booksParams {
   expiry?: string,
 
 }
+
+
 
 
 

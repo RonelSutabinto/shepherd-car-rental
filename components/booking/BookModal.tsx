@@ -23,7 +23,7 @@ import {
 import React, { useState } from 'react';
 import { CarCard } from '..';
 import { createCarBook } from '@/utils/actions/carbook.actions';
-import { format } from 'date-fns'; //YYYY-MM-DDTHH:mm:ss.sssZ
+import { format } from 'date-fns';
  
 // book modal modified received data props======
 interface CarDetailsProps {

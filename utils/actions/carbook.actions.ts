@@ -2,9 +2,10 @@
 
 import { connectToDB } from "@/libs/mongodb";
 import CarBook from "../models/CarBook";
-import { booksParams } from "../props/carProps";
+import { UpdateBookProps, booksParams } from "../props/carProps";
 import Car from "../models/Car";
 import { revalidatePath } from "next/cache";
+import { format } from 'date-fns';
 
 export async function fetchCarBooks(searchStatus?: string, page?: string, pageSize?: string) {
   try {
@@ -73,7 +74,7 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
  
 }
 
-
+// Update book collection to register the checkout session id
 export async function updateCarBookSessionCheckOut( _id: string , checkOutSessionId: string, path: string ){
 
   // Update carbook collection by finding the document by its _id
@@ -92,6 +93,7 @@ export async function updateCarBookSessionCheckOut( _id: string , checkOutSessio
   
 }
 
+// Update book collection after successfully execute the payment checkout process
 export async function updateCarBookCheckOut( checkout: string , bookId: string, path: string){
 
   // Update carbook collection by finding the document by its _id
@@ -107,6 +109,45 @@ export async function updateCarBookCheckOut( checkout: string , bookId: string, 
     }
 
     revalidatePath(path);
+
+  } catch (error: any) {
+    throw new Error(`Failed to checkout bookcar: ${error.message}`);
+  }
+  
+}
+
+export async function updateCarBook( 
+  bookId: string,
+  location: string, 
+  pickupDateTime: string, 
+  rate: number,
+  no_days: number, 
+  total_amount: number, 
+  full_name: string,
+  contact_no: string, 
+  carId: string
+){
+
+  // Update carbook collection by finding the document by its _id
+  try {
+    await connectToDB();
+
+   
+    await CarBook.findByIdAndUpdate(
+      { _id: bookId },
+      {
+        location : location, 
+        pickupDateTime: pickupDateTime, 
+        rate: rate,
+        no_days : no_days, 
+        total_amount: total_amount, 
+        full_name: full_name,
+        contact_no: contact_no, 
+        carId: carId
+       }
+    
+      
+    );
 
   } catch (error: any) {
     throw new Error(`Failed to checkout bookcar: ${error.message}`);
@@ -130,12 +171,15 @@ export async function createCarBook({
   checkoutId,
   expiry
 }: booksParams) {
+
+  const formatDateTime = format(new Date(pickupDateTime),"yyyy-MM-dd'T'HH:mm");
+
   try {
     await connectToDB();
 
     const createdCarBook = await CarBook.create({
       location,
-      pickupDateTime,
+      formatDateTime,
       rate,
       no_days,
       total_amount,
@@ -158,4 +202,20 @@ export async function createCarBook({
   } catch (error: any) {
     throw new Error(`Failed to create to book a car: ${error.message}`);
   }
+}
+
+
+export async function fetchBookById(Id: string) {
+  await connectToDB();
+
+  const query = {}
+  if (Id) {
+    query._id = Id
+  }
+  
+  // // Fetch the cars...
+  const bookQuery = CarBook.findOne(query);
+  const book = await bookQuery.exec();
+  
+  return { book }
 }

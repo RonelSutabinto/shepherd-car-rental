@@ -16,8 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='navbar' > 
-      <nav className="bg-gray-100 text-primary-blue p-2 fixed w-full top-0">
+      <nav className="bg-gray-100 text-primary-blue p-2 fixed z-50 w-full drop-shadow-sm top-0">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-xl font-bold">
           <Link href="/" className="flex justify-center items-center">
@@ -64,7 +63,6 @@ const Navbar = () => {
 
       </div>
     </nav>
-    </div>
     </>
     
   );

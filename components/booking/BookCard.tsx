@@ -66,6 +66,22 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
       window.location.assign(data.url);
     };
    
+
+    const handleUpdate = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      
+      searchParams.set("bookId", _id);
+      searchParams.set("carId", carId);
+
+      searchParams.delete("made");
+      searchParams.delete("model");
+      searchParams.delete("bookStatus");
+    
+  
+      const newPathname = `/book/update?${searchParams.toString()}`;
+      router.push(newPathname);
+    };
+
   return (
     
       <div className={` 
@@ -139,7 +155,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
 
               <h2 className="ml-6 text-[14px] font-bold">Pick Up DateTime: 
                 <span className="pl-2 text-[13px] font-normal"> 
-                  {new Date(pickupDateTime).toISOString()}
+                  {format(new Date(pickupDateTime),"yyyy-MM-dd'T'HH:mm")}
                 </span>
               </h2>
             </div>
@@ -153,7 +169,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
             </h2> 
             <h2 className="text-[14px]  font-bold">Contact Number: 
               <span className="pl-2 text-[13px] font-normal"> 
-                {contact_no} - {idStripe}
+                {contact_no} 
               </span>
             </h2>
 
@@ -184,7 +200,10 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
                   Pay Now
                 </button>
                 
-                <button className=" m-2 flex justify-center py-2 h-9 border border-secondary-blue text-secondary-blue px-2 rounded-lg hover:bg-secondary-blue hover:text-white transition duration-300 text-[12px]" >
+                <button 
+                  className=" m-2 flex justify-center py-2 h-9 border border-secondary-blue text-secondary-blue px-2 rounded-lg hover:bg-secondary-blue hover:text-white transition duration-300 text-[12px]" 
+                  onClick={handleUpdate}
+                >
                 <FaRegEdit size={20}  />
                   Update
                 </button>
