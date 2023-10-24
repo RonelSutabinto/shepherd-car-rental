@@ -75,7 +75,7 @@ const CarCard = ({isList, car }: CarCardProps) => {
     <BookModal isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} car={car} />
     </>
 
-   
+    
   );
 };
 

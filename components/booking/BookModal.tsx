@@ -21,9 +21,9 @@ import {
   
 } from '@chakra-ui/react'
 import React, { useState } from 'react';
-import { CarCard } from '..';
 import { createCarBook } from '@/utils/actions/carbook.actions';
 import { format } from 'date-fns';
+import CarCard from '../home/CarCard';
  
 // book modal modified received data props======
 interface CarDetailsProps {
@@ -136,7 +136,7 @@ const BookModal = ({isOpen,onClose, initialRef,finalRef, car}: CarDetailsProps) 
 
                         <div className='grid grid-cols-1 md:grid-cols-2 '>
                           <FormControl className='mt-4'>
-                            <FormLabel className='text-xs text-gray-600'>Number Of Days</FormLabel>
+                            <FormLabel className='text-xs text-gray-600'>No. Of Days</FormLabel>
                             <NumberInput 
                               size='sm' 
                               defaultValue={1} 
