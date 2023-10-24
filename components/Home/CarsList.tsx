@@ -4,7 +4,7 @@ import { carProps } from "@/utils/props/carProps";
 import CarCard from "../home/CarCard";
 
 interface CarProps {
-  props: carProps;
+  cars: carProps
 }
 
 export default function CarsList({ cars }: any) {

@@ -41,7 +41,7 @@ export default async function Page({searchParams}: UpdateBookCarParams)  {
           <p className="no-result">No cars found</p>
           ) : (
             
-            result.cars.map((car: any) => (
+            result.cars.map((car) => (
               <UpdateCarCard car = {car}  currentId ={searchParams.carId} cardStyle={'bg-secondary-blue-100b'}/>
             ))
           )}

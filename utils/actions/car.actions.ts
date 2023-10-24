@@ -34,7 +34,7 @@ export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: strin
   
   const isNext = totalCarsCount > skipAmount + cars.length;
 
-  return { cars, isNext }
+  return { cars }
 }
 
 //const car = await Car.findOne({ _id: id });

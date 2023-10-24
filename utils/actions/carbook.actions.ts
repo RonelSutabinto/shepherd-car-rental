@@ -2,7 +2,7 @@
 
 import { connectToDB } from "@/libs/mongodb";
 import CarBook from "../models/CarBook";
-import { UpdateBookProps, booksParams } from "../props/carProps";
+import { booksParams } from "../props/carProps";
 import Car from "../models/Car";
 import { revalidatePath } from "next/cache";
 import { format } from 'date-fns';
