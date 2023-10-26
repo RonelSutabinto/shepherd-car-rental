@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST (request: any) {
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {});
 
     let data = await request.json();
     let priceId = data.priceId

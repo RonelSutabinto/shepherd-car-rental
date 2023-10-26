@@ -5,7 +5,7 @@ import { connectToDB } from "@/libs/mongodb";
 import Car from "../models/Car";
 
 
-export async function fetchCars(pageNumber = 1, pageSize = 10,searchMake?: string, searchModel?: string) {
+export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string, searchModel?: string) {
   await connectToDB();
 
   //Calculate the number of cars 
