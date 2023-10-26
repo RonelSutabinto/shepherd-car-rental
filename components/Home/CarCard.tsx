@@ -18,8 +18,8 @@ const CarCard = ({isList, car }: CarCardProps) => {
 
   //Book modal component react hook settings====================
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  // const initialRef = React.useRef(null);
+  // const finalRef = React.useRef(null);
 
   return (
     <>
