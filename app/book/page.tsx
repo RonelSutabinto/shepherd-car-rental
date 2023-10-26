@@ -1,5 +1,5 @@
 
-// import BookCard from '@/components/booking/BookCard';
+
 import BookCard from '@/components/booking/BookCard';
 import TopButton from '@/components/booking/TopButton';
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
@@ -62,6 +62,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
                   <div>
                     {result?.mergedCarbooks.map((book: any) => (
                       < BookCard 
+                        key = {book._id}
                         book={book} 
                         idStripe = {book.idStripe}
                         make = {book.make}
