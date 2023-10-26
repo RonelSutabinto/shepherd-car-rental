@@ -26,19 +26,19 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
         );
 
   return (
-    <div className='flex-1 max-sm:w-full flex justify-start items-center'>
+    <div className=' flex max-sm:w-full justify-start items-center'>
       <Combobox value={selected} onChange={setSelected}>
-        <div className='flex  w-full'>
-          <Combobox.Button className="absolute top-[14px] pl-4 text-white">
+        <div className=' flex items-center  w-full'>
+          <Combobox.Button className=" top-[14px] pl-4 text-white">
           <FaListUl size={20}  />   
           </Combobox.Button>
           
           {/* When the input changes, the search query is updated */}
           <Combobox.Input
-            className=' autocomplete-none w-full h-[48px] bg-gradient-to-r from-blue-400 to-primary-blue text-white pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none cursor-pointer text-sm font-bold'
+            className=' autocomplete-none w-full h-[48px] bg-gradient-to-r from-blue-400 to-primary-blue text-white pl-4 p-4 rounded-l-full max-sm:rounded-l-full bg-light-white outline-none cursor-pointer text-sm font-bold'
             displayValue={(car_made: string) => car_made}
             onChange={(e) => setQuery(e.target.value)} 
-            placeholder='Manufacturer'
+            placeholder='Car Made'
           />
 
           {/* Group more components without adding a new DOM node  */}
@@ -50,7 +50,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             afterLeave={() => setQuery("")} // After the transition of component, reset the search query
           >
             <Combobox.Options  
-              className='absolute mt-12 max-w-xs max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
+              className='absolute mt-36 max-w-xs max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
               static
             >
               {filteredMade.length === 0 && query !== "" ? (

@@ -173,14 +173,12 @@ export async function createCarBook({
   expiry
 }: booksParams) {
 
-  const formatDateTime = format(new Date(pickupDateTime),"yyyy-MM-dd'T'HH:mm");
-
   try {
     await connectToDB();
 
     const createdCarBook = await CarBook.create({
       location,
-      formatDateTime,
+      pickupDateTime,
       rate,
       no_days,
       total_amount,
@@ -195,9 +193,9 @@ export async function createCarBook({
     });
 
   // Update car model
-  await Car.findByIdAndUpdate(carId, {
-    $push: { threads: createdCarBook._id },
-  });
+  // await Car.findByIdAndUpdate(carId, {
+  //   $push: { book: createdCarBook._id },
+  // });
 
     console.log("Book a car successfully created");
   } catch (error: any) {

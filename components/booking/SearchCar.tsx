@@ -27,7 +27,7 @@ const SearchCar = () => {
     searchParams.set("made", carMade);
     searchParams.set("model", model);
 
-    revalidatePath(`${window.location.pathname}?${searchParams.toString()}`)
+    //revalidatePath(`${window.location.pathname}?${searchParams.toString()}`)
 
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
     router.push(newPathname);

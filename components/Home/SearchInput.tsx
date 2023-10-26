@@ -68,8 +68,8 @@ const SearchInput = () => {
 
   return (
     <form className='searchbar' onSubmit={handleSearch}>
-        <div className='flex pr-4 rounded-full bg-secondary-blue'>
-        <div className='flex text-white rounded-full justify-start items-center '>
+        <div className='flex pl-0  pr-4 rounded-full bg-gradient-to-r from-blue-400 to-primary-blue '>
+        <div className='flex  text-white rounded-full justify-start items-center '>
           <FindMade 
             selected={findMade}
             setSelected={setFindMade}

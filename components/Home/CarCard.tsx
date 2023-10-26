@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import React from 'react';
 import { useDisclosure } from '@chakra-ui/react';
-import BookModal from '../booking/BookModal';
 import { carProps } from '@/utils/props/carProps';
+import BookModal from '../booking/BookModal';
 
 interface CarCardProps {
   isList: boolean;
@@ -26,7 +26,7 @@ const CarCard = ({isList, car }: CarCardProps) => {
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group">
       <div className="w-full flex justify-between items-start gap-2">
         <h2 className="text-[18px] leading-[22px] font-bold capitalize">
-          {make} {model} 
+          {make} {model} - {year}
         </h2>
       </div>
 
@@ -72,7 +72,7 @@ const CarCard = ({isList, car }: CarCardProps) => {
       
     </div>
 
-    <BookModal isOpen={isOpen} onClose={onClose} initialRef={initialRef} finalRef={finalRef} car={car} />
+    <BookModal isOpen={isOpen} onClose={onClose} car={car} />
     </>
 
     
