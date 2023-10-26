@@ -23,11 +23,11 @@ export async function GET(req: any) {
   
   const { searchParams } = new URL(req.url);
   
-  let query = {};
+   let query = {};
 
-  if (searchParams) {
-    query._id = searchParams
-  }
+  // if (searchParams) {
+  //   query._id = searchParams
+  // }
 
  
   console.log(searchParams.get('query'))
