@@ -62,15 +62,16 @@ export default async function Page({searchParams}: BookHistoryParams) {
                   <div>
                     {result?.mergedCarbooks.map((book: any) => (
                       < BookCard 
-                        key = {book._id}
-                        book={book} 
-                        idStripe = {book.idStripe}
-                        make = {book.make}
-                        model = {book.model}
-                        transmission = {book.transition}
-                        rentRate = {book.rentRate}
-                        seats = {book.seats}
-                        city_mpg = {book.city_mpg}
+                        key={book._id}
+                        book={book}
+                        idStripe={book.idStripe}
+                        make={book.make}
+                        model={book.model}
+                        transmission={book.transition}
+                        rentRate={book.rentRate}
+                        seats={book.seats}
+                        city_mpg={book.city_mpg} 
+                        sessionId={''} pathName={''}                     
                       />
                     ))}
                   </div>

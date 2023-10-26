@@ -18,7 +18,6 @@ interface BookProps {
   seats: number,
   city_mpg: number,
   idStripe: string,
-  searchParams: BookHistoryParams,
   sessionId: string,
   pathName: string
 }

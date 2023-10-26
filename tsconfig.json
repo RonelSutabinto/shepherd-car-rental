@@ -18,8 +18,10 @@
         "name": "next"
       }
     ],
+
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["*"]
     }
   },
   "include": ["app/api/**/*.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/mongoDB.ts", "utils/mongoDB.ts", "utils/Mongodb.jsx", "app/api/cars/route.ts", "app/api/stripe/route.ts", "temp/page.jsx"],
