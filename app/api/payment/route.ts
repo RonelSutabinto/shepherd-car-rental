@@ -3,10 +3,9 @@
 
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
-import { Session } from "inspector";
-import { id } from "date-fns/locale";
+// import { Session } from "inspector";
 
-export async function POST (request) {
+export async function POST (request: any) {
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
