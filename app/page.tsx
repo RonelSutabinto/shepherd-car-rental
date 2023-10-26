@@ -1,10 +1,10 @@
 
-// import CarCard from "@/components/home/CarCard";
-// import SearchInput from "@/components/home/SearchInput";
-import { CarCard, SearchInput } from "@/components";
-import { fetchCars } from "@/utils/actions/car.actions";
-import { HomeProps } from "@/utils/props/carProps";
+import CarCard from '@/components/home/CarCard';
+import SearchInput from '@/components/home/SearchInput';
+import { fetchCars } from '@/utils/actions/car.actions';
+import { HomeProps } from '@/utils/props/carProps';
 import Image from 'next/image';
+
 
 export default async function Home({ searchParams }: HomeProps) {
   
@@ -62,11 +62,10 @@ export default async function Home({ searchParams }: HomeProps) {
         {result.cars.length === 0 ? (
           <p className="no-result">No cars found</p>
           ) : (
-            // <CarsList cars = {result.cars} />
-
+           
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1 w-full gap-8 pt-10">
               {result.cars.map((car: any) => (
-                <CarCard isList={true} car = {car}/>
+                <CarCard key={car._id} isList={true} car = {car}/>
               ))}
             </div>
 
