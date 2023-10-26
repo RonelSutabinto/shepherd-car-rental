@@ -1,6 +1,6 @@
 
-import CarCard from '@/components/home/CarCard';
-import SearchInput from '@/components/home/SearchInput';
+import CarCard from '../components/home/CarCard';
+import SearchInput from '../components/home/SearchInput';
 import { fetchCars } from '@/utils/actions/car.actions';
 import { HomeProps } from '@/utils/props/carProps';
 import Image from 'next/image';
