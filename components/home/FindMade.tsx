@@ -13,7 +13,8 @@ import { MadeProps } from
 
  import { carMade } from '@/utils/details';
 import Image from 'next/image';
-
+import { HiMiniChevronUpDown } from "react-icons/hi2";
+ 
 const FindMade = ({selected, setSelected}: MadeProps) => {
 
   const [query, setQuery] = useState("");
@@ -28,19 +29,22 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
   return (
     <div className=' flex max-sm:w-full justify-start items-center'>
       <Combobox value={selected} onChange={setSelected}>
-        <div className=' flex items-center  w-full'>
-          <Combobox.Button className=" top-[14px] pl-4 text-white">
-          <FaListUl size={20}  />   
+      <div className="relative mt-0">
+          <Combobox.Button className="absolute inset-y-0 left-4 flex items-center pr-2">
+            <FaListUl
+              className="h-5 w-5 text-white"
+              aria-hidden="true"
+            />
           </Combobox.Button>
-          
+        
           {/* When the input changes, the search query is updated */}
           <Combobox.Input
-            className=' autocomplete-none w-full h-[48px] bg-gradient-to-r from-blue-400 to-primary-blue text-white pl-4 p-4 rounded-l-full max-sm:rounded-l-full bg-light-white outline-none cursor-pointer text-sm font-bold'
+            className='w-full h-[54px] pl-12  rounded-l-full bg-gradient-to-r from-blue-400 to-primary-blue outline-none cursor-pointer text-sm'
             displayValue={(car_made: string) => car_made}
             onChange={(e) => setQuery(e.target.value)} 
             placeholder='Car Made'
           />
-
+          
           {/* Group more components without adding a new DOM node  */}
           <Transition
             as={Fragment} 
@@ -50,7 +54,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             afterLeave={() => setQuery("")} // After the transition of component, reset the search query
           >
             <Combobox.Options  
-              className='absolute mt-72 max-w-xs max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
+              className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'
               static
             >
               {filteredMade.length === 0 && query !== "" ? (
@@ -65,7 +69,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
                   <Combobox.Option
                     key={item}
                     className={({ active }) =>
-                      `mb-6 min-h-fit  cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? "bg-primary-blue text-white" : "text-gray-900 font-bold"
                       }`
                     }
@@ -92,7 +96,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             </Combobox.Options>
           </Transition>
 
-        </div>
+      </div>
       </Combobox>
     </div>
   )

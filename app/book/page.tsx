@@ -19,7 +19,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
     <div className=' padding-x padding-y max-width'>
       <div className=' mt-28 flex justify-center'>
         
-      <div className='fixed z-50 top-28 flex justify-center rounded-lg bg-secondary-blue w-4/5'>
+      <div className='fixed z-40 top-28 flex justify-center rounded-lg bg-secondary-blue w-4/5'>
         <div className='my-2'>
           <TopButton />
         </div>

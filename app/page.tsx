@@ -9,7 +9,7 @@ import Image from 'next/image';
 export default async function Home({ searchParams }: HomeProps) {
   
   //Use four parameters to fetch the filtered car lists available ===================
-  const result = await fetchCars(1, 10, searchParams.made, searchParams.model);
+  const result = await fetchCars(1, 8, searchParams.made, searchParams.model);
 
   return (
     <div className='mt-12 padding-x padding-y max-width' id='discover'>
@@ -18,21 +18,21 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className='px-10'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
         
-          <div className=' pt-12 my-4 xl:px-8 sm:px-4'>
-            <h3 className='text-black-100 2xl:text-[26px] sm:text-[22px] text-[22px]'>
+          <div className='flex flex-col items-center md:items-start justify-center md:justify-start pt-12 my-4 xl:px-8 sm:px-4'>
+            <h3 className='text-black-100 2xl:text-[26px] sm:text-[22px] text-[20px]'>
               SPECIAL OFFER
             </h3>
-            <h1 className='text-secondary-blue text-[40px] md:text-[60px] font-bold '>
+            <h1 className='text-secondary-blue text-[38px] md:text-[60px] font-bold '>
               Best <span className='text-secondary-orange'>Car </span>Rental
             </h1>
 
-            <h2 className='text-[20px] text-gray-500 pr-20 mt-5'>
+            <h3 className='text-[20px] text-gray-500 md:pr-20 mt-5'>
               Enjoy your vacation with the best car rental service from us.
-            </h2>
+            </h3>
             
 
             <div className='mt-6 pt-4 w-full flex-between items-center flex-wrap gap-5'>
-              <h4 className='text-2xl font-extrabold'>Rent a car in BC</h4>
+              <h4 className=' text-[20px] text-black-100 text-2xl font-extrabold'>Rent a car in BC</h4>
               <SearchInput />
             </div>
 

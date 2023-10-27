@@ -86,7 +86,7 @@ const SearchInput = () => {
             value={searchModel}
             onChange={(e) => setSearchModel(e.target.value)}
             placeholder='Search Model...'
-            className='w-full h-[48px] text-white pl-12 p-4 bg-gradient-to-r from-primary-blue  to-blue-400  outline-none cursor-pointer text-sm'
+            className='w-full h-[54px] text-white pl-12 p-4 bg-gradient-to-r from-primary-blue  to-blue-400  outline-none cursor-pointer text-sm'
           />
           <SearchButton otherClasses='sm:hidden' />
         </div>

@@ -102,11 +102,11 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
               <ModalBody pb={6}>
                 <div className='grid grid-cols-1
                 md:grid-cols-2 p-4'>
-                    <div className='px-4'>
+                    <div className='sm:px-4 mb-8'>
                       {/* Reuse the car card component from the list component */}
                       <CarCard isList={false} car = {car}/> 
                     </div>
-                    <div className='border-[1px] shadow-md border-b-slate-500 p-4 rounded-2xl '>
+                    <div className='border-[1px] shadow-md border-b-slate-500 p-4 mx-2 sm:mx-2 rounded-2xl '>
 
                       {/* Chakra ui form rent a car input details starts here=== */}
                       <FormControl  >

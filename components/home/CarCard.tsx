@@ -24,7 +24,7 @@ const CarCard = ({isList, car }: CarCardProps) => {
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group">
       <div className="w-full flex justify-between items-start gap-2">
         <h2 className="text-[18px] leading-[22px] font-bold capitalize">
-          {make} {model} - {year}
+          {make} {model}-{year}  
         </h2>
       </div>
 
@@ -33,7 +33,7 @@ const CarCard = ({isList, car }: CarCardProps) => {
         {rentRate} 
         <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
       </p>
-
+        
       <div className='relative w-full h-36 my-3 object-contain'>
         <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
         {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' /> */}
