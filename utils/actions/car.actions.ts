@@ -4,7 +4,6 @@
 import { connectToDB } from "@/libs/mongodb";
 import Car from "../models/Car";
 
-
 export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string, searchModel?: string) {
   await connectToDB();
 
@@ -15,9 +14,9 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
 
   //  This section was created by Alex, =====================================
   // our class's technical support for Capstone web application development==
-  const query = {}
+  const query: any = {};
   if (search_make) {
-    query.make = search_make
+    query.make = search_make;
   }
 
   if (search_model) {
@@ -40,12 +39,12 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
 //const car = await Car.findOne({ _id: id });
 export async function fetchCarsById(Id: string) {
   await connectToDB();
-
-  const query = {}
-  if (Id) {
-    query._id = Id
-  }
   
+  const query: any = {};
+  if (Id) {
+    query._id = Id;
+  }
+
   // // Fetch the cars...
   const carsQuery = Car.findOne(query);
   const car = await carsQuery.exec();

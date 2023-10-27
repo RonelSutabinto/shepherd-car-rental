@@ -202,14 +202,14 @@ export async function createCarBook({
 
 export async function fetchBookById(Id: string) {
   await connectToDB();
-
-  const query = {}
+  
+  const query: any = {};
   if (Id) {
-    query._id = Id
+    query._id = Id;
   }
   
   // // Fetch the cars...
-  const bookQuery = CarBook.findOne(query);
+  const bookQuery = CarBook.findOne( query);
   const book = await bookQuery.exec();
   
   return { book }
