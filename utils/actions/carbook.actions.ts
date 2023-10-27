@@ -192,11 +192,7 @@ export async function createCarBook({
       expiry
     });
 
-  // Update car model
-  // await Car.findByIdAndUpdate(carId, {
-  //   $push: { book: createdCarBook._id },
-  // });
-
+    revalidatePath('/book')
     console.log("Book a car successfully created");
   } catch (error: any) {
     throw new Error(`Failed to create to book a car: ${error.message}`);

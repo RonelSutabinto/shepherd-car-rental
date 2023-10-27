@@ -26,7 +26,6 @@ interface BookProps {
 const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe, pathName }: BookProps) => {
     // Implement route navigation for Webhooks================= 
     const router = useRouter();
-    
 
     // Initialize for webhook server side props for data rendering
     const { _id, location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
@@ -37,31 +36,42 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
     const _rentRate = rentRate;
     const _seats = seats;
     const _city_mpg = city_mpg;
-    const _isComplete = isComplete
+    const _isComplete = isComplete;
+
+    let domain = '';
+    if (typeof window !== 'undefined') {
+      // Get the current URL from the window 
+      const currentUrl = window.location.href;
+
+      // Parse the URL to extract the domain
+      const url = new URL(currentUrl);
+      domain = 'http://'+url.hostname+':'+url.port+'/book';
+    }
 
     // POST request for stripe payment integration
     const handlePayment = async (e: any) => {
       e.preventDefault();
-      const { data } = await axios.post('/api/payment',{ 
-        priceId: id_Stripe,
-        days: no_days,
-        bookId: _id
-      }, {
-        headers: {
-          "Content-Type": "app/json",
-        },
-      });
+        // Check first if window is defined 
+        if (typeof window !== 'undefined') {
+          const { data } = await axios.post('/api/payment',{ 
+            priceId: id_Stripe,
+            days: no_days,
+            bookId: _id,
+            pathname: domain
+          }, {
+            headers: {
+              "Content-Type": "app/json",
+            },
+          });
 
-      pathName = `${window.location.pathname}`;
+          // Try to check if some important data was able to rendered properly
+          // console.log("Book ID: "+_id + " - "+ model + " Session ID: "+ data.id + " Path: "+ path_Name);
+          if(data.id){
+            updateCarBookSessionCheckOut(_id, data.id, pathName);
+          }
 
-      // Try to check if some important data was able to rendered properly
-      console.log("Book ID: "+_id + " - "+ model + " Session ID: "+ data.id + " Path: "+ pathName);
-    
-      if(data.id){
-        updateCarBookSessionCheckOut(_id, data.id, pathName);
-      }
-
-      window.location.assign(data.url);
+          window.location.assign(data.url);
+        }
     };
    
 
@@ -74,7 +84,6 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
       searchParams.delete("made");
       searchParams.delete("model");
       searchParams.delete("bookStatus");
-    
   
       const newPathname = `/book/update?${searchParams.toString()}`;
       router.push(newPathname);

@@ -65,7 +65,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
                   <Combobox.Option
                     key={item}
                     className={({ active }) =>
-                      `relative mb-6 min-h-fit  cursor-default select-none py-2 pl-10 pr-4 ${
+                      `mb-6 min-h-fit  cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? "bg-primary-blue text-white" : "text-gray-900 font-bold"
                       }`
                     }

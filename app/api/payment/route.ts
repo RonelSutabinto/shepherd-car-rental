@@ -6,14 +6,20 @@ import { NextResponse } from "next/server";
 // import { Session } from "inspector";
 
 export async function POST (request: any) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+        throw new Error("missing process.env.STRIPE_SECRET_KEY")
+    }
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: "2023-10-16"});
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {});
-
+    // console.log("request objevct", request.headers)
     let data = await request.json();
     let priceId = data.priceId
     let days = data.days
     let bookId = data.bookId
 
+    console.log("Request object", data.pathname)
+    
+    // console.log('redirecting to ', `${domainName}?checkout=success&bookId=${bookId}`)
     const session = await stripe.checkout.sessions.create({
         line_items: [ {
             price: priceId,
@@ -21,8 +27,8 @@ export async function POST (request: any) {
         }
         ],
       mode: 'payment',
-      success_url: `http://localhost:3000/book?checkout=success&bookId=${bookId}`,
-      cancel_url: 'http://localhost:3000/book?checkout=cancelled',
+      success_url: `${data.pathname}?checkout=success&bookId=${bookId}`,
+      cancel_url: `${data.pathname}?checkout=cancelled`,
   
     });
 
