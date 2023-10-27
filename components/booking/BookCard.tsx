@@ -2,7 +2,7 @@
 
 import { FaAngleDoubleRight, FaRegEdit,FaCar, FaGasPump, FaWheelchair } from "react-icons/fa";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { BookHistoryParams, booksProps } from "@/utils/props/carProps";
+import { booksProps } from "@/utils/props/carProps";
 import Image from 'next/image';
 import { format } from 'date-fns';
 import axios from "axios"

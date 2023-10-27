@@ -1,9 +1,9 @@
 "use client"
 
 import { carProps } from '@/utils/props/carProps';
-import { Image,Button, Card, CardBody, CardFooter, Heading, Stack, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { FaAngleDoubleRight, FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
+import { Image, Card, CardBody, CardFooter, Heading, Stack, Text } from '@chakra-ui/react'
+import React from 'react'
+import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 
 interface CarCardProps {

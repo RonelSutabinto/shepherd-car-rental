@@ -1,6 +1,6 @@
 "use client"
 import { Divider, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';

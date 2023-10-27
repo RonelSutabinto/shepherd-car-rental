@@ -5,8 +5,6 @@ import React, { useState } from 'react'
 import { AiFillCar } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { useRouter }  from 'next/navigation';
-import { FaAngleDoubleRight } from 'react-icons/fa';
-import { revalidatePath } from "next/cache";
 
 const SearchCar = () => {
   // Implement route navigation for Webhooks================= 

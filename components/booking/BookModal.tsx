@@ -20,7 +20,7 @@ import {
   NumberDecrementStepper,
   
 } from '@chakra-ui/react'
-import React, { RefObject, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { createCarBook } from '@/utils/actions/carbook.actions';
 import { format } from 'date-fns';
 import CarCard from '../home/CarCard';
@@ -29,8 +29,6 @@ import CarCard from '../home/CarCard';
 interface CarDetailsProps {
   isOpen: boolean;
   onClose: () => void;
-  // initialRef: any;
-  // finalRef: any;
   car: carProps;
 } 
 
