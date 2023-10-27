@@ -5,7 +5,6 @@ import SearchInput from "./home/SearchInput";
 // import CarCard from "./home/CarCard";
 // import FindMade from "./home/FindMade";
 // import Hero from "./home/Hero";
-// import SearchInput from "./home/SearchInput";
 
 
 export {
