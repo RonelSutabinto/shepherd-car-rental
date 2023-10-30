@@ -120,8 +120,8 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
             <div className='flex w-full'>
               <div className='relative w-full h-24'>
                 <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
-                 {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' />  */}
               </div>
+
               <div className='flex group-hover:visible w-full justify-between text-grey pl-2'>
                 <div className='flex flex-col justify-center items-center gap-2'>
                   <FaCar  className="w-full text-[20px]" />

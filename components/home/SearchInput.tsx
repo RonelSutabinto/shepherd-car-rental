@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import FindMade from './FindMade';
-import { FaSistrix } from 'react-icons/fa';
+import { BiSearchAlt } from 'react-icons/bi';
 
 
 const SearchInput = () => {
@@ -34,7 +34,7 @@ const SearchInput = () => {
 
   const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
     <button type='submit' className={`ml-1 rounded-fullpx-2 z-10 text-white ${otherClasses}`}>
-      <FaSistrix size={20} />
+      <BiSearchAlt size={25} />
     </button>
   );
   
@@ -53,9 +53,16 @@ const SearchInput = () => {
     // Update or delete the 'made' search parameter based on the 'made' value
     if (made) {
       searchParams.set("made", made);
+
+      if(made==='all cars'){
+        searchParams.set("made", '');
+      }
+
     } else {
        searchParams.delete("made");
     }
+
+    searchParams.set("pageNumber",'1');
 
     console.log(made);
     console.log(model);
@@ -68,8 +75,8 @@ const SearchInput = () => {
 
   return (
     <form className='searchbar' onSubmit={handleSearch}>
-        <div className='flex pl-0  pr-4 rounded-full bg-gradient-to-r from-blue-400 to-primary-blue '>
-        <div className='flex  text-white rounded-full justify-start items-center '>
+        <div className='flex pl-0  pr-4 rounded-xl bg-gradient-to-r from-blue-400 to-primary-blue '>
+        <div className='flex  text-white rounded-xl justify-start items-center '>
           <FindMade 
             selected={findMade}
             setSelected={setFindMade}
@@ -86,7 +93,7 @@ const SearchInput = () => {
             value={searchModel}
             onChange={(e) => setSearchModel(e.target.value)}
             placeholder='Search Model...'
-            className='w-full h-[54px] text-white pl-12 p-4 bg-gradient-to-r from-primary-blue  to-blue-400  outline-none cursor-pointer text-sm'
+            className='w-full h-[44px] md:h-[54px] text-white pl-12 p-4 bg-gradient-to-r from-primary-blue  to-blue-400  outline-none cursor-pointer text-sm'
           />
           <SearchButton otherClasses='sm:hidden' />
         </div>

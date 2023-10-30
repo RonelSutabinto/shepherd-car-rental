@@ -17,7 +17,7 @@ const Footer = () => {
   
   return (
     <>
-    <div className='flex justify-center items-center mt-20 px-4 '>
+    <div className='flex justify-center items-center mt-10 px-4 '>
       <h1
         className={`my-1 rounded-full p-2 px-3 cursor-pointer ${
           activeLink === '/' ? 'border-secondary-blue text-dark-100' : 'hover:border-secondary-blue hover:text-dark-100 transition-all '
@@ -72,10 +72,10 @@ const Footer = () => {
     </div>
     <div className='flex flex-col justify-center items-center mb-20 mt-4'>
       <h1 className='m-4 text-base text-gray-700'>
-        Donz shepherdtech 2023 &copy;
+        Ronel shepherdtech 2023 &copy;
       </h1>
       <h1 className=' mx-10 mb-4 text-base text-secondary-blue-100'>
-        Experimental Project DGL-204 (2023 - fall semester) 
+        Project DGL-204 (2023 - fall semester) 
       </h1>
     </div>
     

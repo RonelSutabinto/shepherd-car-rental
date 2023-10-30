@@ -192,7 +192,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
                 </div>
               </ModalBody>
 
-              <ModalFooter>
+              <ModalFooter className='mx-6 mb-4'>
                 <Button type="submit" className=' text-white bg-secondary-blue hover:text-black-100 hover:bg-secondary-light' mr={3}>
                   Book Now
                 </Button>

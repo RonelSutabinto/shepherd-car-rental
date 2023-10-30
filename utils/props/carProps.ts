@@ -21,7 +21,9 @@ export interface carProps {
 //start of car search parameters=======
 export interface SearchProps {
   made: string,
-  model: string 
+  model: string,
+  totalPages: number,
+  pageNumber: number
 }
 
 export interface HomeProps {
@@ -29,7 +31,16 @@ export interface HomeProps {
 }
 // end of car search parameters========
 
+//start of cars list pages control parameters=======
+export interface PagesControllerProps {
+  totalPages: number,
+  pageNumber: number
+}
 
+export interface CarPagesControllerProps {
+  pagesParams: PagesControllerProps;
+}
+// end cars list pages control  parameters========
 
 // start of car reservation parameters
 export interface SearchBookHistoryProps{

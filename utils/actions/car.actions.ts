@@ -7,6 +7,10 @@ import Car from "../models/Car";
 export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string, searchModel?: string) {
   await connectToDB();
 
+   if(searchMake){
+    searchMake = searchMake==='All Cars' ? '':searchMake; 
+   } 
+
   //Calculate the number of cars 
   const skipAmount = (pageNumber - 1) * pageSize;
   const search_make = searchMake ? { $regex: searchMake, $options: 'i' } : null;
@@ -21,19 +25,22 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
 
   if (search_model) {
     query.model = search_model
-  }
-  //=============================================================================
+  }//===================================
+
+  const totalCarsCount = await Car.countDocuments(query);
+  const totalPages = Math.ceil(totalCarsCount / pageSize);
 
 
-  // // Fetch the cars...
+  //Fetch the cars...
   const carsQuery = Car.find(query).skip(skipAmount).limit(pageSize)
-  const totalCarsCount = await Car.countDocuments()
+  //const totalCarsCount = await Car.countDocuments()
 
   const cars = await carsQuery.exec();
   
-  const isNext = totalCarsCount > skipAmount + cars.length;
+  //const isNext = totalCarsCount > skipAmount + cars.length;
+  const isNext = totalPages > pageNumber
 
-  return { cars }
+  return { cars, totalPages, isNext }
 }
 
 //const car = await Car.findOne({ _id: id });

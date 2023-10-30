@@ -1,7 +1,6 @@
 
 
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gilroy:wght@600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -39,4 +38,18 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+.nav-btn__style {
+  @apply flex 
+  justify-center 
+  items-center 
+  w-full 
+  md:w-fit 
+  md:rounded-full 
+  my-1 
+  p-2 
+  px-3 
+  cursor-pointer;
+}
+
 

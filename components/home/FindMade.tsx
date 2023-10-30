@@ -1,7 +1,7 @@
 
-//===============================================================================
-// UI source for input filtering: Resource: https://headlessui.com/react/combobox
-//===============================================================================
+//=============================================================================================
+//Resource: UI source code for input filtering: Resource: https://headlessui.com/react/combobox
+//=============================================================================================
 
 "use client";
 
@@ -39,7 +39,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
         
           {/* When the input changes, the search query is updated */}
           <Combobox.Input
-            className='w-full h-[54px] pl-12  rounded-l-full bg-gradient-to-r from-blue-400 to-primary-blue outline-none cursor-pointer text-sm'
+            className='w-full h-[44px] md:h-[54px] pl-12  rounded-l-full bg-gradient-to-r from-blue-400 to-primary-blue outline-none cursor-pointer text-sm'
             displayValue={(car_made: string) => car_made}
             onChange={(e) => setQuery(e.target.value)} 
             placeholder='Car Made'
@@ -51,7 +51,8 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
             leave='transition ease-in duration-100'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
-            afterLeave={() => setQuery("")} // After the transition of component, reset the search query
+            // After the transition of component, reset the search query
+            afterLeave={() => setQuery("")} 
           >
             <Combobox.Options  
               className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'
