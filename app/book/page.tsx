@@ -4,6 +4,7 @@ import Pagination from '@/components/booking/Pagination';
 import TopButton from '@/components/booking/TopButton';
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
 import { BookHistoryParams } from '@/utils/props/carProps';
+import Link from 'next/link';
 
 export default async function Page({searchParams}: BookHistoryParams) {
 
@@ -104,11 +105,26 @@ export default async function Page({searchParams}: BookHistoryParams) {
         </div>
       </div>
 
-      <div className='fixed flex justify-center items-center bottom-0 z-10 w-full'>
+      {/* <div className='fixed flex justify-center items-center bottom-0 z-10 w-full'>
       <div className='block md:hidden w-full'>
         <div className='flex justify-center items-center opacity-75 bg-black-100 py-2 rounded-t-xl'>
           <TopButton display={'small'}/>
         </div>
+      </div>
+      </div> */}
+
+    <div className="min-h-screen flex flex-col">
+      {/* Your main content */}
+      
+      {/* Fixed bottom navigation bar */}
+      <div className="fixed bottom-0 left-0 w-full opacity-75 bg-black-100 p-4 flex justify-around">
+        
+        <div className='block md:hidden'>
+          
+          <TopButton display={'small'}/>
+          
+        </div>
+
       </div>
     </div>
       

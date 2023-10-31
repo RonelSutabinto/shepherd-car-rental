@@ -95,8 +95,8 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
   return (
 
       <div className="flex justify-center items-center w-full mt-4">
-{/* ${isComplete===true ? "bg-gray-700" :" bg-secondary-orange "}  */}
-        <div className={` md:3/4 lg:w-3/5 ${isComplete===true ? "bg-white" :" bg-light-white "}`}>
+
+        <div className={`w-full mx-4 md:mx-0 md:w-5/6 lg:w-3/5 ${isComplete===true ? "bg-white" :" bg-light-white "}`}>
           <div 
             className="relative flex justify-center items-center w-full h-10 bg-gradient-to-r from-blue-400 to-primary-blue"
           >
@@ -104,8 +104,8 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
           </div>
 
           {/* View car details */}
-          <div className="px-10 relative border border-black-100 grid grid-cols-5 items-center justify-center w-full">
-            <div className="col-span-2 w-full">
+          <div className="sm:px-1 md:px-4 lg:px-10 relative border border-black-100 grid grid-cols-1 md:grid-cols-5 items-center justify-center w-full">
+            <div className="md:col-span-2 w-full">
 
               <div className="relative flex flex-col justify-start">
                 <div className="ml-4 py-2 w-fit text-white bg-slate-600 text-[18] font-bold mt-4 px-4">
@@ -140,7 +140,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
             </div>
 
             {/* View booked details */}
-            <div className="col-span-3  w-full">
+            <div className="md:col-span-3  w-full">
               <div className="relative flex flex-col ml-10 justify-start mx-2">
 
                 <h2 className="text-[14px] text-gray-500">
@@ -183,7 +183,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
                   </span>
                 </h2>
 
-                <div className=" flex justify-start pt-4" >
+                <div className=" flex justify-start py-4 " >
            
                   { _isComplete ? (
                    

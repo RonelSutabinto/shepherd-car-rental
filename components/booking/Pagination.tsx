@@ -15,11 +15,12 @@ function Pagination({ pageNumber, isNext, path,bookStatus,totalPage }: Props) {
   const router = useRouter();
   const [pNumber,setPNumber] = useState(1);
   const [totalP,setTotalP] = useState(1);
+  const [nextPageNumber,setNextPageNumber] = useState(1);
 
   const handleNextPage = () => {
-    let nextPageNumber = pageNumber;
+    // let nextPageNumber = pageNumber;
       
-    nextPageNumber = pageNumber + 1;
+    setNextPageNumber(pageNumber + 1);
     setPNumber(nextPageNumber);
     setTotalP(totalPage)
     

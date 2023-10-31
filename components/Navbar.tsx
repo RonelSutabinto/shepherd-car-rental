@@ -14,6 +14,7 @@ const navbarStyles = css`
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
+  const [isPageRefreshed, setIsPageRefreshed] = useState(false);
   
   const handleMenuClick = (href: string) => {
     setActiveLink(href);
@@ -25,7 +26,19 @@ const Navbar = () => {
 
   useEffect(() => {
     console.log('Active link changed:', activeLink);
-  }, [activeLink])
+    setIsPageRefreshed(!window.performance.navigation.type);
+    
+    //handling reload page event
+    if (!isPageRefreshed) {
+      setActiveLink(window.location.pathname);
+    } 
+
+    // Clean up the state to reset on page loading
+    return () => {
+      setIsPageRefreshed(false);
+    };
+    
+  }, [])
 
   return (
     <>
