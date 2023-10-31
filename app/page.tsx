@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: HomeProps) {
   searchParams.pageNumber = 1;
 
   return (
-    <div className=' mt-24 lg:mt-32 padding-y max-width' id='discover'>
+    <div className=' mt-24 lg:mt-32 padding-y max-width' id='homepage'>
       {/* <Hero onDataReceived={handleDataFromHero} /> */}
       {/* Start of the hero part============================================== */}
       <div className=' lg:mx-28 md:mx-10 mx-4'>

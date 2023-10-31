@@ -51,6 +51,7 @@ export interface SearchBookHistoryProps{
   bookId: string,
   checkout: string,
   pathName: string
+  pageNumber: number
 }
 export interface BookHistoryParams{
   searchParams: SearchBookHistoryProps

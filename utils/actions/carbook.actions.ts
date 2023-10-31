@@ -7,7 +7,7 @@ import Car from "../models/Car";
 import { revalidatePath } from "next/cache";
 import { format } from 'date-fns';
 
-export async function fetchCarBooks(searchStatus?: string, page?: string, pageSize?: string) {
+export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageSize = 5) {
   try {
     await connectToDB();
 
@@ -17,15 +17,20 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
     const filter = { isComplete: result }
     const cars = await Car.find();
 
-    // Get page number and page size to determine the skip range
-    const skip = (parseInt(page as string) - 1) * parseInt(pageSize as string);
-    const limit = parseInt(pageSize as string);
+
+    
     
     if(result === null) { 
      
+      //Calculate the number of book cars 
+      const skipAmount = (pageNumber - 1) * pageSize;
+      const totalBooksCount = await CarBook.countDocuments();
+      const totalPages = Math.ceil(totalBooksCount / pageSize);
+
       // Fetch all book cars 
-      const carbooks = await CarBook.find().skip(skip).limit(limit).exec();
-           
+      const carbooks = await CarBook.find().skip(skipAmount).limit(pageSize).exec();
+      const isNext = totalPages > pageNumber
+
       // Merge books with cars based on carId
       const mergedCarbooks = carbooks.map(carbook => {
         const car = cars.find(c => c._id.toString() === carbook.carId.toString());
@@ -38,16 +43,22 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
           seats : car.seats,
           city_mpg : car.city_mpg,
           idStripe: car.idStripe,
+          year: car.year
 
         };
       });
 
-      return { mergedCarbooks };
+      return { mergedCarbooks,  totalPages, isNext, totalBooksCount };
       
     } else {
-      
+      //Calculate the number of book cars 
+      const skipAmount = (pageNumber - 1) * pageSize;
+      const totalBooksCount = await CarBook.countDocuments(filter);
+      const totalPages = Math.ceil(totalBooksCount / pageSize);
+
       // Fetch book cars by completed status
-      const carbooks = await CarBook.find(filter).skip(skip).limit(limit).exec();
+      const carbooks = await CarBook.find(filter).skip(skipAmount).limit(pageSize).exec();
+      const isNext = totalPages > pageNumber
 
       // Merge book with cars based on carId
       const mergedCarbooks = carbooks.map(carbook => {
@@ -61,10 +72,11 @@ export async function fetchCarBooks(searchStatus?: string, page?: string, pageSi
           seats : car.seats,
           city_mpg : car.city_mpg,
           idStripe: car.idStripe,
+          year: car.year
         };
       });
 
-      return { mergedCarbooks };
+      return { mergedCarbooks,  totalPages, isNext, totalBooksCount };
 
     }    
 

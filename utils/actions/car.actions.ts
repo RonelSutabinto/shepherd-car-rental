@@ -11,8 +11,6 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
     searchMake = searchMake==='All Cars' ? '':searchMake; 
    } 
 
-  //Calculate the number of cars 
-  const skipAmount = (pageNumber - 1) * pageSize;
   const search_make = searchMake ? { $regex: searchMake, $options: 'i' } : null;
   const search_model = searchModel ? { $regex: searchModel, $options: 'i' }: null;
 
@@ -27,17 +25,15 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
     query.model = search_model
   }//===================================
 
+  //Calculate the number of cars 
+  const skipAmount = (pageNumber - 1) * pageSize;
   const totalCarsCount = await Car.countDocuments(query);
   const totalPages = Math.ceil(totalCarsCount / pageSize);
 
-
   //Fetch the cars...
   const carsQuery = Car.find(query).skip(skipAmount).limit(pageSize)
-  //const totalCarsCount = await Car.countDocuments()
 
   const cars = await carsQuery.exec();
-  
-  //const isNext = totalCarsCount > skipAmount + cars.length;
   const isNext = totalPages > pageNumber
 
   return { cars, totalPages, isNext }

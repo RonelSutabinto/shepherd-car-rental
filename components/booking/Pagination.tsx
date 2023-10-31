@@ -4,15 +4,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
-  totalPage: number;
+  totalPage: any;
   pageNumber: number;
-  isNext: boolean;
+  isNext: any;
   path: string;
-  made?: string;
-  model?: string
+  bookStatus?: string;
 }
 
-function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) {
+function Pagination({ pageNumber, isNext, path,bookStatus,totalPage }: Props) {
   const router = useRouter();
   const [pNumber,setPNumber] = useState(1);
   const [totalP,setTotalP] = useState(1);
@@ -24,10 +23,10 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
     setPNumber(nextPageNumber);
     setTotalP(totalPage)
     
-    if ((nextPageNumber > 1) &&(nextPageNumber<=totalPage)) {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`);
+    if ((nextPageNumber > 1) &&(nextPageNumber<=totalPage+1)) {
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`);
     } else {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${totalPage}`);
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${totalPage}`);
     }
       
   };
@@ -40,9 +39,9 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
     setTotalP(totalPage)
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`);
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`);
     }else {
-      router.push(`/${path}?made=${made}&model=${model}`);
+      router.push(`/${path}?bookStatus=${bookStatus}`);
     }
   };
 
