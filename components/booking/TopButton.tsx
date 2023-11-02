@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { FaTasks,FaAngleDoubleRight,FaCheckDouble,FaUserTie,FaUsersSlash } from "react-icons/fa";
+import { FaTasks,FaCheckDouble,FaUserTie,FaUsersSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { HiViewGrid } from "react-icons/hi"
 interface Props{
   display:string;
 } 
@@ -16,7 +17,7 @@ const TopButton = ({display}: Props)  => {
   const [activeButton, setActiveButton] = useState<string | null>(null);
 
   const buttons = [
-    { name: 'View All', id: 1,bIcon: <FaAngleDoubleRight size={20} className="w-full text-[13px] " />  },
+    { name: 'View All', id: 1,bIcon: <HiViewGrid size={20} className="w-full text-[13px] " />  },
     { name: 'Incomplete', id: 2,bIcon: <FaTasks size={20} className="w-full text-[13px]" /> },
     { name: 'Completed', id: 3, bIcon: <FaCheckDouble size={20} className="w-full text-[13px] " /> },
     { name: 'View Profile', id: 4, bIcon: <FaUserTie size={20} className="w-full text-[13px] " /> },
@@ -79,9 +80,9 @@ const TopButton = ({display}: Props)  => {
 
           <button
               key={button.id}
-            className={`" bg-black-100 mx-2 w-fit px-4 py-2 text-[13px] " ${activeButton === button.name ? " text-secondary-orange scale-100 transition-all rounded-lg border border-secondary-orange " : "text-gray-400"}`}
-            onClick={() => handleButtonClick(button.name)}
-          >
+              className={`"relative bg-black-100 mx-2 w-fit px-4 py-2 text-[13px] " ${activeButton === button.name ? " text-secondary-orange scale-100 transition-all rounded-lg border border-secondary-orange " : "text-gray-400"}`}
+              onClick={() => handleButtonClick(button.name)}
+            >
               <span>{button.bIcon}</span>
             {screenDisplay === 'small' ? '': button.name}
           </button>

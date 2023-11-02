@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import { booksProps, carProps } from '@/utils/props/carProps';
 import { useRouter } from 'next/navigation';
 import { updateCarBook } from '@/utils/actions/carbook.actions';
+import CarDrawer from './CarDrawer';
 interface CarCardProps {
   car: carProps,
   book: booksProps
@@ -182,45 +183,55 @@ const Form = ({car, book}:CarCardProps) => {
           </div>
 
 
-          <div className='px-6 pt-10 '>
-          
-              {/* View the car detail */}
-            <div className="flex flex-col p-4 pr-4 justify-center items-start text-black-100 bg-gray-100 border-blue-600 rounded-3xl group">
-                <div className="w-full flex justify-between items-start gap-1">
-                  <h2 className="text-[18px] leading-[22px] font-bold capitalize">
-                    {make} {model} - {year}
-                  </h2>
+          <div className='mx-4 mt-6 border border-gray-200 text-black-100  rounded-md drop-shadow-md'>
+            <div 
+              className="relative flex justify-center items-center w-full h-10 bg-gradient-to-r from-blue-400 to-primary-blue "
+            >
+              <h1 className={`text-[20] font-bold text-white`}> {make} {model} - {year}</h1>
+            </div>
+              <div className="md:col-span-2 w-full">
+
+              <div className="relative flex flex-col justify-start">
+                <div className="ml-4 py-2 w-fit text-white bg-slate-600 text-[18] font-bold mt-4 px-4">
+                  <p className='flex text-secondary-orange mt-2 text-[32px] leading-[32px] font-extrabold'>
+                    <span className="text-[18px] mr-2 text-white">Rental Rate: </span>
+                    ${rentRate} 
+                    <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
+                  </p>
+                </div>
+                <div className='relative h-24 mt-2'>
+                  <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
                 </div>
 
-                <p className='flex mt-2 text-[32px] leading-[38px] font-extrabold'>
-                  <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span>
-                  {rentRate}
-                  <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
-                </p>
-
-                <div className='flex w-full'>
-                  <div className='relative w-full h-24'>
-                    <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
-                    
+                <div className="flex justify-center p-2">
+                  <div className='flex flex-col justify-center items-center gap-2 mx-2'>
+                    <FaCar  className="w-full text-[20px] text-gray-500" />
+                    <p className='text-[14px] leading-[17px]'>
+                      {transmission === "Manual" ? "Manual" : "Auto"}
+                    </p>
                   </div>
-                  <div className='flex group-hover:visible w-full justify-between text-grey pl-2'>
-                    <div className='flex flex-col justify-center items-center gap-2'>
-                      <FaCar  className="w-full text-[20px]" />
-                      <p className='text-[14px] leading-[17px]'>
-                        {transmission === "Manual" ? "Manual" : "Auto"}
-                      </p>
-                    </div>
-                    <div className="flex flex-col justify-center items-center gap-2">
-                      <FaWheelchair  className="w-full text-[20px]" />
-                      <p className=" text-[14px] leading-[17px]">{seats}</p>
-                    </div>
-                    <div className="flex flex-col justify-center items-center gap-2">
-                      <FaGasPump className="w-full text-[20px]" />
-                      <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
-                    </div>
+                  <div className="flex flex-col justify-center items-center gap-2 mx-2">
+                    <FaWheelchair  className="w-full text-[20px] text-gray-500" />
+                    <p className=" text-[14px] leading-[17px]">{seats}</p>
+                  </div>
+                  <div className="flex flex-col justify-center items-center gap-2 mx-2">
+                    <FaGasPump className="w-full text-[20px] text-gray-500" />
+                    <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
                   </div>
                 </div>
-              </div >
+
+              </div>
+              </div>
+
+              {/* <div className='flex justify-center items-center w-full'>
+                <button 
+                    className=" m-2 flex justify-center py-2 h-9 bg-secondary-blue text-white px-2 rounded-lg hover:bg-secondary-blue-200 hover:text-white transition duration-300 text-[12px]" 
+                    //onClick={onOpen}
+                >
+                  Change Car
+                </button>
+              </div> */}
+              
               
           </div>
         </div>

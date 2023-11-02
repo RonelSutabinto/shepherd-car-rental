@@ -111,7 +111,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
                 <div className="ml-4 py-2 w-fit text-white bg-slate-600 text-[18] font-bold mt-4 px-4">
                   <p className='flex text-secondary-orange mt-2 text-[32px] leading-[32px] font-extrabold'>
                     <span className="text-[18px] mr-2 text-white">Rental Rate: </span>
-                    ${+_rentRate} 
+                    ${_rentRate} 
                     <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
                   </p>
                 </div>

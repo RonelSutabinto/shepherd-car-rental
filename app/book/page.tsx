@@ -53,20 +53,16 @@ export default async function Page({searchParams}: BookHistoryParams) {
                 
               </div>
 
-              <div className='flex flex-center md:col-span-2 mr-32 w-full p-2 rounded-r-2xl'>
+              <div className='flex flex-center md:col-span-2 mr-32 w-full p-2'>
                 <img
-                  className="mx-5 scale-90 object-contain align-middle "
+                  className="mx-5 scale-100 object-contain align-middle "
                   alt=""
-                  src="/tmpImage.png"
+                  src="/template_a.png"
                 />
               </div>
 
             </div>
           </div>
-
-           
-            
-         
             
           <div>
            
@@ -104,19 +100,8 @@ export default async function Page({searchParams}: BookHistoryParams) {
           />
         </div>
       </div>
-
-      {/* <div className='fixed flex justify-center items-center bottom-0 z-10 w-full'>
-      <div className='block md:hidden w-full'>
-        <div className='flex justify-center items-center opacity-75 bg-black-100 py-2 rounded-t-xl'>
-          <TopButton display={'small'}/>
-        </div>
-      </div>
-      </div> */}
-
-    <div className="min-h-screen flex flex-col">
-      {/* Your main content */}
       
-      {/* Fixed bottom navigation bar */}
+      {/* Fixed top update page button */}
       <div className="fixed bottom-0 left-0 w-full opacity-75 bg-black-100 p-4 flex justify-around">
         
         <div className='block md:hidden'>
@@ -126,7 +111,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
         </div>
 
       </div>
-    </div>
+    {/* </div> */}
       
     </div>
     
