@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { updateCarBookSessionCheckOut } from "@/utils/actions/carbook.actions";
+import { useEffect, useState } from "react";
 
 interface BookProps {
   book: booksProps,
@@ -26,6 +27,8 @@ interface BookProps {
 
  
 const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe,year, pathName }: BookProps) => {
+    const [fileName, setFileName] = useState('');
+    
     // Implement route navigation for Webhooks================= 
     const router = useRouter();
 
@@ -92,6 +95,12 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
       router.push(newPathname);
     };
 
+    useEffect(() => {
+      const fname = '/car_img/'+ make +'_'+ model+'.png'
+      setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
+      
+    }, [fileName]);
+
   return (
 
       <div className="flex justify-center items-center w-full mt-4">
@@ -116,7 +125,8 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
                   </p>
                 </div>
                 <div className='relative h-24 mt-2'>
-                  <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
+                  {/* Source car images link: https://www.edmunds.com=========== */}
+                  <Image src={fileName} alt='car model' fill priority className='object-contain' />
                 </div>
 
                 <div className="flex justify-center p-2">

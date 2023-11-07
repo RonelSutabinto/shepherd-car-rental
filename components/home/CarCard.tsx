@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { carProps } from '@/utils/props/carProps';
 import BookModal from '../booking/BookModal';
@@ -15,10 +15,19 @@ interface CarCardProps {
 const CarCard = ({isList, car }: CarCardProps) => {
   // Initialize local props from the car details received ======
   const { city_mpg, year, make, model, transmission, rentRate, seats } = car; 
+  const [fileName, setFileName] = useState('');
 
   //Book modal component react hook settings====================
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  //input.replace(/\s+/g, '_')
+
+  useEffect(() => {
+    const fname = '/car_img/'+ make +'_'+ model+'.png'
+    setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
+    
+  }, [fileName]);
+  
   return (
     <>
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group">
@@ -29,14 +38,14 @@ const CarCard = ({isList, car }: CarCardProps) => {
       </div>
 
       <p className='flex mt-6 text-[32px] leading-[38px] font-extrabold'>
-        <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span>
+         <span className='text-secondary-blue-100'>$</span>
         {rentRate} 
         <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
       </p>
         
       <div className='relative w-full h-36 my-3 object-contain'>
-        <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
-        {/* <Image src={carImageUrl(car)} alt='car model' fill priority className='object-contain' /> */}
+        {/* Source car images link: https://www.edmunds.com=========== */}
+        <Image src={fileName} alt='car model' fill priority className='object-contain' />
       </div>
 
       <div className='relative flex w-full mt-2'>

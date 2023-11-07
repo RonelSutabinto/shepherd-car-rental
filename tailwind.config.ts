@@ -52,13 +52,8 @@ module.exports = {
       },
 
       backgroundImage: {
-        'pattern': "url('/pattern.png')",
-        'hero-bg': "url('/hero-bg.png')"
+        'car-bg': "url('/car_bg.png')"
       },
-
-
-
-
 
       spacing: {},
       

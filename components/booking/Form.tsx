@@ -1,6 +1,6 @@
 "use client"
 import { Divider, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -16,6 +16,8 @@ interface CarCardProps {
 }
 
 const Form = ({car, book}:CarCardProps) => {
+  const [fileName, setFileName] = useState('');
+  
   const router = useRouter();
 
   const { city_mpg, year, make, model, transmission, rentRate, seats } = car; 
@@ -71,6 +73,12 @@ const Form = ({car, book}:CarCardProps) => {
     const handleBack = () => {
       router.push('/book');
     }
+
+    useEffect(() => {
+      const fname = '/car_img/'+ make +'_'+ model+'.png'
+      setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
+      
+    }, [fileName]);
 
   return (
    
@@ -200,7 +208,7 @@ const Form = ({car, book}:CarCardProps) => {
                   </p>
                 </div>
                 <div className='relative h-24 mt-2'>
-                  <Image src="/tmpImage.png" alt='car model' fill priority className='object-contain' />
+                  <Image src={fileName} alt='car model' fill priority className='object-contain' />
                 </div>
 
                 <div className="flex justify-center p-2">

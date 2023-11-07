@@ -2,7 +2,7 @@
 
 import { carProps } from '@/utils/props/carProps';
 import { Image, Card, CardBody, CardFooter, Heading, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 
@@ -14,6 +14,7 @@ interface CarCardProps {
 
 const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
   const {_id, city_mpg, year, make, model, transmission, rentRate, seats } = car; 
+  const [fileName, setFileName] = useState('');
   const router = useRouter();
   
   if(currentId!==_id){
@@ -31,6 +32,12 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
     router.push(newPathname);
   };
 
+  useEffect(() => {
+    const fname = '/car_img/'+ make +'_'+ model+'.png'
+    setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
+    
+  }, [fileName]);
+
   return (
     <div className='bg-gray-100 my-4'>
      
@@ -43,7 +50,7 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
         <Image
           objectFit='cover'
           maxW={{ base: '100%', sm: '200px' }}
-          src='/tmpImage.png'
+          src={fileName}
           alt='Car Model'
           className='object-contain'
         />
@@ -59,25 +66,22 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
             </p>
 
             <div className='flex group-hover:visible w-full justify-between text-grey pl-2 mt-6'>
-            <div className='flex flex-col justify-center items-center gap-2'>
-              <FaCar  className="w-full text-[20px]" />
-              <p className='text-[14px] leading-[17px]'>
-                {transmission === "Manual" ? "Manual" : "Auto"}
-              </p>
+              <div className='flex flex-col justify-center items-center gap-2'>
+                <FaCar  className="w-full text-[20px]" />
+                <p className='text-[14px] leading-[17px]'>
+                  {transmission === "Manual" ? "Manual" : "Auto"}
+                </p>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <FaWheelchair  className="w-full text-[20px]" />
+                <p className=" text-[14px] leading-[17px]">{seats}</p>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <FaGasPump className="w-full text-[20px]" />
+                <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
+              </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-2">
-              <FaWheelchair  className="w-full text-[20px]" />
-              <p className=" text-[14px] leading-[17px]">{seats}</p>
-            </div>
-            <div className="flex flex-col justify-center items-center gap-2">
-              <FaGasPump className="w-full text-[20px]" />
-              <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
-            </div>
-          </div>
 
-          {/* <Text py='2'>
-              If you prefer, you can send us an email. Our helpful staff is available to answer any inquiries or address any concerns.
-            </Text>  */}
           </CardBody>
 
           <CardFooter>
@@ -86,9 +90,8 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
               className=" m-2 flex justify-center py-2 h-9 border bg-secondary-blue px-4 rounded-lg text-white text-[14px] font-bold border-secondary-blue" 
               onClick={handleSearch}
             >
-            {/* <FaAngleDoubleRight size={20}  /> */}
-            Select
-          </button>
+              Select
+            </button>
 
             
           </CardFooter>

@@ -1,5 +1,5 @@
 
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/home/Pagination';
 import CarCard from '../components/home/CarCard';
 import SearchInput from '../components/home/SearchInput';
 import { fetchCars } from '@/utils/actions/car.actions';
