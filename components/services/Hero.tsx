@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Hero = () => {
   return (
     <div >
-      <div className='bg-car-bg bg-repeat-round z-0 object-contain'>
+      <div className='bg-car-bg bg-repeat-round z-0 object-contain mt-2'>
         <div className='grid grid-cols-5 mx-16  '>
 
           <div className='ml-16 mt-24 col-span-2 w-full'>
@@ -17,9 +17,9 @@ const Hero = () => {
                 </h1>
               </div>
 
-              <div className='mt-10 flex w-full items-center justify-center md:justify-start'>
+              <div className='mt-6 flex w-full items-center justify-center md:justify-start'>
                 <h1 className='px-4  md:px-0 md:text-[18px] text-[16px] text-gray-500'>
-                Rent a car from us today and drive all throughout Canada's <span className=' font-extrabold text-secondary-blue-100'>British Columbia</span> province. A travel with no mileage restrictions.
+                Rent a car from us today and drive all throughout Canada's British Columbia province. We are ensuring the best customer experience.
                 </h1>
               </div>
 

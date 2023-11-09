@@ -1,3 +1,4 @@
+import { type } from "os";
 
 
 export interface carProps {
@@ -127,7 +128,35 @@ export interface booksParams {
 
 }
 
+//Starting props of the top cars list
+export interface topCarProps {
+  _id: string;
+  city_mpg: number;
+  color: string;
+  fuel_type: string;
+  highway_mpg: number;
+  idLocation: string;
+  make: string;
+  mileage: number;
+  model: string;
+  rentRate: number;
+  seats: number;
+  transmission: string;
+  year: number;
+  availability: boolean;
+  idStripe: string;
+  totalCarBooks: number;
+  carBooks: booksProps[];
+};
 
+export interface CarouselCarListProps {
+  topCars: topCarProps[];
+};
 
+export interface topCarParams {
+  topCar: topCarProps;
+  fileName: string;
+}
+//End props of the top cars list
 
 

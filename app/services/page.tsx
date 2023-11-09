@@ -6,8 +6,11 @@ import { FaMapLocationDot } from 'react-icons/fa6'
 import { AiFillCar } from 'react-icons/ai'
 import { FaSwatchbook } from 'react-icons/fa6'
 import CarouselCarLIst from '../../components/services/CarouselCarLIst'
+import { fetchTopCars } from '@/utils/actions/car.actions'
 
-const page = () => {
+export default async function Page() {
+  const result = await fetchTopCars();
+  
   return (
     <div className=' mt-12 padding-y max-width' id='servicespage'>
       <Hero />
@@ -19,7 +22,7 @@ const page = () => {
       </div>
       
       
-      <div className='grid grid-cols-2 mt-16'>
+      <div className='grid grid-cols-2 mt-14'>
 
         <div className='flex justify-start w-full items-start'>
           {/* Source car images link: https://www.edmunds.com=========== */}
@@ -28,7 +31,7 @@ const page = () => {
             alt='hero'
             width={400}
             height={500}
-            className='relative w-full z-10 object-contain '
+            className='relative w-full z-10 object-contain scale-75 '
           />
         </div>
 
@@ -86,19 +89,20 @@ const page = () => {
       </div>
 
       <div className='flex flex-col justify-start items-center w-full mt-20'>
-        <h2 className=' text-[35px] font-black text-primary-blue mb-2'>
-          Most Popular <span className='text-secondary-orange'>Car Rental</span> Offers
+        <h2 className=' text-[35px] font-black text-secondary-blue mb-2'>
+          Most Popular Car Rental Offers
         </h2>
-        <h2 className=' text-center text-[18px] m-6 w-2/4'>
+        <h2 className=' text-center text-[20px] m-6 w-2/4'>
           For trips over the weekend, from Friday to Sunday, we offer lower rates. A great choice for short trips and activities.
         </h2>
       </div>
 
-      <CarouselCarLIst />
+      <CarouselCarLIst topCars={result.topCars} />
 
     </div>
 
   )
 }
 
-export default page
+
+

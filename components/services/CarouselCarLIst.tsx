@@ -1,47 +1,56 @@
 "use client"
+import { fetchTopCars } from '@/utils/actions/car.actions';
+import { CarouselCarListProps } from '@/utils/props/carProps';
 import React, { useState } from 'react'
+import { MdSkipPrevious, MdSkipNext } from 'react-icons/md'
+import CarCard from './CarCard';
 
-const CarouselCarLIst = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const items = [
-    'Car 1',
-    'Car 2',
-    'Car 3',
-    'Car 4',
-    'Car 5'
-  ];
+const CarouselCarLIst = ({ topCars }: CarouselCarListProps) => {
+  const [startIndex, setStartIndex] = useState(0);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+  const visibleTopCars = topCars.slice(startIndex, startIndex + 3);
+
+  const nextBtn = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex + 1 > topCars.length - 3 ? 0 : prevIndex + 1
+    );
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
+  const prevBtn = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? topCars.length - 3 : prevIndex - 1
+    );
   };
-
 
   return (
-    <div className="w-full max-w-xl mx-auto mt-8 p-4 border border-gray-300 rounded-md relative">
-      <div className="flex items-center justify-center mb-4">
-        <button className="mr-2" onClick={handlePrev}>
-          Previous
-        </button>
-        <button className="ml-2" onClick={handleNext}>
-          Next
-        </button>
+    <div className="w-full max-w-4xl mx-auto mt-8">
+      <div className="relative overflow-hidden">
+        <div className="flex transition-transform ease-in-out duration-300 transform">
+          {visibleTopCars.map((car, index) => (
+            <div
+              key={index}
+              className="w-1/3 p-2 flex-shrink-0 justify-center items-center text-center"
+            >
+              <CarCard topCar = {car} fileName = { '/car_img/'+ car.make +'_'+ car.model+'.png'} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex items-center justify-center space-x-4 overflow-hidden">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className={`w-48 h-48 bg-gray-200 flex items-center justify-center transition-transform transform ${
-              index === currentIndex ? 'scale-125' : 'scale-100'
-            }`}
-          >
-            {item}
-          </div>
-        ))}
+      <div className="mt-4 flex justify-center space-x-4">
+        <button
+          onClick={prevBtn}
+          className="bg-secondary-blue-100 hover:bg-secondary-blue text-white font-semibold py-2 px-4 rounded"
+        >
+         <MdSkipPrevious size={24}/>
+        </button>
+        <button
+          onClick={nextBtn}
+          className="bg-secondary-blue-100 hover:bg-secondary-blue text-white font-semibold py-2 px-4 rounded"
+        >
+          
+          <MdSkipNext size={24} />
+        </button>
       </div>
     </div>
   )

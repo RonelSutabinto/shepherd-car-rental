@@ -39,7 +39,60 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
   return { cars, totalPages, isNext }
 }
 
-//const car = await Car.findOne({ _id: id });
+//This query can fetch the top 6 of most popular car from shepherd car rental services
+export async function fetchTopCars(){
+  await connectToDB();
+
+  //Temporarily hide this car filtering
+  // const matchFilter = {};
+  // if (make) matchFilter.make = make;
+  // if (model) matchFilter.model = model;
+
+  const cars = Car.aggregate([
+    {
+      $lookup: {
+        from: 'carbooks', 
+        localField: '_id',
+        foreignField: 'carId',
+        as: 'carbooks',
+      },
+    },
+    {
+      $addFields: {
+        carBooks: {
+          $ifNull: ['$carBooks', []], // Handle null carBooks field by defaulting to an empty array
+        },
+        totalCarBooks: { $size: '$carbooks' },
+      },
+    },
+    // { $match: matchFilter, },
+    { $sort: { totalCarBooks: -1 },},
+    { $limit: 6,},
+    {
+      // Include fields from Car collection 
+      $project: {
+        _id: 1, 
+        city_mpg: 1,
+        make: 1,
+        model: 1,
+        year: 1,
+        color: 1,
+        rentRate: 1,
+        seats: 1,
+        // Include other fields from Car
+        totalCarBooks: 1, // Include the calculated totalCarBooks field
+        carBooks: {
+          $slice: ['$carbooks', 3], // Include only top 3 car books for each car as sub query
+        },
+      },
+    },
+  ]);
+
+  const topCars = await cars.exec();
+
+  return { topCars };
+}
+
 export async function fetchCarsById(Id: string) {
   await connectToDB();
   
@@ -67,3 +120,4 @@ export const updateSearchParams = (type: string, value: string) => {
 
   return newPathname;
 };
+

@@ -20,8 +20,6 @@ const CarCard = ({isList, car }: CarCardProps) => {
   //Book modal component react hook settings====================
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  //input.replace(/\s+/g, '_')
-
   useEffect(() => {
     const fname = '/car_img/'+ make +'_'+ model+'.png'
     setFileName(fname.toLowerCase().replace(/\s+/g, '_'))

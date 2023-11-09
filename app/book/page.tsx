@@ -32,7 +32,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
 
         <div>
           <div className='flex justify-center items-center w-full mt-0 md:mt-24 mb-4'>
-            <h1 className='px-2 text-secondary-blue text-[28px] md:text-[34px] font-extrabold' >Booking <span className='text-secondary-orange'>History </span>Records </h1>            
+            <h1 className='px-2 text-secondary-blue text-[28px] md:text-[45px] font-extrabold' >Booking <span className='text-secondary-orange'>History </span>Records </h1>            
           </div>
           
           <div className='flex justify-center items-center w-full '>

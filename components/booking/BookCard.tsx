@@ -28,7 +28,7 @@ interface BookProps {
  
 const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe,year, pathName }: BookProps) => {
     const [fileName, setFileName] = useState('');
-    
+
     // Implement route navigation for Webhooks================= 
     const router = useRouter();
 
@@ -113,7 +113,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
           </div>
 
           {/* View car details */}
-          <div className="sm:px-1 md:px-4 lg:px-10 relative border border-black-100 grid grid-cols-1 md:grid-cols-5 items-center justify-center w-full">
+          <div className="sm:px-1 md:px-4 lg:px-10 relative border border-black-100 grid grid-cols-1 md:grid-cols-5 items-center justify-center w-full rounded-b-xl">
             <div className="md:col-span-2 w-full">
 
               <div className="relative flex flex-col justify-start">
