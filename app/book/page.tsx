@@ -1,5 +1,6 @@
 
 import BookCard from '@/components/booking/BookCard';
+import BookList from '@/components/booking/BookList';
 import Pagination from '@/components/booking/Pagination';
 import TopButton from '@/components/booking/TopButton';
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
@@ -11,28 +12,36 @@ export default async function Page({searchParams}: BookHistoryParams) {
   //Fetch the filtered book a car records by its status ===================
   const result = await fetchCarBooks(searchParams.bookStatus, searchParams.pageNumber ? searchParams.pageNumber: 1, 5);
 
+
   if(searchParams.checkout && searchParams.checkout==='success'){
     updateCarBookCheckOut(searchParams.checkout, searchParams.bookId,'/book');
   }
 
   return (
-  <>
+  <div>
     <div className='padding-y max-width' id='bookpage'>
-      <div className='mt-28 md:mt-36 flex justify-center'>
+      <div className='mt-28 md:mt-36 flex justify-start md:justify-center'>
         
-        <div className='flex justify-center items-center fixed z-40 top-32'>
+        
+        <div className='flex justify-start md:justify-center items-center fixed z-40 top-28 md:top-32'>
           <div className='hidden md:block'>
-            <div className='rounded-lg bg-white w-fit border border-gray-300 px-10 drop-shadow-md'>
-              <div className='my-1 px-6'>
-                <TopButton display={'medium'}/>
+              <div className='rounded-lg bg-white w-fit border border-gray-300 px-10 drop-shadow-md'>
+                <div className='my-1 px-6'>
+                  <TopButton />
+                </div>
               </div>
+          </div>
+
+          <div className='block md:hidden'>
+            <div className='mx-4 rounded-lg bg-white w-fit border border-gray-300 p-2 drop-shadow-md'>
+              <TopButton />
             </div>
           </div>
         </div>
 
         <div>
-          <div className='flex justify-center items-center w-full mt-0 md:mt-24 mb-4'>
-            <h1 className='px-2 text-secondary-blue text-[28px] md:text-[45px] font-extrabold' >Booking <span className='text-secondary-orange'>History </span>Records </h1>            
+          <div className='flex justify-center items-center w-full -mt-4 md:mt-24 mb-4'>
+            <h1 className='px-6 md:px-2 text-center text-secondary-blue text-[30px] md:text-[45px] font-extrabold' >Booking <span className='text-secondary-orange'>History </span>Records </h1>            
           </div>
           
           <div className='flex justify-center items-center w-full '>
@@ -40,24 +49,24 @@ export default async function Page({searchParams}: BookHistoryParams) {
 
               <div className='md:col-span-3' >
                 <div className='flex justify-start items-center w-full'>
-                  <h1 className='text-[18px] md:text-[22px] font-bold text-gray-700'>
+                  <h1 className='text-[20px] md:text-[22px] font-bold text-gray-700'>
                     Please click the <span className='text-secondary-orange'>pay now button</span> to complete your car reservation. 
                   </h1>
                 </div>
                 
                 <div className='flex w-full justify-center '>
-                <h1 className='text-[16px] text-gray-700'>
+                <h1 className='ext-[12px] md:text-[16px] text-gray-700'>
                   We can accommodate your needs, whether you need a dependable vehicle for a business trip, are organizing a road trip, or simply want the comfort of having a car of your choice.
                 </h1>
                 </div>
                 
               </div>
 
-              <div className='flex flex-center md:col-span-2 mr-32 w-full p-2'>
+              <div className='flex flex-center md:col-span-2 mr-28 w-full p-2'>
                 <img
-                  className="mx-5 scale-100 object-contain align-middle "
+                  className="scale-110 md:scale-125 object-contain align-middle "
                   alt=""
-                  src="/template_a.png"
+                  src="/carBook.png"
                 />
               </div>
 
@@ -65,30 +74,8 @@ export default async function Page({searchParams}: BookHistoryParams) {
           </div>
             
           <div>
-           
-                {result?.mergedCarbooks.length === 0 ? (
-                <p className="no-result">No book cars found</p>
-                ) : (
-                  <div>
-                    {result?.mergedCarbooks.map((book: any) => (
-                      < BookCard 
-                        key={book._id}
-                        book={book}
-                        idStripe={book.idStripe}
-                        make={book.make}
-                        model={book.model}
-                        transmission={book.transition}
-                        rentRate={book.rentRate}
-                        seats={book.seats}
-                        city_mpg={book.city_mpg} 
-                        sessionId={''} pathName={''}  
-                        year={book.year}                   
-                      />
-                    ))}
-                  </div>
-                )}
-              
-         
+            <BookList bookList={result?.mergedCarbooks ? result.mergedCarbooks : []} 
+           />
           </div>
 
           <Pagination
@@ -100,23 +87,8 @@ export default async function Page({searchParams}: BookHistoryParams) {
           />
         </div>
       </div>
-      
-      {/* Fixed top update page button */}
-      <div className="fixed bottom-0 left-0 w-full opacity-75 bg-black-100 p-4 flex justify-around">
-        
-        <div className='block md:hidden'>
-          
-          <TopButton display={'small'}/>
-          
-        </div>
-
-      </div>
-    {/* </div> */}
-      
-    </div>
-    
-      
-  </>
+    </div>  
+  </div>
 
   );
 }

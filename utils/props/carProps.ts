@@ -96,6 +96,36 @@ export interface booksProps {
   checkoutId?: string,
   expiry?: string,
 }
+export interface BookMergeProps {
+  _id: string;
+  location: string;
+  pickupDateTime: string;
+  rate: number;
+  no_days: number; 
+  total_amount: number; 
+  full_name: string ;
+  contact_no: string; 
+  carId: string;
+  isComplete: boolean;
+  card_type?: string;
+  card_number?: string;
+  checkoutId?: string;
+  expiry?: string;
+  make: string;
+  model: string;
+  transmission: string;
+  rentRate: number;
+  seats: number;
+  city_mpg: number;
+  idStripe: string;
+  year: number;
+  sessionId: string;
+  pathName: string;
+}
+
+export interface BookListProps{
+  bookList: BookMergeProps[];
+}
 
 export interface UpdateBookProps {
   bookId: string,

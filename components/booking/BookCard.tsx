@@ -1,9 +1,9 @@
- "use client";
+"use client";
 
 import { FaAngleDoubleRight, FaRegEdit,FaCar, FaGasPump, FaWheelchair } from "react-icons/fa";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import { BiMap } from "react-icons/bi";
-import { booksProps } from "@/utils/props/carProps";
+
 import Image from 'next/image';
 import { format } from 'date-fns';
 import axios from "axios"
@@ -12,28 +12,42 @@ import { updateCarBookSessionCheckOut } from "@/utils/actions/carbook.actions";
 import { useEffect, useState } from "react";
 
 interface BookProps {
-  book: booksProps,
-  make: string,
-  model: string,
-  transmission: string,
-  rentRate: number,
-  seats: number,
-  city_mpg: number,
-  idStripe: string,
-  year: number
-  sessionId: string,
-  pathName: string
+  idBook: string;
+  location: string; 
+  pickupDateTime: string; 
+  rateBook: number;
+  no_days: number; 
+  total_amount: number; 
+  full_name: string;
+  contact_no: string; 
+  carId: string;
+  isComplete: boolean;
+  card_type?: string;
+  card_number?: string;
+  checkoutId?: string;
+  expiry?: string;//end of book collection
+  make: string;
+  model: string;
+  transmission: string;
+  rentRate: number;
+  seats: number;
+  city_mpg: number;
+  idStripe: string;
+  year: number;
+  sessionId: string;
+  pathName: string;
+  imgPath: string
 }
 
  
-const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, idStripe,year, pathName }: BookProps) => {
+const BookCard = ({idBook, location, pickupDateTime,rateBook, no_days, total_amount, full_name, contact_no, carId, isComplete, make, model, transmission, rentRate, seats, city_mpg, idStripe,year, imgPath }: BookProps) => {
     const [fileName, setFileName] = useState('');
 
     // Implement route navigation for Webhooks================= 
     const router = useRouter();
 
     // Initialize for webhook server side props for data rendering
-    const { _id, location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
+    // const { _id, location, pickupDateTime, no_days, total_amount, full_name, contact_no, carId, isComplete } = book; 
     const id_Stripe  = idStripe; 
     const _make = make;
     const _model = model;
@@ -62,7 +76,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
           const { data } = await axios.post('/api/payment',{ 
             priceId: id_Stripe,
             days: no_days,
-            bookId: _id,
+            bookId: idBook,
             pathname: domain
           }, {
             headers: {
@@ -73,7 +87,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
           // Try to check if some important data was able to rendered properly
           // console.log("Book ID: "+_id + " - "+ model + " Session ID: "+ data.id + " Path: "+ path_Name);
           if(data.id){
-            updateCarBookSessionCheckOut(_id, data.id, pathName);
+            updateCarBookSessionCheckOut(idBook, data.id, '/book');
           }
 
           window.location.assign(data.url);
@@ -84,7 +98,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
     const handleUpdate = () => {
       const searchParams = new URLSearchParams(window.location.search);
       
-      searchParams.set("bookId", _id);
+      searchParams.set("bookId", idBook);
       searchParams.set("carId", carId);
 
       searchParams.delete("made");
@@ -95,19 +109,18 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
       router.push(newPathname);
     };
 
-    useEffect(() => {
-      const fname = '/car_img/'+ make +'_'+ model+'.png'
-      setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
-      
-    }, [fileName]);
+    // const fname = '/car_img/'+ make +'_'+ model+'.png'
+    // setFileName(fname.toLowerCase().replace(/\s+/g, '_'))
+
+    
 
   return (
 
       <div className="flex justify-center items-center w-full mt-4">
 
-        <div className={`w-full mx-4 md:mx-0 md:w-5/6 lg:w-3/5 ${isComplete===true ? "bg-white" :" bg-light-white "}`}>
+        <div className={` rounded-t-xl w-full mx-4 md:mx-0 md:w-5/6 lg:w-3/5 ${isComplete===true ? "bg-white" :" bg-light-white "}`}>
           <div 
-            className="relative flex justify-center items-center w-full h-10 bg-gradient-to-r from-blue-400 to-primary-blue"
+            className="relative flex justify-center items-center w-full h-10 bg-gradient-to-r from-blue-400 to-primary-blue rounded-t-xl"
           >
             <h1 className={`text-[20] font-bold text-white`}> {_make} {_model} - {_year}</h1>
           </div>
@@ -126,7 +139,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
                 </div>
                 <div className='relative h-24 mt-2'>
                   {/* Source car images link: https://www.edmunds.com=========== */}
-                  <Image src={fileName} alt='car model' fill priority className='object-contain' />
+                  <Image src={imgPath} alt='car model' fill priority className='object-contain' />
                 </div>
 
                 <div className="flex justify-center p-2">
@@ -246,6 +259,7 @@ const BookCard = ({book, make, model, transmission, rentRate, seats, city_mpg, i
 };
 
 export default BookCard
+
 
 
 

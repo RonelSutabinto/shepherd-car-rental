@@ -17,8 +17,6 @@ export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageS
     const filter = { isComplete: result }
     const cars = await Car.find();
 
-
-    
     
     if(result === null) { 
      

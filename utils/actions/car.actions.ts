@@ -15,7 +15,7 @@ export async function fetchCars(pageNumber = 1, pageSize = 8,searchMake?: string
   const search_model = searchModel ? { $regex: searchModel, $options: 'i' }: null;
 
   //  This section was created by Alex, =====================================
-  // our class's technical support for Capstone web application development==
+  // our class technical support for Capstone web application development==
   const query: any = {};
   if (search_make) {
     query.make = search_make;
