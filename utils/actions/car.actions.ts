@@ -82,7 +82,7 @@ export async function fetchTopCars(){
         // Include other fields from Car
         totalCarBooks: 1, // Include the calculated totalCarBooks field
         carBooks: {
-          $slice: ['$carbooks', 3], // Include only top 3 car books for each car as sub query
+          $slice: ['$carbooks', 60], // Include only top 3 car books for each car as sub query
         },
       },
     },
