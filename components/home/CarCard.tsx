@@ -15,7 +15,7 @@ interface CarCardProps {
 const CarCard = ({isList, car }: CarCardProps) => {
   // Initialize local props from the car details received ======
   const { city_mpg, year, make, model, transmission, rentRate, seats } = car; 
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('/model-icon.png');
 
   //Book modal component react hook settings====================
   const { isOpen, onOpen, onClose } = useDisclosure();

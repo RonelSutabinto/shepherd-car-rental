@@ -70,7 +70,8 @@ const SearchInput = () => {
     // Generate the new pathname with the updated search parameters
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
 
-    router.push(newPathname);
+    // router.push(newPathname);
+    router.push(newPathname, { scroll: false })
   };
 
   return (

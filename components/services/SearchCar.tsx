@@ -1,10 +1,11 @@
 "use client"
 import { minimalCarMade } from '@/utils/details';
-import { FormControl, InputGroup, InputLeftElement, Select } from '@chakra-ui/react';
+import { InputGroup, InputLeftElement, Select, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { AiFillCar } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { useRouter }  from 'next/navigation';
+import CarDrawer from './CarDrawer';
 
 const SearchCar = () => {
   // Implement route navigation for Webhooks================= 
@@ -13,10 +14,8 @@ const SearchCar = () => {
   const [carMade, setCarMade] = useState<string>('All Cars');
   const [model, setModel] = useState<string>('');
 
-
   const handleSearch = () => {
-    // alert("Made: "+ carMade +"\n model:"+ model );
-
+   
     const searchParams = new URLSearchParams(window.location.search);
     if(carMade==='All Cars'){
       setCarMade('');
@@ -25,19 +24,23 @@ const SearchCar = () => {
     searchParams.set("made", carMade);
     searchParams.set("model", model);
 
-    //revalidatePath(`${window.location.pathname}?${searchParams.toString()}`)
-
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
-    router.push(newPathname);
+    router.push(newPathname,{scroll: false});
   };
+
+  // ===============================
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleClick = () => {
+    onOpen()
+  }
+  //================================
 
   return (
     <>
       <div className='flex flex-row items-center justify-start w-fit'>
         
         <div className='flex items-center justify-start w-full'>
-          {/* <AiFillCar size={28} className='relative ml-4 mr-2 padding-2 text-[20px] text-secondary-blue' /> */}
-         
          <div>
           <InputGroup>
               <InputLeftElement pointerEvents="none">
@@ -46,9 +49,8 @@ const SearchCar = () => {
               
                 <Select 
                   id="selectMade"
-                  className='h-10 w-40 pl-10 py-2  text-secondary-blue'
+                  className='h-10 w-32 md:w-40 pl-10 py-2  text-secondary-blue'
                   onChange={(e) => setCarMade(e.target.value)}
-                  
                 >
                   {minimalCarMade.map((item) =>  (
                     <option key={item} value={item}>{item}</option>
@@ -63,7 +65,7 @@ const SearchCar = () => {
 
           <input 
             placeholder='Search Model' 
-            className=' w-40 bg-white h-10 my-1 border border-gray-200 px-2' 
+            className=' w-36 md:w-40 bg-white h-10 my-1 border border-gray-200 px-2' 
             type="text" 
             id="inputModel"
             onChange={(e) => setModel(e.target.value)}
@@ -71,7 +73,7 @@ const SearchCar = () => {
        
           <button 
             className="flex justify-center mx-2 py-2 h-9 border border-secondary-blue text-secondary-blue px-2 rounded-lg hover:bg-secondary-blue hover:text-white transition duration-300 text-[12px]" 
-            onClick={handleSearch}
+            onClick={() => handleClick()}
           >
             <BiSearchAlt size={20}  />  
           </button>
@@ -80,6 +82,8 @@ const SearchCar = () => {
 
         
       </div>
+      
+      <CarDrawer isOpen={isOpen} onClose={onClose} make={carMade} model={model} />
     </>
   )
 }

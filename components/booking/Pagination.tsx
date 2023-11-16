@@ -15,19 +15,18 @@ function Pagination({ pageNumber, isNext, path,bookStatus,totalPage }: Props) {
   const router = useRouter();
   const [pNumber,setPNumber] = useState(1);
   const [totalP,setTotalP] = useState(1);
-  const [nextPageNumber,setNextPageNumber] = useState(1);
 
   const handleNextPage = () => {
-    // let nextPageNumber = pageNumber;
+   let nextPageNumber = pageNumber;
       
-    setNextPageNumber(pageNumber + 1);
+    nextPageNumber = parseInt(pageNumber.toString()) + 1;
     setPNumber(nextPageNumber);
     setTotalP(totalPage)
     
-    if ((nextPageNumber > 1) &&(nextPageNumber<=totalPage+1)) {
-      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`);
+    if ((nextPageNumber > 1) &&(nextPageNumber < totalPage)) {
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`, { scroll: false });
     } else {
-      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${totalPage}`);
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${totalPage}`, { scroll: false });
     }
       
   };
@@ -40,9 +39,9 @@ function Pagination({ pageNumber, isNext, path,bookStatus,totalPage }: Props) {
     setTotalP(totalPage)
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`);
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`, { scroll: false });
     }else {
-      router.push(`/${path}?bookStatus=${bookStatus}`);
+      router.push(`/${path}?bookStatus=${bookStatus}&pageNumber=${nextPageNumber}`, { scroll: false });
     }
   };
 

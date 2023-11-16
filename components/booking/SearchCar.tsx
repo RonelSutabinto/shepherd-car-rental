@@ -4,7 +4,7 @@ import { FormControl, InputGroup, InputLeftElement, Select } from '@chakra-ui/re
 import React, { useState } from 'react'
 import { AiFillCar } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
-import { useRouter }  from 'next/navigation';
+import { useRouter }  from 'next/router';
 
 const SearchCar = () => {
   // Implement route navigation for Webhooks================= 
@@ -26,9 +26,9 @@ const SearchCar = () => {
     searchParams.set("model", model);
 
     //revalidatePath(`${window.location.pathname}?${searchParams.toString()}`)
-
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
     router.push(newPathname);
+    
   };
 
   return (

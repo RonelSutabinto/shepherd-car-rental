@@ -20,14 +20,14 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
   const handleNextPage = () => {
     let nextPageNumber = pageNumber;
       
-    nextPageNumber = pageNumber + 1;
+    nextPageNumber = parseInt(pageNumber.toString()) + 1;
     setPNumber(nextPageNumber);
     setTotalP(totalPage)
     
     if ((nextPageNumber > 1) &&(nextPageNumber<=totalPage)) {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`);
+      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false });
     } else {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${totalPage}`);
+      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${totalPage}`, { scroll: false });
     }
       
   };
@@ -40,9 +40,9 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
     setTotalP(totalPage)
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`);
+      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false });
     }else {
-      router.push(`/${path}?made=${made}&model=${model}`);
+      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false });
     }
   };
 

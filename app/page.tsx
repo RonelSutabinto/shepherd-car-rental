@@ -1,18 +1,44 @@
-
+"use client"
 import Pagination from '@/components/home/Pagination';
 import CarCard from '../components/home/CarCard';
 import SearchInput from '../components/home/SearchInput';
 import { fetchCars } from '@/utils/actions/car.actions';
 import Car from '@/utils/models/Car';
-import { CarPagesControllerProps, HomeProps } from '@/utils/props/carProps';
+import { CarPagesControllerProps, HomeProps, carProps } from '@/utils/props/carProps';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
-export default async function Home({ searchParams }: HomeProps) {
+interface CarList {
+  cars: carProps[];
+  totalPages: number;
+  isNext: boolean;
+}
+//const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
+//export default async function Home({ searchParams }: HomeProps) {
+const Home = ({ searchParams }: HomeProps) => {
   
   //Use four parameters to fetch the filtered car lists available ===================
-  const result = await fetchCars(searchParams.pageNumber ? searchParams.pageNumber: 1, 8, searchParams.made, searchParams.model);
+  // const result = await fetchCars(searchParams.pageNumber ? searchParams.pageNumber: 1, 8, searchParams.made, searchParams.model);
 
-  searchParams.pageNumber = 1;
+  // searchParams.pageNumber = 1;
+
+  const [carList, setCarList] = useState<CarList>({cars: [], 
+    totalPages: 0, 
+    isNext: false});
+
+  const getCars = async () => {
+    try {
+      const result = await fetchCars(searchParams.pageNumber ? searchParams.pageNumber: 1, 8, searchParams.made, searchParams.model);
+      setCarList(result);
+    } catch (error) {
+      console.error('Error fetching cars:', error);
+      alert("Fetch car error: "+error);
+    }
+  };
+
+  useEffect(() => {
+    getCars();
+  }, [searchParams.pageNumber, searchParams.made, searchParams.model]);
 
   return (
     <div className=' mt-24 lg:mt-32 padding-y max-width' id='homepage'>
@@ -73,12 +99,12 @@ export default async function Home({ searchParams }: HomeProps) {
       
 
       <section className="px-4 lg:mx-20 md:mx-10 mx-0 mt-10 lg:mt-6 ">
-        {result.cars.length === 0 ? (
+        {carList.cars.length === 0 ? (
           <p className="no-result">No cars found</p>
           ) : (
            
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full gap-4 md:gap-6">
-              {result.cars.map((car: any) => (
+              {carList.cars.map((car: any) => (
                 <CarCard key={car._id} isList={true} car = {car}/>
               ))}
             </div>
@@ -88,15 +114,17 @@ export default async function Home({ searchParams }: HomeProps) {
           <Pagination
             path='/'
             pageNumber={searchParams?.pageNumber ? searchParams.pageNumber : 1}
-            isNext={result.isNext}
+            isNext={carList.isNext}
             made={searchParams.made ? searchParams.made : ''}
             model={searchParams.model ? searchParams.model : ''}
-            totalPage={result.totalPages}
+            totalPage={carList.totalPages}
           />
           
       </section>
     </div>
   );
 }
+
+export default Home
 
 

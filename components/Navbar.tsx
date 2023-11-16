@@ -48,7 +48,7 @@ const Navbar = () => {
 
           <div className=' flex flex-row justify-between items-center  lg:w-full md:w-fit w-full lg:mx-auto'>
             <div className="text-xl font-bold">
-              <Link href="/" className="flex justify-start items-center">
+              <Link href="/" className="flex justify-start items-center" scroll={false}>
                 <Image
                   src="/logo.png"
                   alt="Car Rental Logo"

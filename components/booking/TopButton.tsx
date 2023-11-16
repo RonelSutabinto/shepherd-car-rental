@@ -56,7 +56,7 @@ const TopButton = () => {
     searchParams.delete('pageNumber');
 
     const newPathname = `/book?${searchParams.toString()}`;
-    router.push(newPathname);
+    router.push(newPathname, { scroll: false });
 
   };
 

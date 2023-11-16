@@ -8,13 +8,9 @@ interface Params{
   //search_Params: BookHistoryParams;
 } 
 const BookList = ({ bookList }: Params) => {
-  //const [startIndex, setStartIndex] = useState(0);
   const [books,setBooks] = useState([bookList]);
-    
-  //const [bookData, setBookData] = useState<any>([]);
   const [bookData, setBookData] = useState([bookList]);
   
-
   return (
 
     <div>

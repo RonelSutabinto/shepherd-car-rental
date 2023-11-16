@@ -21,10 +21,10 @@ export default async function Page({searchParams}: UpdateBookCarParams)  {
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen mt-36'>
-      <h1 className='flex justify-center px-10 text-[35px] font-extrabold text-secondary-blue w-full max-w-3xl'>
-        Update the booked 
+      <h1 className=' text-center text-[35px] font-extrabold text-secondary-blue w-full max-w-3xl'>
+        Update Booking
         <span className='text-secondary-orange ml-2'>
-        car details
+        Details
         </span>
       </h1>
 
