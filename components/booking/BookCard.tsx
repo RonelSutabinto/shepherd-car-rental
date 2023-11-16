@@ -108,7 +108,7 @@ const BookCard = ({
     searchParams.delete("bookStatus");
 
     const newPathname = `/book/update?${searchParams.toString()}`;
-    router.push(newPathname);
+    router.push(newPathname,{scroll: false});
   };
 
   return (

@@ -16,7 +16,7 @@ interface CarCardProps {
 }
 
 const Form = ({car, book}:CarCardProps) => {
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('/honda-car.png');
   
   const router = useRouter();
 

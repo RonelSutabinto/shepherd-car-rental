@@ -13,15 +13,8 @@ interface CarList {
   totalPages: number;
   isNext: boolean;
 }
-//const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
-//export default async function Home({ searchParams }: HomeProps) {
+
 const Home = ({ searchParams }: HomeProps) => {
-  
-  //Use four parameters to fetch the filtered car lists available ===================
-  // const result = await fetchCars(searchParams.pageNumber ? searchParams.pageNumber: 1, 8, searchParams.made, searchParams.model);
-
-  // searchParams.pageNumber = 1;
-
   const [carList, setCarList] = useState<CarList>({cars: [], 
     totalPages: 0, 
     isNext: false});
@@ -42,7 +35,7 @@ const Home = ({ searchParams }: HomeProps) => {
 
   return (
     <div className=' mt-24 lg:mt-32 padding-y max-width' id='homepage'>
-      {/* <Hero onDataReceived={handleDataFromHero} /> */}
+      
       {/* Start of the hero part============================================== */}
       <div className=' lg:mx-28 md:mx-10 mx-4'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
