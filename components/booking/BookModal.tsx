@@ -99,9 +99,6 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
       } else {
         setContactError('');
       }
-
-      alert(location.length)
-  
     
       if (isValid) {
         // Call the backend API endpoint to create a car book

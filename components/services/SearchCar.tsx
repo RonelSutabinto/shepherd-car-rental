@@ -65,7 +65,7 @@ const SearchCar = () => {
 
           <input 
             placeholder='Search Model' 
-            className=' w-36 md:w-40 bg-white h-10 my-1 border border-gray-200 px-2' 
+            className=' w-28 md:w-40 bg-white h-10 my-1 border border-gray-200 px-2' 
             type="text" 
             id="inputModel"
             onChange={(e) => setModel(e.target.value)}
