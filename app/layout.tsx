@@ -5,12 +5,13 @@ import { Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
 
 import { Providers } from '@/components/ui/Providerui'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Shepherd Car Rental',
-  description: 'Discover the best car rental sevices of the world',
+  description: 'Discover the best car rental sevices',
 }
 
 export default function RootLayout({
@@ -20,21 +21,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
-        <body className="relative">
-          <Providers>
-            <Navbar />
-            
-            {/* It will be used if there is a need to add car records */}
-            {/* <div className='pt-32 px-6 mx-12'>
-                <ListHeader />
-            </div> */}
-
-            {children}
-            <Footer />
-          </Providers>
+      <ClerkProvider>
+        <body className="relative">          
+            <Providers>
+              <Navbar/>
+              {children}
+              <Footer />
+            </Providers>
         </body>
-    
+      </ClerkProvider>
     </html>
   )
 }

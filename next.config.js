@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["cdn.imagin.studio"]
+        domains: ["img.clerk.com"]
+       
     },
 
     experimental: {
@@ -16,4 +17,4 @@ const nextConfig = {
     
 }
 
-module.exports = nextConfig
+ module.exports = nextConfig

@@ -1,4 +1,4 @@
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Stack } from '@chakra-ui/react'
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Spinner, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import CarCard from '../home/CarCard';
 import { fetchCars } from '@/utils/actions/car.actions';
@@ -19,9 +19,7 @@ interface CarList {
   
 const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
 
-  const [carList, setCarList] = useState<CarList>({cars: [], 
-      totalPages: 0, 
-      isNext: false});
+  const [carList, setCarList] = useState<CarList>({cars: [], totalPages: 0, isNext: false});
 
   const getCars = async () => {
     try {
@@ -49,7 +47,10 @@ const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
           <DrawerBody className='w-full'>
             <Stack spacing='24px'>   
               {carList.cars.length === 0 ? (
-              <p className="no-result">No cars found</p>
+                <div>
+                  <p className="no-result">Please wait, retrieving data..</p>
+                  <Spinner color='red.500' />
+                </div>
               ) : (
               
                 <div className="grid w-fit gap-4 md:gap-6 mt-10 mx-2">

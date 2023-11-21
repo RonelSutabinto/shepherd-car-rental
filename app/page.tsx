@@ -7,6 +7,7 @@ import Car from '@/utils/models/Car';
 import { CarPagesControllerProps, HomeProps, carProps } from '@/utils/props/carProps';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { UserButton } from '@clerk/nextjs';
 
 interface CarList {
   cars: carProps[];
@@ -63,7 +64,6 @@ const Home = ({ searchParams }: HomeProps) => {
               <h4 className=' text-[18px] md:text-[20px] text-black-100 font-extrabold'>Rent a car in BC</h4>
               <SearchInput />
             </div>
-
           </div>
 
           <div className='flex justify-center items-center mt-8 md:mt-0 lg:scale-90 scale-100'>

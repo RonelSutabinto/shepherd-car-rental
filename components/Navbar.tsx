@@ -4,14 +4,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { Divider } from '@chakra-ui/react';
-import { LuLogIn } from 'react-icons/lu'
+import { Center, Divider } from '@chakra-ui/react';
+
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 
 const navbarStyles = css`
   z-index: 1000; 
 `;
 
 const Navbar = () => {
+  const { isLoaded, user } = useUser();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
   const [isPageRefreshed, setIsPageRefreshed] = useState(false);
@@ -135,15 +143,19 @@ const Navbar = () => {
                 <Link href="/contact">Contact Us</Link>
               </h1>
             </div>
-            
-            <Divider className='text-black-100 mx-1' orientation='vertical' />
-            <div className=" flex justify-center items-center w-full md:w-fit md:rounded-full my-2 md:mb-0 mb-6 bg-primary-blue p-2 px-6  text-white cursor-pointer hover:scale-105 transition-all">
-              <h2>
+
+            <SignedIn>
+              <a className=' text-center m-6'>
+                <UserButton afterSignOutUrl="/" />
+              </a>
+            </SignedIn>
+          
+            <SignedOut>
+              <Link className=" flex justify-center items-center w-full md:w-fit md:rounded-full my-2 md:mb-0 mb-6 bg-primary-blue p-2 px-6  text-white cursor-pointer hover:scale-105 transition-all" href="/dashboard">
                 Sign In
-              </h2>
-              <LuLogIn className='md:hidden mx-2' />
-            </div>
-            
+              </Link>
+            </SignedOut>
+               
           </div>
         </div>
       </nav>
