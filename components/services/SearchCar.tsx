@@ -38,18 +38,17 @@ const SearchCar = () => {
 
   return (
     <>
-      <div className='flex flex-row items-center justify-start w-fit'>
+      <div className='z-10 flex flex-row items-center justify-start w-fit'>
         
         <div className='flex items-center justify-start w-full'>
-         <div>
           <InputGroup>
-              <InputLeftElement pointerEvents="none">
+              <InputLeftElement >
                 <AiFillCar size={20} className="text-primary-blue" />
               </InputLeftElement>
               
                 <Select 
                   id="selectMade"
-                  className='h-10 w-32 md:w-40 pl-10 py-2  text-secondary-blue'
+                  className='relative h-10 w-32 md:w-40 pl-10 py-2  text-secondary-blue'
                   onChange={(e) => setCarMade(e.target.value)}
                 >
                   {minimalCarMade.map((item) =>  (
@@ -57,8 +56,6 @@ const SearchCar = () => {
                   ))}
                 </Select>
             </InputGroup>
-         </div>
-          
         </div>
 
         <div className='flex justify-start items-center w-full'>

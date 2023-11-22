@@ -1,17 +1,17 @@
-import React from 'react';
-import Image from 'next/image';
 
+import Image from 'next/image';
 const Hero = () => {
+
   return (
     <div className='z-0  mt-6'>
       <div className='grid grid-cols-1 md:grid-cols-2 mx-6 md:mx-12 lg:mx-16'>
 
-        <div className=' z-10 lg:-mr-0 md:ml-6 lg:ml-16 md:col-span-1 w-full mt-6 md:mt-4 lg:mt-20'>
+        <div className=' z-5 lg:-mr-0 md:ml-6 lg:ml-16 md:col-span-1 w-full mt-6 md:mt-4 lg:mt-20'>
           <div className='flex flex-col'>
 
             <div className='flex w-full items-center justify-center md:justify-start'>
               <h1 className='text-black-100 text-[32px] text-center md:text-start lg:text-[45px] font-extrabold'>
-                Simple And Quick Car Rental Service!
+                Simple And Quick Car Rental Service! 
               </h1>
             </div>
 

@@ -190,3 +190,7 @@ export interface topCarParams {
 //End props of the top cars list
 
 
+export interface userEmail {
+  id: string;
+  emailAddress: string;
+}

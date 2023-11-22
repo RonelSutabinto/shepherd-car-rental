@@ -7,10 +7,11 @@ import { css } from '@emotion/react';
 import { Center, Divider } from '@chakra-ui/react';
 
 import {
+  ClerkProvider,
   SignedIn,
   SignedOut,
   UserButton,
-  useUser,
+ useUser,
 } from "@clerk/nextjs";
 
 const navbarStyles = css`
@@ -50,9 +51,9 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-gray-100 text-primary-blue px-0 lg:py-2 fixed z-50 w-full drop-shadow-sm top-0 ">
+      <nav className="bg-gray-100 text-primary-blue px-0 fixed z-50 w-full drop-shadow-sm top-0 ">
         
-        <div className=" relative container mx-auto flex  flex-col md:flex-row items-center justify-between w-full ">
+        <div className=" relative container mx-auto flex  flex-col md:flex-row text-center items-center justify-between w-full ">
 
           <div className=' flex flex-row justify-between items-center  lg:w-full md:w-fit w-full lg:mx-auto'>
             <div className="text-xl font-bold">
@@ -86,14 +87,15 @@ const Navbar = () => {
             </div>
           </div>
           
+          {/* set big screen mode for navbar menu */}
           <div
-            className={`w-full justify-end md:flex flex-col items-center md:flex-row md:space-x-2 ${isOpen ? 'flex' : 'hidden'} lg:flex`}
+            className={`w-full justify-end md:flex flex-col text-center items-center md:flex-row md:space-x-2 ${isOpen ? 'flex' : 'hidden'} lg:flex`}
           >
             <div
               className={`
-                nav-btn__style
+                nav-btn__style 
                 ${
-                  activeLink === '/' ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-110 transition-all' : 'hover:bg-secondary-light hover:text-dark-100 text[18px]'
+                  activeLink === '/' ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-105 transition-all' : 'hover:bg-secondary-light hover:text-dark-100 text[18px]'
                 }`
               }
             >
@@ -106,7 +108,7 @@ const Navbar = () => {
               className={`
                 nav-btn__style 
                 ${ activeLink === '/book'
-                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-110 transition-all'
+                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-105 transition-all'
                   : 'hover:bg-secondary-light hover:text-dark-100 text[18px]'
                 }
               `}
@@ -120,7 +122,7 @@ const Navbar = () => {
               className={`
                 nav-btn__style 
                 ${ activeLink === '/services'
-                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-110 transition-all'
+                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-105 transition-all'
                   : 'hover:bg-secondary-light hover:text-dark-100 text[18px]'
                 }
               `}
@@ -132,18 +134,19 @@ const Navbar = () => {
             
             <div
               className={`
-                nav-btn__style
+                nav-btn__style 
                 ${ activeLink === '/contact'
-                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-110 transition-all'
+                  ? 'bg-secondary-light text-dark-100 text[20px] font-bold scale-105 transition-all'
                   : 'hover:bg-secondary-light hover:text-dark-100 text[18px]'
                 }
               `}
             >
               <h1 onClick={() => handleMenuClick('/contact')} >
                 <Link href="/contact">Contact Us</Link>
-              </h1>
+              </h1> 
             </div>
-
+           
+            <a className='w-4'></a>
             <SignedIn>
               <a className=' text-center m-6'>
                 <UserButton afterSignOutUrl="/" />
@@ -151,11 +154,11 @@ const Navbar = () => {
             </SignedIn>
           
             <SignedOut>
-              <Link className=" flex justify-center items-center w-full md:w-fit md:rounded-full my-2 md:mb-0 mb-6 bg-primary-blue p-2 px-6  text-white cursor-pointer hover:scale-105 transition-all" href="/dashboard">
+              <Link className="text-center w-full md:w-fit md:rounded-full my-2 bg-primary-blue p-2 px-6  text-white cursor-pointer hover:scale-105 transition-all" href="/dashboard">
                 Sign In
               </Link>
             </SignedOut>
-               
+
           </div>
         </div>
       </nav>
