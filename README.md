@@ -22,15 +22,23 @@ Shepherd Car Rental is an ongoing effort. This project provides consumers with a
 
 Technology requirements:
 
-    Next.js
-
     React.js
+
+    Next.js
 
     GraphQl
 
     MongoDB
 
+    Typescript 
+    
     Tailwind CSS
+
+    ChakraUI
+
+    Stripe
+
+    Clerk
 
 
 ## Getting Started
