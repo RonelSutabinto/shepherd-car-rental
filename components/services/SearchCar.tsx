@@ -48,7 +48,7 @@ const SearchCar = () => {
               
                 <Select 
                   id="selectMade"
-                  className='relative h-10 w-32 md:w-40 pl-10 py-2  text-secondary-blue'
+                  className='relative h-10 w-32 md:w-44 pl-10 py-2  text-secondary-blue'
                   onChange={(e) => setCarMade(e.target.value)}
                 >
                   {minimalCarMade.map((item) =>  (
