@@ -9,6 +9,7 @@ import CarouselCarLIst from '../../components/services/CarouselCarLIst'
 import { fetchTopCars } from '@/utils/actions/car.actions'
 
 export default async function Page() {
+
   const result = await fetchTopCars();
   
   return (
@@ -16,7 +17,7 @@ export default async function Page() {
       <Hero />
 
       <div className='mt-4 lg:-mt-20 flex flex-row w-full justify-center items-center'>
-        <div className='flex justify-center items-center w-11/12 md:w-fit  rounded-lg drop-shadow-sm my-6 max-w-lg    md:p-5 p-3 bg-white border border-primary-blue to-white opacity-95' >
+        <div className='flex justify-center items-center text-center w-11/12 md:w-fit  rounded-lg drop-shadow-sm my-6 max-w-lg    md:p-4 p-3 bg-white border border-primary-blue to-white opacity-95' >
           <SearchCar />
         </div>
       </div> 

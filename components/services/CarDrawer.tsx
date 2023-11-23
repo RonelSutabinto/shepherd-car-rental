@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import CarCard from '../home/CarCard';
 import { fetchCars } from '@/utils/actions/car.actions';
 import { carProps } from '@/utils/props/carProps';
-
+import { auth, clerkClient, useUser } from '@clerk/nextjs'
 
 interface CarDetailsProps {
   isOpen: boolean;
   onClose: () => void;
   make: string;
   model: string;
+  
 } 
 interface CarList {
   cars: carProps[];
@@ -20,6 +21,9 @@ interface CarList {
 const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
 
   const [carList, setCarList] = useState<CarList>({cars: [], totalPages: 0, isNext: false});
+  const { user } = useUser();
+  const [authId, setAuthId] = useState<string>('');
+  
 
   const getCars = async () => {
     try {
@@ -33,6 +37,10 @@ const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
   useEffect(() => {
     if (isOpen) {
       getCars();
+    }
+
+    if(user){
+      setAuthId(user.id);
     }
   }, [isOpen, make, model]);
 
@@ -55,7 +63,7 @@ const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
               
                 <div className="grid w-fit gap-4 md:gap-6 mt-10 mx-2">
                 {carList.cars.map((car) => (
-                  <CarCard key={car._id} isList={true} car = {car}/>  
+                  <CarCard key={car._id} isList={true} car = {car} authId={authId}/>  
                 ))}
                 </div>
               )}

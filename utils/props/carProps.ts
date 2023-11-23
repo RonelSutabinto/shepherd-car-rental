@@ -51,8 +51,9 @@ export interface SearchBookHistoryProps{
   checkOutSessionId: string,
   bookId: string,
   checkout: string,
-  pathName: string
-  pageNumber: number
+  pathName: string,
+  pageNumber: number,
+  authId : string
 }
 export interface BookHistoryParams{
   searchParams: SearchBookHistoryProps
@@ -91,7 +92,7 @@ export interface booksProps {
   contact_no: string, 
   carId: string,
   isComplete: boolean,
-  card_type?: string,
+  userID?: string,
   card_number?: string,
   checkoutId?: string,
   expiry?: string,
@@ -107,7 +108,7 @@ export interface BookMergeProps {
   contact_no: string; 
   carId: string;
   isComplete: boolean;
-  card_type?: string;
+  userID?: string;
   card_number?: string;
   checkoutId?: string;
   expiry?: string;
@@ -151,7 +152,7 @@ export interface booksParams {
   contact_no: string, 
   carId: string,
   isComplete: boolean,
-  card_type?: string,
+  userID?: string,
   card_number?: string,
   checkoutId?: string
   expiry?: string,
@@ -186,6 +187,7 @@ export interface CarouselCarListProps {
 export interface topCarParams {
   topCar: topCarProps;
   fileName: string;
+  authId: string;
 }
 //End props of the top cars list
 

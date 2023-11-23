@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 interface Params{
   bookList: BookListProps[];
-  //search_Params: BookHistoryParams;
+  authId: string;
 } 
-const BookList = ({ bookList }: Params) => {
+const BookList = ({ bookList,authId }: Params) => {
   const [books,setBooks] = useState([bookList]);
   const [bookData, setBookData] = useState([bookList]);
   
@@ -16,7 +16,9 @@ const BookList = ({ bookList }: Params) => {
     <div>
     
     {bookList.length === 0 ? (
-      <p className="no-result">No Cars found</p>
+      <div className="flex flex-row w-full justify-center items-center m-6">
+        <p className="no-result text-[18px] font-extrabold text-secondary-orange">No car books found...</p>
+      </div>
       ) : (
         <>
           {bookList.map((book: any) => (
@@ -41,7 +43,8 @@ const BookList = ({ bookList }: Params) => {
               city_mpg={book.city_mpg}
               sessionId={''} pathName={''}
               year={book.year}     
-              imgPath = {`/car_img/${book.make}_${book.model}.png`.toLowerCase().replace(/\s+/g, '_') }           
+              imgPath = {`/car_img/${book.make}_${book.model}.png`.toLowerCase().replace(/\s+/g, '_') }    
+              authId = {authId}       
             />
           ))}
           

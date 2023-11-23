@@ -5,16 +5,20 @@ import CarBook from "../models/CarBook";
 import { booksParams } from "../props/carProps";
 import Car from "../models/Car";
 import { revalidatePath } from "next/cache";
-import { format } from 'date-fns';
 
-export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageSize = 5) {
+export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageSize = 5, isAuthLoad = false, authId?: string) {
+  // Fetch all book cars 
+  if(!isAuthLoad){
+    authId = '';
+  } 
+
   try {
     await connectToDB();
 
     const result = searchStatus === 'incomplete' ? false : 
                    searchStatus === 'completed'? true : null;
   
-    const filter = { isComplete: result }
+    const filter = { isComplete: result, userID: authId }
     const cars = await Car.find();
 
     
@@ -22,11 +26,11 @@ export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageS
      
       //Calculate the number of book cars 
       const skipAmount = (pageNumber - 1) * pageSize;
-      const totalBooksCount = await CarBook.countDocuments();
+      const totalBooksCount = await CarBook.countDocuments({userID: authId});
       const totalPages = Math.ceil(totalBooksCount / pageSize);
 
-      // Fetch all book cars 
-      const carbooks = await CarBook.find().skip(skipAmount).limit(pageSize).exec();
+      
+      const carbooks = await CarBook.find({userID: authId}).skip(skipAmount).limit(pageSize).exec();
       const isNext = totalPages > pageNumber
 
       // Merge books with cars based on carId
@@ -41,7 +45,8 @@ export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageS
           seats : car.seats,
           city_mpg : car.city_mpg,
           idStripe: car.idStripe,
-          year: car.year
+          year: car.year,
+          userID: carbook.userID, // Include the userID field from CarBook
 
         };
       });
@@ -70,7 +75,8 @@ export async function fetchCarBooks(searchStatus?: string, pageNumber = 1, pageS
           seats : car.seats,
           city_mpg : car.city_mpg,
           idStripe: car.idStripe,
-          year: car.year
+          year: car.year,
+          userID: carbook.userID, // Include the userID field from CarBook
         };
       });
 
@@ -177,7 +183,7 @@ export async function createCarBook({
   contact_no, 
   carId, 
   isComplete,
-  card_type,
+  userID,
   card_number,
   checkoutId,
   expiry
@@ -196,7 +202,7 @@ export async function createCarBook({
       contact_no,
       carId,
       isComplete,
-      card_type,
+      userID,
       card_number,
       checkoutId,
       expiry
@@ -223,4 +229,23 @@ export async function fetchBookById(Id: string) {
   const book = await bookQuery.exec();
   
   return { book }
+}
+
+export async function updateCarBookField() {
+
+  try {
+    await connectToDB();
+    // Find documents with card_type field and update them using the model
+    const carBooksToUpdate = await CarBook.find({ card_type: { $exists: true } });
+
+    for (const book of carBooksToUpdate) {
+      book.userID = book.card_type; // Copy card_type to userID field
+      delete book.card_type; // Remove card_type field
+      await book.save(); // Save the updated document
+    }
+
+    console.log("Updated carbooks collection field successfully");
+  } catch (error) {
+    console.error('Error updating carbooks collection field:', error);
+  }
 }

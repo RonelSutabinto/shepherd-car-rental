@@ -17,7 +17,10 @@ const carbookSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    card_type: String,
+    userID: {
+      type: String,
+      versionKey: false,
+    },
     card_number: String,
     checkoutId: String,
     expiry: {

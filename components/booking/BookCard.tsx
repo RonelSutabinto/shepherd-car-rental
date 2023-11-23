@@ -10,6 +10,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation";
 import { updateCarBookSessionCheckOut } from "@/utils/actions/carbook.actions";
 import { useEffect, useState } from "react";
+import { auth, clerkClient } from "@clerk/nextjs";
 
 interface BookProps {
   idBook: string;
@@ -22,7 +23,7 @@ interface BookProps {
   contact_no: string; 
   carId: string;
   isComplete: boolean;
-  card_type?: string;
+  userID?: string;
   card_number?: string;
   checkoutId?: string;
   expiry?: string;//end of book collection
@@ -36,7 +37,8 @@ interface BookProps {
   year: number;
   sessionId: string;
   pathName: string;
-  imgPath: string
+  imgPath: string;
+  authId: string;
 }
 
 
@@ -49,6 +51,7 @@ const BookCard = ({
   total_amount,
   full_name,
   contact_no,
+  userID,
   carId,
   isComplete,
   make,
@@ -59,8 +62,10 @@ const BookCard = ({
   city_mpg,
   idStripe,
   year,
-  imgPath
+  imgPath,
+  authId
 }: BookProps) => {
+
   // Extracted domain logic into a separate function
   const getDomain = () => {
     if (typeof window !== 'undefined') {

@@ -1,13 +1,12 @@
 "use client";
 
 import Image from 'next/image';
-import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
-import { booksProps, topCarParams } from '@/utils/props/carProps';
+import { topCarParams } from '@/utils/props/carProps';
 import BookModal from '../booking/BookModal';
 
-const CarCard = ({ topCar, fileName }: topCarParams) => {
+const CarCard = ({ topCar, fileName, authId }: topCarParams) => {
   // Initialize local props from the car details received ======
   const { city_mpg, year, make, model, transmission, rentRate, seats, totalCarBooks} = topCar; 
 
@@ -54,7 +53,7 @@ const CarCard = ({ topCar, fileName }: topCarParams) => {
       
     </div>
 
-    <BookModal isOpen={isOpen} onClose={onClose} car={topCar} />
+    <BookModal isOpen={isOpen} onClose={onClose} car={topCar} authId = {authId}/>
     </>
 
     

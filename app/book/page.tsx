@@ -1,16 +1,28 @@
-
 import BookCard from '@/components/booking/BookCard';
 import BookList from '@/components/booking/BookList';
 import Pagination from '@/components/booking/Pagination';
-import TopButton from '@/components/booking/TopButton';
+import TopButton from "@/components/booking/TopButton";
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
 import { BookHistoryParams } from '@/utils/props/carProps';
-import Link from 'next/link';
+import { auth, clerkClient } from '@clerk/nextjs';
 
 export default async function Page({searchParams}: BookHistoryParams) {
 
+  const { userId } = auth();
+  let isAuthLoad = false;
+
+  if (userId !== null) {
+    const user = await clerkClient.users.getUser(userId);
+    
+    searchParams.authId = user.id;
+    isAuthLoad = true
+  } else {
+    // Get console log if incase where userId is null for checking
+    console.log("User ID is null. Unable to fetch user data.");
+  }
+
   //Fetch the filtered book a car records by its status ===================
-  const result = await fetchCarBooks(searchParams.bookStatus, searchParams.pageNumber ? searchParams.pageNumber: 1, 5);
+  const result = await fetchCarBooks(searchParams.bookStatus, searchParams.pageNumber ? searchParams.pageNumber: 1, 5, isAuthLoad, searchParams.authId);
 
 
   if(searchParams.checkout && searchParams.checkout==='success'){
@@ -74,8 +86,10 @@ export default async function Page({searchParams}: BookHistoryParams) {
           </div>
             
           <div>
-            <BookList bookList={result?.mergedCarbooks ? result.mergedCarbooks : []} 
-           />
+            <BookList 
+              bookList={result?.mergedCarbooks ? result.mergedCarbooks : []} 
+              authId = {searchParams.authId}
+            />
           </div>
 
           <Pagination

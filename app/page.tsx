@@ -3,11 +3,10 @@ import Pagination from '@/components/home/Pagination';
 import CarCard from '../components/home/CarCard';
 import SearchInput from '../components/home/SearchInput';
 import { fetchCars } from '@/utils/actions/car.actions';
-import Car from '@/utils/models/Car';
-import { CarPagesControllerProps, HomeProps, carProps } from '@/utils/props/carProps';
+import { HomeProps, carProps } from '@/utils/props/carProps';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { UserButton } from '@clerk/nextjs';
+import { auth, clerkClient, useUser } from '@clerk/nextjs';
 
 interface CarList {
   cars: carProps[];
@@ -16,13 +15,17 @@ interface CarList {
 }
 
 const Home = ({ searchParams }: HomeProps) => {
+  const { user } = useUser();
+  const [authId, setAuthId] = useState<string>('');
   const [carList, setCarList] = useState<CarList>({cars: [], 
     totalPages: 0, 
     isNext: false});
 
+  
   const getCars = async () => {
     try {
       const result = await fetchCars(searchParams.pageNumber ? searchParams.pageNumber: 1, 8, searchParams.made, searchParams.model);
+
       setCarList(result);
     } catch (error) {
       console.error('Error fetching cars:', error);
@@ -32,6 +35,11 @@ const Home = ({ searchParams }: HomeProps) => {
 
   useEffect(() => {
     getCars();
+
+    if(user){
+      setAuthId(user.id);
+    }
+    
   }, [searchParams.pageNumber, searchParams.made, searchParams.model]);
 
   return (
@@ -99,7 +107,12 @@ const Home = ({ searchParams }: HomeProps) => {
            
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full gap-4 md:gap-6">
               {carList.cars.map((car: any) => (
-                <CarCard key={car._id} isList={true} car = {car}/>
+                <CarCard 
+                  key={car._id} 
+                  isList={true} 
+                  car={car}
+                  authId={authId}
+                />
               ))}
             </div>
 

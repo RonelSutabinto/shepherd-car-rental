@@ -18,7 +18,7 @@ export default function CarsList({ cars }: any) {
       ) : (
         <>
           {cars.map((car: any) => (
-              <CarCard isList={true} car = {car}/>
+              <CarCard isList={true} car = {car} authId=''/>
           ))}
         </>
       )}

@@ -31,9 +31,10 @@ interface CarDetailsProps {
   isOpen: boolean;
   onClose: () => void;
   car: carProps;
+  authId: string;
 } 
 
-const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
+const BookModal = ({isOpen,onClose, car, authId}: CarDetailsProps) => {
   const initialRef = useRef<HTMLInputElement | null>(null);
   const finalRef = useRef<HTMLInputElement | null>(null);
 
@@ -47,7 +48,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
   const [contact_no, setContact_no] = useState<string>('');
   const [carId, setCarId] = useState<string>(car._id);
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const [card_type, setCard_type] = useState<string>('');
+  const [userID, setUserID] = useState<string>(authId);
   const [card_number, setCard_number] = useState<string>('');
   const [expiry, setexpiry] = useState<string>('');
 
@@ -102,7 +103,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
     
       if (isValid) {
         // Call the backend API endpoint to create a car book
-        const response = await createCarBook({location, pickupDateTime, rate, no_days, total_amount, full_name, contact_no, carId,isComplete, card_type, card_number, expiry});
+        const response = await createCarBook({location, pickupDateTime, rate, no_days, total_amount, full_name, contact_no, carId,isComplete, userID, card_number, expiry});
 
         // Handle success response (if needed)
         console.log('Car book created successfully:', response);
@@ -119,7 +120,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
   const isErrorName = full_name === ''
 
   return ( 
-    <>
+    <div>
         <Modal
           initialFocusRef = {initialRef}
           finalFocusRef= {finalRef}
@@ -137,7 +138,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
               md:grid-cols-2 p-4'>
                   <div className='sm:px-4 mb-8'>
                     {/* Reuse the car card component from the list component */}
-                    <CarCard isList={false} car = {car}/> 
+                    <CarCard isList={false} car = {car} authId={authId}/> 
                   </div>
                   <div className='border-[1px] shadow-md border-b-slate-500 p-4 mx-2 sm:mx-2 rounded-2xl '>
 
@@ -202,7 +203,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
                       </div>
 
                       <FormControl className='mt-4' isInvalid={!!nameError}>
-                        <FormLabel className='text-xs text-gray-600'>Renters Full Name</FormLabel>
+                        <FormLabel className='text-xs text-gray-600'>Renters Full Name </FormLabel>
                         <Input 
                           size='sm' 
                           ref={initialRef} 
@@ -241,7 +242,7 @@ const BookModal = ({isOpen,onClose, car}: CarDetailsProps) => {
         </Modal>
     
       
-    </>
+    </div>
 
   );
   }

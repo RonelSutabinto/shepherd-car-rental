@@ -37,8 +37,8 @@ const SearchCar = () => {
   //================================
 
   return (
-    <>
-      <div className='z-10 flex flex-row items-center justify-start w-fit'>
+    <div className='flex justify-center items-center w-full'>
+      <div className='z-10 flex flex-row items-center justify-center w-fit'>
         
         <div className='flex items-center justify-start w-full'>
           <InputGroup>
@@ -48,7 +48,7 @@ const SearchCar = () => {
               
                 <Select 
                   id="selectMade"
-                  className='relative h-10 w-32 md:w-44 pl-10 py-2  text-secondary-blue'
+                  className='relative h-10 w-32 md:w-40 pl-10 py-2  text-secondary-blue'
                   onChange={(e) => setCarMade(e.target.value)}
                 >
                   {minimalCarMade.map((item) =>  (
@@ -62,7 +62,7 @@ const SearchCar = () => {
 
           <input 
             placeholder='Search Model' 
-            className=' w-28 md:w-40 bg-white h-10 my-1 border border-gray-200 px-2' 
+            className=' w-28 md:w-44 bg-white h-10 my-1 border border-gray-200 px-2' 
             type="text" 
             id="inputModel"
             onChange={(e) => setModel(e.target.value)}
@@ -81,7 +81,7 @@ const SearchCar = () => {
       </div>
       
       <CarDrawer isOpen={isOpen} onClose={onClose} make={carMade} model={model} />
-    </>
+    </div>
   )
 }
 
