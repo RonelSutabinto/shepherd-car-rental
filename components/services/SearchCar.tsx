@@ -37,8 +37,8 @@ const SearchCar = () => {
   //================================
 
   return (
-    <div className='flex justify-center items-center w-full'>
-      <div className='z-10 flex flex-row items-center justify-center w-fit'>
+    <>
+      <div className='z-10 flex flex-row items-center justify-center w-full'>
         
         <div className='flex items-center justify-start w-full'>
           <InputGroup>
@@ -81,7 +81,7 @@ const SearchCar = () => {
       </div>
       
       <CarDrawer isOpen={isOpen} onClose={onClose} make={carMade} model={model} />
-    </div>
+    </>
   )
 }
 
