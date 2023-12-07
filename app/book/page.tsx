@@ -30,7 +30,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
   }
 
   return (
-  <div>
+  <>
     <div className='padding-y max-width' id='bookpage'>
       <div className='mt-28 md:mt-36 flex justify-start md:justify-center'>
         
@@ -102,7 +102,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
         </div>
       </div>
     </div>  
-  </div>
+  </>
 
   );
 }

@@ -13,7 +13,7 @@ const BookList = ({ bookList,authId }: Params) => {
   
   return (
 
-    <div>
+    <>
     
     {bookList.length === 0 ? (
       <div className="flex flex-row w-full justify-center items-center m-6">
@@ -50,7 +50,7 @@ const BookList = ({ bookList,authId }: Params) => {
           
         </>
       )}
-    </div>
+    </>
     
   );
 };

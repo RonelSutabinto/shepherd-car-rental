@@ -35,6 +35,7 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
   }, []);
 
   return (
+    <>
     <div className="w-full max-w-4xl mx-auto mt-8">
       <div className="relative overflow-hidden">
         <div className="flex transition-transform ease-in-out duration-300 transform md:mx-6 lg:mx-0 mx-2 ">
@@ -63,6 +64,7 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

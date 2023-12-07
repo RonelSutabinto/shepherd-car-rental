@@ -4,14 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { Center, Divider } from '@chakra-ui/react';
 
 import {
-  ClerkProvider,
   SignedIn,
   SignedOut,
-  UserButton,
- useUser,
+  UserButton
 } from "@clerk/nextjs";
 
 const navbarStyles = css`
@@ -19,7 +16,6 @@ const navbarStyles = css`
 `;
 
 const Navbar = () => {
-  const { isLoaded, user } = useUser();
   
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
@@ -50,7 +46,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div>
+    <>
       <nav className="bg-gray-100 text-primary-blue px-0 fixed z-50 w-full drop-shadow-sm top-0 ">
         
         <div className=" relative container mx-auto flex  flex-col md:flex-row text-center items-center justify-between w-full ">
@@ -145,12 +141,12 @@ const Navbar = () => {
                 <Link href="/contact">Contact Us</Link>
               </h1> 
             </div>
-           
+
             <a className='w-4'></a>
             <SignedIn>
-              <a className=' text-center m-6'>
-                <UserButton afterSignOutUrl="/" />
-              </a>
+              <a className=' text-center mt-6'> </a>
+              <UserButton afterSignOutUrl="/" />
+              <a className=' text-center mb-6'> </a>
             </SignedIn>
           
             <SignedOut>
@@ -158,11 +154,11 @@ const Navbar = () => {
                 Sign In
               </Link>
             </SignedOut>
-
+           
           </div>
         </div>
       </nav>
-    </div>
+    </>
   );
 };
 

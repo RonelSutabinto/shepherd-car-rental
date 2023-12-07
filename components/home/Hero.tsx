@@ -21,6 +21,7 @@ const Hero = ({ onDataReceived }: HeroProps) => {
   onDataReceived(data1, data2);
 
   return (
+    <>
     <div className='px-10'>
       <div className='grid grid-cols-1 md:grid-cols-2'>
         
@@ -55,6 +56,7 @@ const Hero = ({ onDataReceived }: HeroProps) => {
       </div>
     </div>
     </div>
+    </>
    
   )
 }

@@ -3,15 +3,18 @@
 
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
-// import { Session } from "inspector";
 
 export async function POST (request: any) {
+
+    // Checking if the Stripe secret key is available in the environment variables
     if (!process.env.STRIPE_SECRET_KEY) {
         throw new Error("missing process.env.STRIPE_SECRET_KEY")
     }
+
+    // Creating a new instance of the Stripe object and specifying the API version
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {apiVersion: "2023-10-16"});
 
-    // console.log("request objevct", request.headers)
+    // Parsing the JSON data from the request body
     let data = await request.json();
     let priceId = data.priceId
     let days = data.days
@@ -19,7 +22,7 @@ export async function POST (request: any) {
 
     console.log("Request object", data.pathname)
     
-    // console.log('redirecting to ', `${domainName}?checkout=success&bookId=${bookId}`)
+    // Creating a Stripe checkout session with specific parameters
     const session = await stripe.checkout.sessions.create({
         line_items: [ {
             price: priceId,

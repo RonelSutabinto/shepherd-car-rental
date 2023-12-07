@@ -27,6 +27,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
         );
 
   return (
+    <>
     <div className=' flex max-sm:w-full justify-start items-center'>
       <Combobox value={selected} onChange={setSelected}>
       <div className="relative mt-0">
@@ -100,6 +101,7 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
       </div>
       </Combobox>
     </div>
+    </>
   )
 }
 

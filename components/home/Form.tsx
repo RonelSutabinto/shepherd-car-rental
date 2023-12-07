@@ -17,11 +17,13 @@ const Form = () => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
       <input type="username" placeholder="UserName" value={username} onChange={(e) => setUsername(e.target.value)} required />
       <button type="submit">Submit</button>
     </form>
+    </>
   );
 };
 

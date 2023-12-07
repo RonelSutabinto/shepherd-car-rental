@@ -28,7 +28,7 @@ const CarCard = ({isList, car, authId }: CarCardProps) => {
   }, [fileName]);
   
   return (
-    <div>
+    <>
       <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group">
         <div className="w-full flex justify-between items-start gap-2">
           <h2 className="text-[18px] leading-[22px] font-bold capitalize">
@@ -79,7 +79,7 @@ const CarCard = ({isList, car, authId }: CarCardProps) => {
       </div>
 
       <BookModal isOpen={isOpen} onClose={onClose} car={car} authId = {authId}/>
-    </div>
+    </>
   );
 };
 

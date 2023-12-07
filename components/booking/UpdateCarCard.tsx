@@ -39,6 +39,7 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
   }, [fileName]);
 
   return (
+    <>
     <div className='bg-gray-100 my-4'>
      
       <Card
@@ -98,6 +99,7 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
         </Stack>
       </Card>
     </div>
+    </>
   )
 }
 

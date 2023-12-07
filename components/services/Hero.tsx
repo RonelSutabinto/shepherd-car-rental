@@ -3,6 +3,7 @@ import Image from 'next/image';
 const Hero = () => {
 
   return (
+    <>
     <div className='z-0  mt-6'>
       <div className='grid grid-cols-1 md:grid-cols-2 mx-6 md:mx-12 lg:mx-16'>
 
@@ -36,7 +37,7 @@ const Hero = () => {
 
       </div>
     </div>
-
+    </>
   )
 }
 

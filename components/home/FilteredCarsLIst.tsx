@@ -18,13 +18,13 @@ function FilteredCarList() {
   }, []); // Empty dependency array to run the effect once on component mount
 
   return (
-    <div>
+    <>
       {cars.map((car) => (
         // <div>{car.model}</div>
         <div></div>
       ))
       }
-    </div>
+    </>
   );
 }
 

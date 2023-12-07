@@ -53,6 +53,7 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
   }, [pNumber,totalP]);
 
   return (
+    <>
     <div className='pagination flex flex-row justify-center items-center mt-6 md:mb-6 mb-0'>
       <button
         onClick={() => handlePrevPage()}
@@ -68,6 +69,7 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
         Next
       </button>
     </div>
+    </>
   );
 }
 

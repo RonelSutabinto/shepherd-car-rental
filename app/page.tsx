@@ -6,7 +6,7 @@ import { fetchCars } from '@/utils/actions/car.actions';
 import { HomeProps, carProps } from '@/utils/props/carProps';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { auth, clerkClient, useUser } from '@clerk/nextjs';
+import {  useUser } from '@clerk/nextjs';
 
 interface CarList {
   cars: carProps[];
@@ -43,6 +43,7 @@ const Home = ({ searchParams }: HomeProps) => {
   }, [searchParams.pageNumber, searchParams.made, searchParams.model]);
 
   return (
+    <>
     <div className=' mt-24 lg:mt-32 padding-y max-width' id='homepage'>
       
       {/* Start of the hero part============================================== */}
@@ -129,6 +130,7 @@ const Home = ({ searchParams }: HomeProps) => {
           
       </section>
     </div>
+    </>
   );
 }
 

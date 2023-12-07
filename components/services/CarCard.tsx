@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { topCarParams } from '@/utils/props/carProps';
 import BookModal from '../booking/BookModal';
@@ -16,7 +16,7 @@ const CarCard = ({ topCar, fileName, authId }: topCarParams) => {
   const fname = '/car_img/'+ make +'_'+ model+'.png'
  
   return (
-    <div>
+    <>
       <div className=' flex justify-end w-full items-center'>
         <span className='py-2 font-extrabold text-white bg-secondary-blue-100 px-4  rounded-full border border-secondary-blue'>
           {totalCarBooks}
@@ -54,7 +54,7 @@ const CarCard = ({ topCar, fileName, authId }: topCarParams) => {
       </div>
 
       <BookModal isOpen={isOpen} onClose={onClose} car={topCar} authId = {authId}/>
-    </div>
+    </>
     
   );
 };

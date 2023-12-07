@@ -81,7 +81,7 @@ const Form = ({car, book}:CarCardProps) => {
     }, [fileName]);
 
   return (
-   
+   <>
     <div className='flex flex-col  justify-end w-full mt-14 px-5 max-w-3xl'>
       {/* <form onSubmit={handleFormSubmit}> */}
         <div className='flex justify-start max-w-3xl'>
@@ -246,6 +246,7 @@ const Form = ({car, book}:CarCardProps) => {
         <Divider />
       {/* </form> */}
     </div>
+    </>
   )
 }
 
