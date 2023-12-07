@@ -22,7 +22,7 @@ const TopButton = () => {
     { name: 'Incomplete', id: 2, bIcon: <FaTasks size={20} className="w-full text-[13px]" /> },
     { name: 'Completed', id: 3, bIcon: <FaCheckDouble size={20} className="w-full text-[13px]" /> },
     { name: 'View Profile', id: 4, bIcon: <FaUserTie size={20} className="w-full text-[13px]" /> },
-    { name: 'Sign Out', id: 5, bIcon: <FaUsersSlash size={20} className="w-full text-[13px]" /> },
+    // { name: 'Sign Out', id: 5, bIcon: <FaUsersSlash size={20} className="w-full text-[13px]" /> },
   ];
 
   const handleButtonClick = (buttonName: string) => {

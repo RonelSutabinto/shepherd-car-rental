@@ -46,8 +46,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <>
-      <nav className="bg-gray-100 text-primary-blue px-0 fixed z-50 w-full drop-shadow-sm top-0 ">
+    <nav className="bg-gray-100 text-primary-blue px-0 fixed z-50 w-full drop-shadow-sm top-0 ">
         
         <div className=" relative container mx-auto flex  flex-col md:flex-row text-center items-center justify-between w-full ">
 
@@ -128,7 +127,7 @@ const Navbar = () => {
               </h1>
             </div>
             
-            <div
+            {/* <div
               className={`
                 nav-btn__style 
                 ${ activeLink === '/contact'
@@ -139,8 +138,8 @@ const Navbar = () => {
             >
               <h1 onClick={() => handleMenuClick('/contact')} >
                 <Link href="/contact">Contact Us</Link>
-              </h1> 
-            </div>
+              </h1>  
+            </div>*/}
 
             <a className='w-4'></a>
             <SignedIn>
@@ -158,7 +157,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </>
   );
 };
 
