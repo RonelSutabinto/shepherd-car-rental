@@ -31,8 +31,7 @@ const SearchCar = () => {
   };
 
   return (
-    <>
-      <div className='flex flex-row items-center justify-start w-fit'>
+  <div className='flex flex-row items-center justify-start w-fit'>
         
         <div className='flex items-center justify-start w-full'>
           {/* <AiFillCar size={28} className='relative ml-4 mr-2 padding-2 text-[20px] text-secondary-blue' /> */}
@@ -79,7 +78,6 @@ const SearchCar = () => {
 
         
       </div>
-    </>
   )
 }
 

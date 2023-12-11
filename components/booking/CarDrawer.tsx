@@ -8,7 +8,6 @@ import SearchCar from './SearchCar';
   
     return (
       <>
-        
         <button 
             className=" m-2 flex justify-center py-2 h-9 bg-secondary-blue text-white px-2 rounded-lg hover:bg-secondary-blue-200 hover:text-white transition duration-300 text-[12px]" 
             onClick={onOpen}

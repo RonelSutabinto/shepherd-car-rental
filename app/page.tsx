@@ -6,7 +6,7 @@ import { fetchCars } from '@/utils/actions/car.actions';
 import { HomeProps, carProps } from '@/utils/props/carProps';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import {  useUser } from '@clerk/nextjs';
+//import {  useUser } from '@clerk/nextjs';
 
 interface CarList {
   cars: carProps[];
@@ -15,7 +15,7 @@ interface CarList {
 }
 
 const Home = ({ searchParams }: HomeProps) => {
-  const { user } = useUser();
+  //const { user } = useUser();
   const [authId, setAuthId] = useState<string>('');
   const [carList, setCarList] = useState<CarList>({cars: [], 
     totalPages: 0, 
@@ -36,14 +36,14 @@ const Home = ({ searchParams }: HomeProps) => {
   useEffect(() => {
     getCars();
 
-    if(user){
-      setAuthId(user.id);
-    }
+    // if(user){
+    //   setAuthId(user.id);
+    // }
     
   }, [searchParams.pageNumber, searchParams.made, searchParams.model]);
 
   return (
-    <>
+    
     <div className=' mt-24 lg:mt-32 padding-y max-width' id='homepage'>
       
       {/* Start of the hero part============================================== */}
@@ -98,39 +98,42 @@ const Home = ({ searchParams }: HomeProps) => {
         <div className='mt-4 max-w-xl'>
           <p className='md:text-[18px] text-[14px]'>If you prefer to call or send us an email, our helpful staff is available to answer any inquiries or address any concerns.</p>
         </div>
-      </div>
+      </div> 
       
 
       <section className="px-4 lg:mx-20 md:mx-10 mx-0 mt-10 lg:mt-6 ">
         {carList.cars.length === 0 ? (
           <p className="no-result">No cars found</p>
           ) : (
-           
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full gap-4 md:gap-6">
-              {carList.cars.map((car: any) => (
-                <CarCard 
-                  key={car._id} 
-                  isList={true} 
-                  car={car}
-                  authId={authId}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full gap-4 md:gap-6">
+                {carList.cars.map((car: any) => (
+                  <CarCard 
+                    key={car._id} 
+                    isList={true} 
+                    car={car}
+                    authId={authId}
+                  />
+                ))}
+              </div>
+
+              <Pagination
+                path='/'
+                pageNumber={searchParams?.pageNumber ? searchParams.pageNumber : 1}
+                isNext={carList.isNext}
+                made={searchParams.made ? searchParams.made : ''}
+                model={searchParams.model ? searchParams.model : ''}
+                totalPage={carList.totalPages}
+              />
+            </>
 
           )}
 
-          <Pagination
-            path='/'
-            pageNumber={searchParams?.pageNumber ? searchParams.pageNumber : 1}
-            isNext={carList.isNext}
-            made={searchParams.made ? searchParams.made : ''}
-            model={searchParams.model ? searchParams.model : ''}
-            totalPage={carList.totalPages}
-          />
+          
           
       </section>
     </div>
-    </>
+    
   );
 }
 

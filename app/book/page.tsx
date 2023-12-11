@@ -1,25 +1,27 @@
-import BookCard from '@/components/booking/BookCard';
+
+//import BookCard from '@/components/booking/BookCard';
 import BookList from '@/components/booking/BookList';
 import Pagination from '@/components/booking/Pagination';
 import TopButton from "@/components/booking/TopButton";
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
 import { BookHistoryParams } from '@/utils/props/carProps';
-import { auth, clerkClient } from '@clerk/nextjs';
+import Image from 'next/image';
+//import { auth, clerkClient } from '@clerk/nextjs';
 
 export default async function Page({searchParams}: BookHistoryParams) {
 
-  const { userId } = auth();
+  //const { userId } = auth();
   let isAuthLoad = false;
 
-  if (userId !== null) {
-    const user = await clerkClient.users.getUser(userId);
+  // if (userId !== null) {
+  //   const user = await clerkClient.users.getUser(userId);
     
-    searchParams.authId = user.id;
-    isAuthLoad = true
-  } else {
-    // Get console log if incase where userId is null for checking
-    console.log("User ID is null. Unable to fetch user data.");
-  }
+  //   searchParams.authId = user.id;
+  //   isAuthLoad = true
+  // } else {
+  //   // Get console log if incase where userId is null for checking
+  //   console.log("User ID is null. Unable to fetch user data.");
+  // }
 
   //Fetch the filtered book a car records by its status ===================
   const result = await fetchCarBooks(searchParams.bookStatus, searchParams.pageNumber ? searchParams.pageNumber: 1, 5, isAuthLoad, searchParams.authId);
@@ -30,26 +32,25 @@ export default async function Page({searchParams}: BookHistoryParams) {
   }
 
   return (
-  <>
-    <div className='padding-y max-width' id='bookpage'>
+
+  <div className='padding-y max-width' id='bookpage'>
       <div className='mt-28 md:mt-36 flex justify-start md:justify-center'>
-        
-        
+   
         <div className='flex justify-start md:justify-center items-center fixed z-40 top-28 md:top-32'>
           <div className='hidden md:block'>
-              <div className='rounded-lg bg-white w-fit border border-gray-300 px-10 drop-shadow-md'>
-                <div className='my-1 px-6'>
-                  <TopButton />
-                </div>
+            <div className='rounded-lg bg-white w-fit border border-gray-300 px-10 drop-shadow-md'>
+              <div className='my-1 px-6'>
+                <TopButton /> 
               </div>
-          </div>
-
+            </div>
+          </div> 
+           
           <div className='block md:hidden'>
             <div className='mx-4 rounded-lg bg-white w-fit border border-gray-300 p-2 drop-shadow-md'>
               <TopButton />
             </div>
           </div>
-        </div>
+        </div> 
 
         <div>
           <div className='flex justify-center items-center w-full -mt-4 md:mt-24 mb-4'>
@@ -74,12 +75,14 @@ export default async function Page({searchParams}: BookHistoryParams) {
                 
               </div>
 
-              <div className='flex flex-center md:col-span-2 mr-28 w-full p-2'>
-                <img
-                  className="scale-110 md:scale-125 object-contain align-middle "
-                  alt=""
-                  src="/carBook.png"
-                />
+              <div className='flex items-center justify-center md:col-span-2 md:justify-start md:mr-28 w-full p-2'>
+                <div className="max-w-xs">
+                  <img
+                    src='/carBook.png'
+                    className='w-full h-auto md:max-w-full md:h-auto md:scale-125 object-contain align-middle'
+                    alt='Book Car'
+                  />
+                </div>
               </div>
 
             </div>
@@ -101,8 +104,7 @@ export default async function Page({searchParams}: BookHistoryParams) {
           />
         </div>
       </div>
-    </div>  
-  </>
+    </div>
 
   );
 }

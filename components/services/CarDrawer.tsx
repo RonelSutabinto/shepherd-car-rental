@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CarCard from '../home/CarCard';
 import { fetchCars } from '@/utils/actions/car.actions';
 import { carProps } from '@/utils/props/carProps';
-import { useUser } from '@clerk/nextjs'
+// import { useUser } from '@clerk/nextjs'
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -21,7 +21,7 @@ interface CarList {
 const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
 
   const [carList, setCarList] = useState<CarList>({cars: [], totalPages: 0, isNext: false});
-  const { user } = useUser();
+  // const { user } = useUser();
   const [authId, setAuthId] = useState<string>('');
   
 
@@ -39,13 +39,12 @@ const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
       getCars();
     }
 
-    if(user){
-      setAuthId(user.id);
-    }
+    // if(user){
+    //   setAuthId(user.id);
+    // }
   }, [isOpen, make, model]);
 
   return (
-    <>
     <div className='mt-6'>
       {/* Drawer  */}
       <Drawer onClose={onClose} isOpen={isOpen} size={`md`}>
@@ -79,7 +78,6 @@ const CarDrawer = ({isOpen,onClose, make, model}: CarDetailsProps) => {
         </DrawerContent>
       </Drawer>
     </div>
-    </>
   )
 }
 

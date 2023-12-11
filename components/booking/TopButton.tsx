@@ -1,10 +1,9 @@
 "use client"
 import { useState } from "react";
-import { FaTasks, FaCheckDouble, FaUserTie, FaUsersSlash } from "react-icons/fa";
+import { FaTasks, FaCheckDouble, FaUserTie } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { HiViewGrid } from "react-icons/hi";
-import { GiHamburgerMenu } from "react-icons/gi"
-import { fetchCarBooks } from "@/utils/actions/carbook.actions";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 interface Props {
   display: string;
@@ -61,14 +60,13 @@ const TopButton = () => {
   };
 
   return (
-    <>
     <div className="flex md:items-center md:justify-end">
       <div className="flex">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden block text-gray-400 focus:outline-none"
+          className="md:hidden block text-gray-400 focus:outline-none "
         >
-          <GiHamburgerMenu size={24}/>
+          <span className="text-primary-blue" ><RxHamburgerMenu size={24}/></span>
         </button>
       </div>
 
@@ -107,7 +105,6 @@ const TopButton = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 

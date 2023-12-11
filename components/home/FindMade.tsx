@@ -12,8 +12,6 @@ import { MadeProps } from
  import { FaListUl } from 'react-icons/fa';
 
  import { carMade } from '@/utils/details';
-import Image from 'next/image';
-import { HiMiniChevronUpDown } from "react-icons/hi2";
  
 const FindMade = ({selected, setSelected}: MadeProps) => {
 
@@ -27,7 +25,6 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
         );
 
   return (
-    <>
     <div className=' flex max-sm:w-full justify-start items-center'>
       <Combobox value={selected} onChange={setSelected}>
       <div className="relative mt-0">
@@ -101,7 +98,6 @@ const FindMade = ({selected, setSelected}: MadeProps) => {
       </div>
       </Combobox>
     </div>
-    </>
   )
 }
 

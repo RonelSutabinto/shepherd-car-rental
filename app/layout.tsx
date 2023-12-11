@@ -21,15 +21,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}> 
-        <body>   
+        {/* <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>  */}
+      <body>  
+        <ClerkProvider>  
           <Providers>  
             <Navbar/>
             {children}
           </Providers>
           <Footer />
-        </body>
-      </ClerkProvider>
+        </ClerkProvider>
+      </body>
     </html>
+    
   )
 }

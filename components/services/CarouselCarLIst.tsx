@@ -3,11 +3,11 @@ import { CarouselCarListProps } from '@/utils/props/carProps';
 import React, { useEffect, useState } from 'react'
 import { MdSkipPrevious, MdSkipNext } from 'react-icons/md'
 import CarCard from './CarCard';
-import { useUser } from '@clerk/nextjs';
+// import { useUser } from '@clerk/nextjs';
 
 
 const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
-  const { user } = useUser();
+  // const { user } = useUser();
   const [authId, setAuthId] = useState<string>('');
   
   const [startIndex, setStartIndex] = useState(0);
@@ -26,16 +26,15 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
     );
   };
 
-  useEffect(() => {
+  // useEffect(() => {
    
-    if(user){
-      setAuthId(user.id);
-    }
+  //   if(user){
+  //     setAuthId(user.id);
+  //   }
     
-  }, []);
+  // }, []);
 
   return (
-    <>
     <div className="w-full max-w-4xl mx-auto mt-8">
       <div className="relative overflow-hidden">
         <div className="flex transition-transform ease-in-out duration-300 transform md:mx-6 lg:mx-0 mx-2 ">
@@ -64,7 +63,6 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
         </button>
       </div>
     </div>
-    </>
   );
 };
 

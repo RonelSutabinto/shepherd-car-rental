@@ -161,7 +161,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
-function assignLink(href: string) {
-  throw new Error('Function not implemented.');
-}
 

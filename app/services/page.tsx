@@ -2,9 +2,8 @@ import SearchCar from '@/components/services/SearchCar'
 import Hero from '@/components/services/Hero'
 import React from 'react'
 import Image from 'next/image'
-import { FaMapLocationDot } from 'react-icons/fa6'
+import { FaMapLocationDot, FaSwatchbook } from 'react-icons/fa6'
 import { AiFillCar } from 'react-icons/ai'
-import { FaSwatchbook } from 'react-icons/fa6'
 import CarouselCarLIst from '../../components/services/CarouselCarLIst'
 import { fetchTopCars } from '@/utils/actions/car.actions'
 
@@ -13,7 +12,7 @@ export default async function Page() {
   const result = await fetchTopCars();
   
   return (
-    <>
+   
       <div className=' mt-12 padding-y max-width' id='servicespage'>
         <Hero />
 
@@ -107,7 +106,7 @@ export default async function Page() {
         <CarouselCarLIst topCars={result.topCars} />
 
       </div>
-    </>
+   
   )
 }
 

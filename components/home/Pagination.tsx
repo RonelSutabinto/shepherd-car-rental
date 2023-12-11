@@ -40,7 +40,7 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
     setTotalP(totalPage)
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false });
+      router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false })
     }else {
       router.push(`/${path}?made=${made}&model=${model}&pageNumber=${nextPageNumber}`, { scroll: false });
     }
@@ -53,7 +53,6 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
   }, [pNumber,totalP]);
 
   return (
-    <>
     <div className='pagination flex flex-row justify-center items-center mt-6 md:mb-6 mb-0'>
       <button
         onClick={() => handlePrevPage()}
@@ -69,7 +68,6 @@ function Pagination({ pageNumber, isNext, path,made, model, totalPage }: Props) 
         Next
       </button>
     </div>
-    </>
   );
 }
 

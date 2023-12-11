@@ -1,9 +1,11 @@
-
-import { redirect } from "next/navigation";
+"use client"
+import { redirect, useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   
-  redirect("/");
+  router.push('/',  { scroll: false });
+  //redirect("/");
   return (
     <></>
   );

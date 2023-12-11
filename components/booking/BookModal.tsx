@@ -121,129 +121,126 @@ const BookModal = ({isOpen,onClose, car, authId}: CarDetailsProps) => {
 
   return ( 
     <>
-        <Modal
-          initialFocusRef = {initialRef}
-          finalFocusRef= {finalRef}
-          isOpen={isOpen}
-          onClose={onClose} 
-        >
-          <ModalOverlay />
-          
-          <ModalContent className='max-w-screen-sm'>
-            <ModalHeader className='text-secondary-blue'>Book A Car</ModalHeader>
-            <ModalCloseButton />
+      <Modal
+        initialFocusRef = {initialRef}
+        finalFocusRef= {finalRef}
+        isOpen={isOpen}
+        onClose={onClose} 
+      >
+        <ModalOverlay />
+        
+        <ModalContent className='max-w-screen-sm'>
+          <ModalHeader className='text-secondary-blue'>Book A Car</ModalHeader>
+          <ModalCloseButton />
 
-            <ModalBody pb={6} w="full">
-              <div className='grid grid-cols-1
-              md:grid-cols-2 p-4'>
-                  <div className='sm:px-4 mb-8'>
-                    {/* Reuse the car card component from the list component */}
-                    <CarCard isList={false} car = {car} authId={authId}/> 
-                  </div>
-                  <div className='border-[1px] shadow-md border-b-slate-500 p-4 mx-2  sm:mx-2 rounded-2xl'>
+          <ModalBody pb={6} w="full">
+            <div className='grid grid-cols-1
+            md:grid-cols-2 p-4'>
+                <div className='sm:px-4 mb-8'>
+                  {/* Reuse the car card component from the list component */}
+                  <CarCard isList={false} car = {car} authId={authId}/> 
+                </div>
+                <div className='border-[1px] shadow-md border-b-slate-500 p-4 mx-2  sm:mx-2 rounded-2xl'>
 
-                    {/* Chakra ui form rent a car input details starts here=== */}
-                    <FormControl isInvalid={!!locationError} >
-                      <FormLabel className='text-xs text-gray-600'>Localtion</FormLabel>
-                      <Select 
-                        size='sm' 
-                        placeholder="Select Location"
-                        id="locationSelect"
-                        onChange={(e) => setLocation(e.target.value)}
-                      >
-                        <option value="1">Courtenay, BC</option>
-                        <option value="2">Comox Valley, BC</option>
-                        <option value="3">Nanaimo, BC</option>
-                      </Select>
-                      <FormErrorMessage>{locationError}</FormErrorMessage>
-                    </FormControl>
+                  {/* Chakra ui form rent a car input details starts here=== */}
+                  <FormControl isInvalid={!!locationError} >
+                    <FormLabel className='text-xs text-gray-600'>Localtion</FormLabel>
+                    <Select 
+                      size='sm' 
+                      placeholder="Select Location"
+                      id="locationSelect"
+                      onChange={(e) => setLocation(e.target.value)}
+                    >
+                      <option value="1">Courtenay, BC</option>
+                      <option value="2">Comox Valley, BC</option>
+                      <option value="3">Nanaimo, BC</option>
+                    </Select>
+                    <FormErrorMessage>{locationError}</FormErrorMessage>
+                  </FormControl>
 
+                  <FormControl className='mt-4'>
+                    <FormLabel className='text-xs text-gray-600' >Pick Up Date And Time</FormLabel>
+                    <Input                   
+                      placeholder="Select Date and Time"
+                      size="sm"
+                      type="datetime-local"
+                      id="dataTimePicker"
+                      onChange={(e) => setPickupDateTime(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <div className='grid grid-cols-1 md:grid-cols-2 '>
                     <FormControl className='mt-4'>
-                      <FormLabel className='text-xs text-gray-600' >Pick Up Date And Time</FormLabel>
-                      <Input                   
-                        placeholder="Select Date and Time"
-                        size="sm"
-                        type="datetime-local"
-                        id="dataTimePicker"
-                        onChange={(e) => setPickupDateTime(e.target.value)}
-                      />
-                    </FormControl>
-
-                    <div className='grid grid-cols-1 md:grid-cols-2 '>
-                      <FormControl className='mt-4'>
-                        <FormLabel className='text-xs text-gray-600'>No. Of Days</FormLabel>
-                        <NumberInput 
-                          size='sm' 
-                          defaultValue={1} 
-                          min={1} 
-                          max={20} 
-                          onChange={(valueString) => handleNumberChange(valueString)}
-                          id="numberOfDaysInput"
-                          name="no_days"
-                        >
-                          <NumberInputField />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </FormControl>
-
-                      <FormControl className='mt-4'  mt={4}>
-                        <FormLabel className='text-xs text-gray-600'>Total Amount</FormLabel>
-                        <Input 
-                          className=' text-secondary-orange font-bold'
-                          size='sm' 
-                          defaultValue={`$${car.rentRate.toFixed(2)}`}
-                          placeholder='Total amount' 
-                          readOnly // Make the input field read-only
-                          id="rentRateInput"
-                        />
-                      </FormControl>
-                    </div>
-
-                    <FormControl className='mt-4' isInvalid={!!nameError}>
-                      <FormLabel className='text-xs text-gray-600'>Renters Full Name </FormLabel>
-                      <Input 
+                      <FormLabel className='text-xs text-gray-600'>No. Of Days</FormLabel>
+                      <NumberInput 
                         size='sm' 
-                        ref={initialRef} 
-                        placeholder='Full name' 
-                        id="fullNameInput" 
-                        onChange={(e) => setFull_name(e.target.value)}
-                      />
-                      <FormErrorMessage>{nameError}</FormErrorMessage>
+                        defaultValue={1} 
+                        min={1} 
+                        max={20} 
+                        onChange={(valueString) => handleNumberChange(valueString)}
+                        id="numberOfDaysInput"
+                        name="no_days"
+                      >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
                     </FormControl>
 
-                    <FormControl className='mt-4'  mt={4} isInvalid={!!contactError}>
-                      <FormLabel className='text-xs text-gray-600'>Contact Number</FormLabel>
+                    <FormControl className='mt-4'  mt={4}>
+                      <FormLabel className='text-xs text-gray-600'>Total Amount</FormLabel>
                       <Input 
+                        className=' text-secondary-orange font-bold'
                         size='sm' 
-                        placeholder='Contact number'  
-                        id="contactInput"
-                        onChange={(e) => setContact_no(e.target.value)}
+                        defaultValue={`$${car.rentRate.toFixed(2)}`}
+                        placeholder='Total amount' 
+                        readOnly // Make the input field read-only
+                        id="rentRateInput"
                       />
-                      <FormErrorMessage>{contactError}</FormErrorMessage>
                     </FormControl>
-                  
                   </div>
-              </div>
-            </ModalBody>
 
-            <ModalFooter className='mx-6 mb-4'>
-              <Button type="submit" className=' text-white bg-secondary-blue hover:text-black-100 hover:bg-secondary-light' mr={3}
-              onClick={handleFormSubmit}
-              >
-                Book Now
-              </Button>
-              <Button className=' text-white bg-secondary-orange hover:text-black-100 hover:bg-secondary-light' onClick={onClose}>Cancel</Button>
-            </ModalFooter>
-            
-          </ModalContent>
-        </Modal>
-    
-      
+                  <FormControl className='mt-4' isInvalid={!!nameError}>
+                    <FormLabel className='text-xs text-gray-600'>Renters Full Name </FormLabel>
+                    <Input 
+                      size='sm' 
+                      ref={initialRef} 
+                      placeholder='Full name' 
+                      id="fullNameInput" 
+                      onChange={(e) => setFull_name(e.target.value)}
+                    />
+                    <FormErrorMessage>{nameError}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl className='mt-4'  mt={4} isInvalid={!!contactError}>
+                    <FormLabel className='text-xs text-gray-600'>Contact Number</FormLabel>
+                    <Input 
+                      size='sm' 
+                      placeholder='Contact number'  
+                      id="contactInput"
+                      onChange={(e) => setContact_no(e.target.value)}
+                    />
+                    <FormErrorMessage>{contactError}</FormErrorMessage>
+                  </FormControl>
+                
+                </div>
+            </div>
+          </ModalBody>
+
+          <ModalFooter className='mx-6 mb-4'>
+            <Button type="submit" className=' text-white bg-secondary-blue hover:text-black-100 hover:bg-secondary-light' mr={3}
+            onClick={handleFormSubmit}
+            >
+              Book Now
+            </Button>
+            <Button className=' text-white bg-secondary-orange hover:text-black-100 hover:bg-secondary-light' onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+          
+        </ModalContent>
+      </Modal>
     </>
-
   );
   }
 

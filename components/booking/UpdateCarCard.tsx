@@ -22,10 +22,7 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
   } 
 
   const handleSearch = () => {
-    // alert("Made: "+ carMade +"\n model:"+ model );
-
     const searchParams = new URLSearchParams(window.location.search);
-    
     searchParams.set("carId", _id);
 
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
@@ -92,7 +89,6 @@ const UpdateCarCard = ({ car, currentId, cardStyle }: CarCardProps) => {
             >
               Select
             </button>
-
             
           </CardFooter>
         </Stack>

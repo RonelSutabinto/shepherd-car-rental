@@ -117,9 +117,9 @@ const BookCard = ({
   };
 
   return (
-    <>
     <div className="flex justify-center items-center w-full mt-4">
-       <div className={`rounded-xl w-full mx-4 md:mx-0 md:w-5/6 lg:w-3/5 ${isComplete === true ? "bg-white" : "bg-light-white"}`}>
+      <div className={`rounded-xl w-full mx-4 md:mx-0 md:w-5/6 lg:w-3/5 ${isComplete === true ? "bg-white" : "bg-light-white"}`}>
+        
         <div className="relative flex justify-center items-center w-full h-12 md:h-14 bg-gradient-to-r from-blue-400 to-primary-blue rounded-t-xl">
           <h1 className="text-[22px] md:text-[24px] font-bold text-white"> {make} {model} - {year}</h1>
         </div>
@@ -233,9 +233,9 @@ const BookCard = ({
             </div>
           </div>
         </div>
+
      </div> 
     </div>
-    </>
 
   );
 };
