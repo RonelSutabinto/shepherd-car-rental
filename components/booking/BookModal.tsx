@@ -167,7 +167,7 @@ const BookModal = ({ isOpen, onClose, children, title, car, authId}: CarDetailsP
 
             <div className="w-full md:w-1/2 pl-0 md:pl-4 mt-4 md:mt-0">
               {/* Second column - Input fields */}
-              <div>
+              <div className='mx-2'>
 
                 {/* Reservation Input fields details */}
                 <FormControl isInvalid={!!locationError} >
@@ -257,7 +257,7 @@ const BookModal = ({ isOpen, onClose, children, title, car, authId}: CarDetailsP
               
             </div>
           </div>
-          <div className="mt-4 md:mt-6 flex justify-end">
+          <div className="mt-4 mb-2 md:mt-6 mx-2 flex justify-end">
             {/* Footer with Save and Cancel buttons */}
             <button
               className="px-4 py-2 text-white bg-secondary-blue hover:text-white hover:bg-secondary-blue-200 rounded-md mr-2"
