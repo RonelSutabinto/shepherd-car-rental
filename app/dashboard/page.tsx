@@ -2,10 +2,10 @@
 import { redirect, useRouter } from "next/navigation";
 
 const Page = () => {
-  const router = useRouter();
+  //const router = useRouter();
   
-  router.push('/',  { scroll: false });
-  //redirect("/");
+  //router.push('/',  { scroll: false });
+  redirect("/");
   return (
     <></>
   );

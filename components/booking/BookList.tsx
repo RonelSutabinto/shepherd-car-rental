@@ -12,10 +12,9 @@ const BookList = ({ bookList,authId }: Params) => {
   const [bookData, setBookData] = useState([bookList]);
   
   return (
-
     <>
     
-    {bookList.length === 0 ? (
+      {bookList.length === 0 ? (
       <div className="flex flex-row w-full justify-center items-center m-6">
         <p className="no-result text-[18px] font-extrabold text-secondary-orange">No car books found...</p>
       </div>

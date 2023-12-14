@@ -46,7 +46,8 @@ const Navbar = () => {
   }, [])
 
   return (
-    <nav className="bg-gray-100 text-primary-blue px-0 fixed z-50 w-full drop-shadow-sm top-0 ">
+    <div>
+    <nav className="bg-gray-100 text-primary-blue px-0 fixed z-40 w-full drop-shadow-sm top-0 ">
         
         <div className=" relative container mx-auto flex  flex-col md:flex-row text-center items-center justify-between w-full ">
 
@@ -157,6 +158,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      </div>
   );
 };
 

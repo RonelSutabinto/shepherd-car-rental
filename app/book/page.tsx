@@ -1,27 +1,26 @@
 
-//import BookCard from '@/components/booking/BookCard';
 import BookList from '@/components/booking/BookList';
 import Pagination from '@/components/booking/Pagination';
 import TopButton from "@/components/booking/TopButton";
 import { fetchCarBooks, updateCarBookCheckOut } from '@/utils/actions/carbook.actions';
 import { BookHistoryParams } from '@/utils/props/carProps';
 import Image from 'next/image';
-//import { auth, clerkClient } from '@clerk/nextjs';
+import { auth, clerkClient } from '@clerk/nextjs';
 
 export default async function Page({searchParams}: BookHistoryParams) {
 
-  //const { userId } = auth();
+  const { userId } = auth();
   let isAuthLoad = false;
 
-  // if (userId !== null) {
-  //   const user = await clerkClient.users.getUser(userId);
+  if (userId) {
+    const user = await clerkClient.users.getUser(userId);
     
-  //   searchParams.authId = user.id;
-  //   isAuthLoad = true
-  // } else {
-  //   // Get console log if incase where userId is null for checking
-  //   console.log("User ID is null. Unable to fetch user data.");
-  // }
+    searchParams.authId = user.id;
+    isAuthLoad = true
+  } else {
+    // Get console log if incase where userId is null for checking
+    console.log("User ID is null. Unable to fetch user data.");
+  }
 
   //Fetch the filtered book a car records by its status ===================
   const result = await fetchCarBooks(searchParams.bookStatus, searchParams.pageNumber ? searchParams.pageNumber: 1, 5, isAuthLoad, searchParams.authId);
@@ -95,13 +94,15 @@ export default async function Page({searchParams}: BookHistoryParams) {
             />
           </div>
 
-          <Pagination
-            path='book'
-            pageNumber={searchParams?.pageNumber ? searchParams.pageNumber : 1}
-            isNext ={result?.isNext}
-            bookStatus={searchParams.bookStatus ? searchParams.bookStatus : 'view all'}
-            totalPage={result?.totalPages}
-          />
+          {result && (
+            <Pagination
+              path='book'
+              pageNumber={searchParams?.pageNumber ? searchParams.pageNumber : 1}
+              isNext ={result.isNext}
+              bookStatus={searchParams.bookStatus ? searchParams.bookStatus : 'view all'}
+              totalPage={result.totalPages}
+            />
+          )}
         </div>
       </div>
     </div>

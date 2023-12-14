@@ -6,6 +6,7 @@ import { FaMapLocationDot, FaSwatchbook } from 'react-icons/fa6'
 import { AiFillCar } from 'react-icons/ai'
 import CarouselCarLIst from '../../components/services/CarouselCarLIst'
 import { fetchTopCars } from '@/utils/actions/car.actions'
+import TopCars from '@/components/services/TopCars'
 
 export default async function Page() {
 
@@ -16,12 +17,7 @@ export default async function Page() {
       <div className=' mt-12 padding-y max-width' id='servicespage'>
         <Hero />
 
-        <div className='mt-4 lg:-mt-20 flex flex-row w-full justify-center items-center'>
-          <div className='flex justify-center items-center text-center w-11/12 md:w-fit  rounded-lg drop-shadow-sm my-6 max-w-lg    md:p-4 p-3 bg-white border border-primary-blue to-white opacity-95' >
-            <SearchCar />
-          </div>
-        </div>  
-        
+        <SearchCar />
         
         <div className='grid grid-cols-1 lg:grid-cols-2 lg:mt-14'>
 
@@ -103,8 +99,7 @@ export default async function Page() {
           </h2>
         </div>
 
-        <CarouselCarLIst topCars={result.topCars} />
-
+        <TopCars topCars={result.topCars} /> 
       </div>
    
   )

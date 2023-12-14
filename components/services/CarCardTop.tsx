@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { carProps } from '@/utils/props/carProps';
-import { FaCar, FaGasPump, FaWheelchair } from 'react-icons/fa';
+import { topCarProps } from '@/utils/props/carProps';
 
-interface CarParams {
-  car: carProps;
+interface topCarParams {
+  topCar: topCarProps;
   fileName: string;
   authId: string;
   // Accept the openModal function
@@ -14,16 +13,23 @@ interface CarParams {
 }
 
 
-const CarCard = ({ car, fileName, authId, openModal }: CarParams) => {
+const CarCardTop = ({ topCar, fileName, authId, openModal }: topCarParams) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Initialize local props from the car details received ======
-  const { city_mpg, year, make, model, transmission, rentRate, seats} = car; 
+  const { city_mpg, year, make, model, transmission, rentRate, seats, totalCarBooks} = topCar; 
 
   const fname = '/car_img/'+ make +'_'+ model+'.png'
  
   return (
     <>
+      
+      <div className=' flex justify-end w-full items-center'>
+        <span className='py-2 font-extrabold text-white bg-secondary-blue-100 px-4  rounded-full border border-secondary-blue'>
+          {totalCarBooks}
+        </span>
+      </div> 
+      
       <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md hover:border-[1px] border-blue-600 rounded-3xl group -mt-4">
         <div className="w-full flex justify-between items-start gap-2">
           <h2 className="text-[18px] leading-[22px] font-bold capitalize">
@@ -43,26 +49,6 @@ const CarCard = ({ car, fileName, authId, openModal }: CarParams) => {
           <Image src={fileName.toLowerCase().replace(/\s+/g, '_')} alt='car model' fill priority className='object-contain' />
         </div>
 
-        
-        <div className='relative flex w-full mt-2'>
-            <div className='flex group-hover:visible w-full justify-between text-grey'>
-                <div className='flex flex-col justify-center items-center gap-2'>
-                    <FaCar  className="w-full text-[20px] mb-2" />
-                    <p className='text-[14px] leading-[17px]'>
-                        {transmission === "Manual" ? "Manual" : "Auto"}
-                    </p>
-                </div>
-                <div className="flex flex-col justify-center items-center gap-2">
-                    <FaWheelchair  className="w-full text-[20px] mb-2" />
-                    <p className="text-[14px] leading-[17px]">{seats}</p>
-                </div>
-                <div className="flex flex-col justify-center items-center gap-2">
-                    <FaGasPump className="w-full text-[20px] mb-2" />
-                    <p className="text-[14px] leading-[17px]">{city_mpg} MPG</p>
-                </div>
-            </div>
-        </div>
-        
         <div className='flex-1 w-full h-10 object-contain'>
           <button className='  bg-gradient-to-r from-blue-400 to-primary-blue p-2 rounded-lg text-white w-full px-5 justify-between'
             onClick={openModal}
@@ -78,4 +64,4 @@ const CarCard = ({ car, fileName, authId, openModal }: CarParams) => {
   );
 };
 
-export default CarCard;
+export default CarCardTop;

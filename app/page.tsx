@@ -128,8 +128,6 @@ const Home = ({ searchParams }: HomeProps) => {
             </>
 
           )}
-
-          
           
       </section>
     </div>

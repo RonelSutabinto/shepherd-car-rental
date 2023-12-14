@@ -33,7 +33,7 @@ const SearchInput = () => {
   };
 
   const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-    <button type='submit' className={`ml-1 rounded-fullpx-2 z-10 text-white ${otherClasses}`}>
+    <button type='submit' className={`ml-3 rounded-fullpx-2 z-10 text-white ${otherClasses}`}>
       <BiSearchAlt size={25} />
     </button>
   );
@@ -76,7 +76,7 @@ const SearchInput = () => {
 
   return (
     <form className='searchbar' onSubmit={handleSearch}>
-        <div className='flex pl-0  pr-4 rounded-xl bg-gradient-to-r from-blue-400 to-primary-blue '>
+      <div className='flex pl-0  pr-3 rounded-xl bg-gradient-to-r from-blue-400 to-primary-blue '>
         <div className='flex  text-white rounded-xl justify-start items-center '>
           <FindMade 
             selected={findMade}
@@ -100,7 +100,7 @@ const SearchInput = () => {
         </div>
         <SearchButton otherClasses='max-sm:hidden' />
 
-        </div>
+      </div>
     </form>
   )
 }

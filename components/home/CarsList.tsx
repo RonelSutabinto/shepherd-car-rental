@@ -1,7 +1,7 @@
 
 
 import { carProps } from "@/utils/props/carProps";
-import CarCard from "../home/CarCard";
+import CarCard from "./CarCard";
 
 interface CarProps {
   cars: carProps

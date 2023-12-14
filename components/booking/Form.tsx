@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import { booksProps, carProps } from '@/utils/props/carProps';
 import { useRouter } from 'next/navigation';
 import { updateCarBook } from '@/utils/actions/carbook.actions';
-import CarDrawer from './CarDrawer';
 interface CarCardProps {
   car: carProps,
   book: booksProps
@@ -82,7 +81,7 @@ const Form = ({car, book}:CarCardProps) => {
 
   return (
     <div className='flex flex-col  justify-end w-full mt-14 px-5 max-w-3xl'>
-      {/* <form onSubmit={handleFormSubmit}> */}
+     
       <div className='flex justify-start max-w-3xl'>
         <button 
           className=" m-2 flex justify-center py-2 h-9 border border-secondary-orange text-secondary-orange px-2 rounded-lg hover:bg-secondary-orange hover:text-white transition duration-300 text-[12px] font-bold" 
@@ -229,21 +228,11 @@ const Form = ({car, book}:CarCardProps) => {
 
             </div>
             </div>
-
-            {/* <div className='flex justify-center items-center w-full'>
-              <button 
-                  className=" m-2 flex justify-center py-2 h-9 bg-secondary-blue text-white px-2 rounded-lg hover:bg-secondary-blue-200 hover:text-white transition duration-300 text-[12px]" 
-                  //onClick={onOpen}
-              >
-                Change Car
-              </button>
-            </div> */}
-            
             
         </div>
       </div>
       <Divider />
-      {/* </form> */}
+      
     </div>
   )
 }

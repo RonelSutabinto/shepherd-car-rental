@@ -1,12 +1,16 @@
 "use client"
-import { CarouselCarListProps } from '@/utils/props/carProps';
 import React, { useEffect, useState } from 'react'
 import { MdSkipPrevious, MdSkipNext } from 'react-icons/md'
-import CarCard from './CarCard';
+import CarCardTop from './CarCardTop';
+import { topCarProps } from '@/utils/props/carProps';
 // import { useUser } from '@clerk/nextjs';
 
+interface CarouselCarListProps {
+  topCars: topCarProps[];
+  openModal: (car: topCarProps) => void; // Define the openModal function with a Car parameter
+}
 
-const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
+const CarouselCarList = ({ topCars,openModal }: CarouselCarListProps) => {
   // const { user } = useUser();
   const [authId, setAuthId] = useState<string>('');
   
@@ -26,14 +30,6 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
     );
   };
 
-  // useEffect(() => {
-   
-  //   if(user){
-  //     setAuthId(user.id);
-  //   }
-    
-  // }, []);
-
   return (
     <div className="w-full max-w-4xl mx-auto mt-8">
       <div className="relative overflow-hidden">
@@ -43,7 +39,14 @@ const CarouselCarList = ({ topCars }: CarouselCarListProps) => {
               key={index}
               className="w-full sm:w-1/2 md:w-2/4 lg:w-1/3 p-2 lg:mx-0 md:mx-2 flex-shrink-0 justify-center items-center text-center"
             >
-              <CarCard topCar={car} fileName={'/car_img/' + car.make + '_' + car.model + '.png'}  authId={authId} />
+              <CarCardTop
+                topCar={car}
+                fileName={'/car_img/' + car.make + '_' + car.model + '.png'}
+                authId={authId}
+                // Pass the car when invoking openModal
+                openModal={() => openModal(car)} 
+                key={index}
+              />
             </div>
           ))}
         </div>

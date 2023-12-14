@@ -3,7 +3,9 @@
 
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
+// import { ClerkProvider } from '@clerk/nextjs'
 import Navbar from '../Navbar'
+import Footer from '../Footer'
 
 export function Providers({ 
     children 
@@ -12,12 +14,13 @@ export function Providers({
   }) {
   return (
     <>
-      <CacheProvider>
+    
+      <CacheProvider>     
         <ChakraProvider>
-          <Navbar/>
           {children}
         </ChakraProvider>
-     </CacheProvider>
+      </CacheProvider>
+     
     </>
     
   )
